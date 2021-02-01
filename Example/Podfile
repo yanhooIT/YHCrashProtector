@@ -7,7 +7,5 @@ target 'YHCrashProtector_Example' do
 
   target 'YHCrashProtector_Tests' do
     inherit! :search_paths
-
-    
   end
 end

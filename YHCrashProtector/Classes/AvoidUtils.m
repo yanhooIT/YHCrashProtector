@@ -1,8 +1,8 @@
 //
 //  AvoidUtils.m
-//  HBCAppCore
+//  https://github.com/yanhooIT/YHCrashProtector
 //
-//  Created by 颜琥 on 2021/1/28.
+//  Created by yanhoo on 2020/02/01.
 //
 
 #import "AvoidUtils.h"

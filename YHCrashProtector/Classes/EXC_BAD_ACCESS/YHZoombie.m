@@ -1,20 +1,20 @@
 //
 //  YHZoombie.m
-//  HBCAppCore
+//  https://github.com/yanhooIT/YHCrashProtector
 //
-//  Created by 颜琥 on 2021/1/29.
+//  Created by yanhoo on 2020/02/01.
 //
 
 #import "YHZoombie.h"
 #import <objc/runtime.h>
-#import "AvoidCrashGuardProxy.h"
+#import "YHForwardingTarget.h"
 
 @implementation YHZoombie
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     NSLog(@"[%@ %@] message sent to deallocated instance %@", objc_getAssociatedObject(self, "originClassName"), NSStringFromSelector(aSelector), self);
     
-    return [AvoidCrashGuardProxy new];
+    return [YHForwardingTarget handleWithObject:self forwardingTargetForSelector:aSelector];
 }
 
 @end
