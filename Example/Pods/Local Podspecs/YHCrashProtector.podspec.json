@@ -1,0 +1,22 @@
+{
+  "name": "YHCrashProtector",
+  "version": "0.1.0",
+  "summary": "A short description of YHCrashProtector.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/yanhooit/YHCrashProtector",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "yanhooit": "yanhu@huobi.com"
+  },
+  "source": {
+    "git": "https://github.com/yanhooit/YHCrashProtector.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "YHCrashProtector/Classes/**/*"
+}

@@ -1,0 +1,16 @@
+PODS:
+  - YHCrashProtector (0.1.0)
+
+DEPENDENCIES:
+  - YHCrashProtector (from `../`)
+
+EXTERNAL SOURCES:
+  YHCrashProtector:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  YHCrashProtector: 1e764e1d30b308b12eebe2c7ef891b0bf587d062
+
+PODFILE CHECKSUM: efbbba9d36144213899f3c4d5baaa2d160866ff1
+
+COCOAPODS: 1.10.0
