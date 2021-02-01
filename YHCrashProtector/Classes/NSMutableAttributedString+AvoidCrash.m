@@ -1,0 +1,60 @@
+//
+//  NSMutableAttributedString+AvoidCrash.m
+//  https://github.com/chenfanfang/AvoidCrash
+//
+//  Created by mac on 16/10/15.
+//  Copyright © 2016年 chenfanfang. All rights reserved.
+//
+
+#import "NSMutableAttributedString+AvoidCrash.h"
+#import "AvoidUtils.h"
+
+/**
+ *  Can avoid crash method
+ *
+ *  1.- (instancetype)initWithString:(NSString *)str
+ *  2.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs
+ */
+
+@implementation NSMutableAttributedString (AvoidCrash)
+
++ (void)avoidCrashExchangeMethod {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class NSConcreteMutableAttributedString = NSClassFromString(@"NSConcreteMutableAttributedString");
+        
+        // initWithString:
+        [AvoidUtils exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
+        
+        // initWithString:attributes:
+        [AvoidUtils exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
+    });
+}
+
+#pragma mark - initWithString:
+- (instancetype)avoidCrashInitWithString:(NSString *)str {
+    id object = nil;
+    @try {
+        object = [self avoidCrashInitWithString:str];
+    } @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+    } @finally {
+        return object;
+    }
+}
+
+#pragma mark - initWithString:attributes:
+- (instancetype)avoidCrashInitWithString:(NSString *)str attributes:(NSDictionary<NSString *, id> *)attrs {
+    id object = nil;
+    @try {
+        object = [self avoidCrashInitWithString:str attributes:attrs];
+    } @catch (NSException *exception) {
+        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
+        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+    } @finally {
+        return object;
+    }
+}
+
+@end
