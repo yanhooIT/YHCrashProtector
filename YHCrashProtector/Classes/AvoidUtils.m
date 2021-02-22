@@ -46,7 +46,7 @@
     NSString *errorName = exception.name;
     NSString *errorReason = exception.reason;
     // errorReason 可能为 -[__NSCFConstantString avoidCrashCharacterAtIndex:]: Range or index out of bounds, 将avoidCrash前缀去掉
-    errorReason = [errorReason stringByReplacingOccurrencesOfString:@"avoidCrash" withString:@""];
+    errorReason = [errorReason stringByReplacingOccurrencesOfString:@"yh_" withString:@""];
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place: %@", mainCallStackSymbolMsg];
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n\n",  errorName, errorReason, errorPlace, defaultToDo];
     NSLog(@"%@", logErrorMessage);

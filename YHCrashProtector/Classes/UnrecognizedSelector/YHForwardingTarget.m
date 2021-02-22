@@ -35,7 +35,7 @@ id addMethod(id self, SEL _cmd) {
         return nil;
     }
     
-    NSLog(@"CP - unrecognized selector %@ sent to %@'s instance %@", NSStringFromSelector(aSelector), [object class], object);
+    NSLog(@"CrashProtector - unrecognized selector \"%@\" sent to \"%@'s\" instance", NSStringFromSelector(aSelector), NSStringFromClass([object class]));
     
     // 交给代理对象处理
     return [YHForwardingTarget new];

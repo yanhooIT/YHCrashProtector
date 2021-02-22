@@ -18,5 +18,19 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "YHCrashProtector/Classes/**/*"
+  "source_files": "YHCrashProtector/Classes/**/*",
+  "exclude_files": [
+    "YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.h",
+    "YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.m"
+  ],
+  "subspecs": [
+    {
+      "name": "no-arc",
+      "source_files": [
+        "YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.h",
+        "YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.m"
+      ],
+      "requires_arc": false
+    }
+  ]
 }

@@ -25,6 +25,7 @@
 #import "NSString+AvoidCrash.h"
 #import "YHForwardingTarget.h"
 #import "YHAvoidCrashProtocol.h"
+#import "YHDeallocHandle.h"
 
 FOUNDATION_EXPORT double YHCrashProtectorVersionNumber;
 FOUNDATION_EXPORT const unsigned char YHCrashProtectorVersionString[];

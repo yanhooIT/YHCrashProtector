@@ -32,11 +32,17 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'YHCrashProtector/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'YHCrashProtector' => ['YHCrashProtector/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  # ---------------- pod库包含MRC的文件处理 ----------------
+  
+  non_arc_files = 'YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.h',
+                  'YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.m'
+  # 在工程中首先排除一下
+  s.exclude_files = non_arc_files
+  # 以下就是子设置，为需要添加 MRC 标识的文件进行设置
+  s.subspec 'no-arc' do |mrc|
+      mrc.source_files = non_arc_files
+      mrc.requires_arc = false
+  end
+  
+  # ---------------- pod库包含MRC的文件处理 ----------------
 end

@@ -18,4 +18,8 @@
     return 30;
 }
 
+- (void)logPrint {
+    NSLog(@"%s", __func__);
+}
+
 @end

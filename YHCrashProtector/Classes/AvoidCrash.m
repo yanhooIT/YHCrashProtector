@@ -7,6 +7,7 @@
 //
 
 #import "AvoidCrash.h"
+#import "YHBadAccessManager.h"
 
 @implementation AvoidCrash
 
@@ -40,6 +41,14 @@
     
     // 监听通知, 获取AvoidCrash捕获的崩溃日志的详细信息
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:AvoidCrashNotification object:nil];
+}
+
++ (void)yh_setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames {
+    [YHBadAccessManager setupHandleDeallocClassNames:classNames];
+}
+
++ (void)yh_setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+    [YHBadAccessManager setupHandleDeallocClassPrefixs:classPrefixs];
 }
 
 @end

@@ -6,27 +6,57 @@
 //
 
 #import "YHBadAccessManager.h"
-#import <objc/runtime.h>
-#import "YHZoombie.h"
 
 @implementation YHBadAccessManager
 
-+ (instancetype)sharedInstance {
-    static YHBadAccessManager *instance = nil;
+static NSMutableArray *_classNames;
+static NSMutableArray *_classPrefixs;
++ (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[self alloc] init];
+        _classNames = [NSMutableArray array];
+        _classPrefixs = [NSMutableArray array];
     });
-    return instance;
 }
 
-- (void)handleDeallocObject:(id)object {
-    // 将原有类名存储在关联对象中
-    NSString *originClassName = NSStringFromClass([object class]);
-    objc_setAssociatedObject(object, "originClassName", originClassName, OBJC_ASSOCIATION_COPY_NONATOMIC);
++ (BOOL)isHandleDeallocObject:(NSString *)className {
+    BOOL isHandle = NO;
+    for (NSString *clsName in _classNames) {
+        if ([className isEqualToString:clsName]) {
+            isHandle = YES;
+            break;
+        }
+    }
 
-    // 指向固定的类
-    object_setClass(object, [YHZoombie class]);
+    if (!isHandle) {
+        for (NSString *classPrefix in _classPrefixs) {
+            if ([className hasPrefix:classPrefix]) {
+                isHandle = YES;
+                break;
+            }
+        }
+    }
+    
+    return isHandle;
+}
+
++ (void)setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames; {
+    for (NSString *className in classNames) {
+        if (![className hasPrefix:@"UI"] &&
+            ![className hasPrefix:@"NS"] &&
+            ![className isEqualToString:NSStringFromClass([NSObject class])]) {
+            [_classNames addObject:className];
+        }
+    }
+}
+
++ (void)setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+    for (NSString *classPrefix in classPrefixs) {
+        if (![classPrefix hasPrefix:@"UI"] &&
+            ![classPrefix hasPrefix:@"NS"]) {
+            [_classPrefixs addObject:classPrefix];
+        }
+    }
 }
 
 @end
