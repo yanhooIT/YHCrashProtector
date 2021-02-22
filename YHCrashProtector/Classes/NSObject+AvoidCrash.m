@@ -7,6 +7,8 @@
 //
 
 #import "NSObject+AvoidCrash.h"
+#import <objc/runtime.h>
+
 #import "AvoidUtils.h"
 #import "YHForwardingTarget.h"
 #import "YHBadAccessManager.h"
@@ -34,6 +36,7 @@
         [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(forwardingTargetForSelector:) newMethod:@selector(yh_forwardingTargetForSelector:)];
         
         // Avoid "EXC_BAD_ACCESS" Crash
+        [AvoidUtils exchangeInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
         [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:NSSelectorFromString(@"dealloc") newMethod:@selector(yh_dealloc)];
         
         // setValue:forKey:
@@ -56,9 +59,17 @@
 }
 
 #pragma mark - Avoid "EXC_BAD_ACCESS" Crash
++ (id)yh_allocWithZone:(nullable NSZone *)zone {
+    if ([YHBadAccessManager isHandleDeallocObject:self]) {
+        objc_setAssociatedObject(self, "YH_EXC_BAD_ACCESS_PROTECTOR", @(1), OBJC_ASSOCIATION_ASSIGN);
+    }
+    
+    return [self yh_allocWithZone:zone];
+}
+
 - (void)yh_dealloc {
-    NSString *className = NSStringFromClass(self.class);
-    if ([YHBadAccessManager isHandleDeallocObject:className]) {
+    id flag = objc_getAssociatedObject(self.class, "YH_EXC_BAD_ACCESS_PROTECTOR");
+    if (flag) {
         [YHDeallocHandle handleDeallocObject:self];
     } else {
         [self yh_dealloc];

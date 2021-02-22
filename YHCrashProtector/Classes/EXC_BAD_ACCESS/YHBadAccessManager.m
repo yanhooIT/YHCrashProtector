@@ -19,8 +19,9 @@ static NSMutableArray *_classPrefixs;
     });
 }
 
-+ (BOOL)isHandleDeallocObject:(NSString *)className {
++ (BOOL)isHandleDeallocObject:(Class)cls {
     BOOL isHandle = NO;
+    NSString *className = NSStringFromClass(cls);
     for (NSString *clsName in _classNames) {
         if ([className isEqualToString:clsName]) {
             isHandle = YES;
@@ -29,8 +30,8 @@ static NSMutableArray *_classPrefixs;
     }
 
     if (!isHandle) {
-        for (NSString *classPrefix in _classPrefixs) {
-            if ([className hasPrefix:classPrefix]) {
+        for (NSString *clsPrefix in _classPrefixs) {
+            if ([className hasPrefix:clsPrefix]) {
                 isHandle = YES;
                 break;
             }

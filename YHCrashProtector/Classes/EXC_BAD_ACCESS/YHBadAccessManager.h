@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YHBadAccessManager : NSObject
 
 /// 是否需要处理 Zoombie Objects 僵尸对象
-/// @param className 类名称
-+ (BOOL)isHandleDeallocObject:(NSString *)className;
+/// @param cls 类对象
++ (BOOL)isHandleDeallocObject:(Class)cls;
 
 /**
  *  初始化一个需要防止”EXC_BAD_ACCESS”的崩溃的类名数组
