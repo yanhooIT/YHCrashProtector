@@ -13,14 +13,14 @@
 #pragma mark - 动态转发阶段动态添加方法
 // 动态添加对象方法
 + (BOOL)resolveInstanceMethod:(SEL)sel {
-    class_addMethod([self class], sel, (IMP)addMethod, "v@:@");
+    class_addMethod([self class], sel, (IMP)addMethod, "v@:");
     return YES;
 }
 
 // 动态添加类对象方法
 + (BOOL)resolveClassMethod:(SEL)sel {
     // 通过object_getClass获取元类对象
-    class_addMethod(object_getClass(self), sel, (IMP)addMethod, "v@:@");
+    class_addMethod(object_getClass(self), sel, (IMP)addMethod, "v@:");
     return YES;
 }
 
