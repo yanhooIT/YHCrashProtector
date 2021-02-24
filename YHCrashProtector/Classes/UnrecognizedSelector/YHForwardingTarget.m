@@ -10,6 +10,10 @@
 
 @implementation YHForwardingTarget
 
+- (void)dealloc {
+    NSLog(@"%s", __func__);
+}
+
 #pragma mark - 动态转发阶段动态添加方法
 // 动态添加对象方法
 + (BOOL)resolveInstanceMethod:(SEL)sel {

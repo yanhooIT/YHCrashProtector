@@ -60,7 +60,7 @@
 
 #pragma mark - Avoid "EXC_BAD_ACCESS" Crash
 + (id)yh_allocWithZone:(nullable NSZone *)zone {
-    if ([YHBadAccessManager isHandleDeallocObject:self]) {
+    if ([YHBadAccessManager isEnableZoombieObjectProtectWithClass:self]) {
         objc_setAssociatedObject(self, "YH_EXC_BAD_ACCESS_PROTECTOR", @(1), OBJC_ASSOCIATION_ASSIGN);
     }
     

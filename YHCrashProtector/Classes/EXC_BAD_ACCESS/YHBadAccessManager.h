@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 是否需要处理 Zoombie Objects 僵尸对象
 /// @param cls 类对象
-+ (BOOL)isHandleDeallocObject:(Class)cls;
++ (BOOL)isEnableZoombieObjectProtectWithClass:(Class)cls;
 
 /**
  *  初始化一个需要防止”EXC_BAD_ACCESS”的崩溃的类名数组
@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  ⚠️不可将NS前缀的字符串(包括@"NS")加入classPrefixs数组中
  */
 + (void)setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs;
-
 
 @end
 

@@ -14,7 +14,9 @@
 
 @interface YHViewController ()
 
-@property (nonatomic, assign) YHPerson *person;
+@property (nonatomic, assign) YHPerson *person1;
+@property (nonatomic, assign) YHPerson *person2;
+@property (nonatomic, assign) YHBoy *boy1;
 
 @end
 
@@ -23,15 +25,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
     [self testExcBadAccess];
 }
 
 - (void)testExcBadAccess {
     [AvoidCrash yh_setupHandleDeallocClassNames:@[@"YHPerson"]];
     
-    self.person = [[YHPerson alloc] init];
-    [self.person logPrint];
+    self.person1 = [[YHPerson alloc] init];
+    [self.person1 logPrint];
+    
+    self.person2 = [[YHPerson alloc] init];
+    [self.person2 logPrint];
+
+    self.boy1 = [[YHBoy alloc] init];
+    [self.boy1 logPrint];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // 测试：若在Zoombie实例达到上限，前面的Zoombie实例真正释放之后，再次调用野指针还是会出现Crash
+    [self.person1 logPrint];
 }
 
 - (void)testUnrecognizedSelector {

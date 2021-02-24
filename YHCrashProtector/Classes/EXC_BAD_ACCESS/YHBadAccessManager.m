@@ -19,17 +19,17 @@ static NSMutableArray *_classPrefixs;
     });
 }
 
-+ (BOOL)isHandleDeallocObject:(Class)cls {
++ (BOOL)isEnableZoombieObjectProtectWithClass:(Class)cls {
     BOOL isHandle = NO;
-    NSString *className = NSStringFromClass(cls);
     for (NSString *clsName in _classNames) {
-        if ([className isEqualToString:clsName]) {
+        if ([cls isSubclassOfClass:NSClassFromString(clsName)]) {
             isHandle = YES;
             break;
         }
     }
 
-    if (!isHandle) {
+    if (!isHandle && _classPrefixs.count > 0) {
+        NSString *className = NSStringFromClass(cls);
         for (NSString *clsPrefix in _classPrefixs) {
             if ([className hasPrefix:clsPrefix]) {
                 isHandle = YES;
@@ -44,8 +44,7 @@ static NSMutableArray *_classPrefixs;
 + (void)setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames; {
     for (NSString *className in classNames) {
         if (![className hasPrefix:@"UI"] &&
-            ![className hasPrefix:@"NS"] &&
-            ![className isEqualToString:NSStringFromClass([NSObject class])]) {
+            ![className hasPrefix:@"NS"]) {
             [_classNames addObject:className];
         }
     }

@@ -12,7 +12,7 @@
 @implementation YHZoombie
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
-    NSLog(@"[%@ %@] message sent to deallocated instance %@", objc_getAssociatedObject(self, "originClassName"), NSStringFromSelector(aSelector), self);
+    NSLog(@"CrashProtector - \"%@\" message sent to a deallocated instance, the instance's class is \"%@\"", NSStringFromSelector(aSelector), objc_getAssociatedObject(self, "originClassName"));
     
     return [YHForwardingTarget handleWithObject:self forwardingTargetForSelector:aSelector];
 }
