@@ -49,4 +49,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+// 根据前缀判断是否是系统类
+CG_INLINE BOOL yh_isSystemClassPrefix(NSString *classPrefix) {
+    if ([classPrefix hasPrefix:@"UI"] ||
+        [classPrefix hasPrefix:@"NS"] ||
+        [classPrefix hasPrefix:@"__NS"] ||
+        [classPrefix hasPrefix:@"OS_xpc"]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+// 根据Class判断是否是系统类
+CG_INLINE BOOL yh_isSystemClass(Class cls) {
+    NSBundle *mainBundle = [NSBundle bundleForClass:cls];
+    if (mainBundle == [NSBundle mainBundle]) {
+        return NO;
+    }
+    
+    NSString *className = NSStringFromClass(cls);
+    return yh_isSystemClassPrefix(className);
+}
+
+// 根据类名称判断是否是系统类
+CG_INLINE BOOL yh_isSystemClassWithClassName(NSString *clsName) {
+    Class cls = NSClassFromString(clsName);
+    return yh_isSystemClass(cls);
+}
+
 NS_ASSUME_NONNULL_END

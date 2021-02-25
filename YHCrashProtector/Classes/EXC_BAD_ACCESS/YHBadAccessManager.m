@@ -6,6 +6,7 @@
 //
 
 #import "YHBadAccessManager.h"
+#import "AvoidUtils.h"
 
 @implementation YHBadAccessManager
 
@@ -43,8 +44,7 @@ static NSMutableArray *_classPrefixs;
 
 + (void)setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames; {
     for (NSString *className in classNames) {
-        if (![className hasPrefix:@"UI"] &&
-            ![className hasPrefix:@"NS"]) {
+        if (!yh_isSystemClassWithClassName(className)) {
             [_classNames addObject:className];
         }
     }
@@ -52,8 +52,7 @@ static NSMutableArray *_classPrefixs;
 
 + (void)setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
     for (NSString *classPrefix in classPrefixs) {
-        if (![classPrefix hasPrefix:@"UI"] &&
-            ![classPrefix hasPrefix:@"NS"]) {
+        if (!yh_isSystemClassPrefix(classPrefix)) {
             [_classPrefixs addObject:classPrefix];
         }
     }
