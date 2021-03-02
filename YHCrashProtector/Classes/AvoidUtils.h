@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 // ignore below define
 #define AvoidCrashDefaultReturnNil  @"AvoidCrash default is to return nil to avoid crash."
 #define AvoidCrashDefaultIgnore     @"AvoidCrash default is to ignore this operation to avoid crash."
+
+// 互斥锁
+#define YHLock()    dispatch_semaphore_wait(self->_lock, DISPATCH_TIME_FOREVER)
+#define YHUnlock()  dispatch_semaphore_signal(self->_lock)
 
 @interface AvoidUtils : NSObject
 

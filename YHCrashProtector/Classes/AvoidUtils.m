@@ -6,6 +6,7 @@
 //
 
 #import "AvoidUtils.h"
+#import <objc/runtime.h>
 
 #define key_errorName        @"errorName"
 #define key_errorReason      @"errorReason"

@@ -14,6 +14,8 @@
 
 @interface YHViewController ()
 
+@property (nonatomic, strong) YHPerson *person;
+
 @property (nonatomic, assign) YHPerson *person1;
 @property (nonatomic, assign) YHPerson *person2;
 @property (nonatomic, assign) YHBoy *boy1;
@@ -22,13 +24,41 @@
 
 @implementation YHViewController
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self testKVOCrashRemove];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self testExcBadAccess];
+    [self testKVOCrash];
 }
 
+#pragma mark - KVO Crash Test
+- (void)testKVOCrash {
+    self.person = [[YHPerson alloc] init];
+    // 多次添加不会导致Crash，但是会产生多个监听，所以移除时记得要移除对应的次数
+    [self.person addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [self.person addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+}
+
+- (void)testKVOCrashRemove {
+    // 因为添加了两次监听，这里只移除了一次，还有一个监听
+    [self.person removeObserver:self forKeyPath:@"name"];
+    self.person.name = @"AAA";
+    
+    // 移除次数与添加次数要一一对应，因为添加了两次监听，这里移除了三次，超过添加次数就会导致Crash了
+//    [self.person removeObserver:self.person forKeyPath:@"name"];
+//    [self.person removeObserver:self.person forKeyPath:@"name"];
+//    [self.person removeObserver:self.person forKeyPath:@"name"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    NSLog(@"keyPath: %@, object: %@", keyPath, object);
+}
+
+#pragma mark - EXC_BAD_ACCESS Crash Test
 - (void)testExcBadAccess {
     [AvoidCrash yh_setupHandleDeallocClassNames:@[@"YHPerson"]];
     
@@ -42,11 +72,14 @@
     [self.boy1 logPrint];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    // 测试：若在Zoombie实例达到上限，前面的Zoombie实例真正释放之后，再次调用野指针还是会出现Crash
+- (void)triggerExcBadAccess {
+    /** 测试EXC_BAD_ACCESS Crash时使用
+     测试：若在Zoombie实例达到上限，前面的Zoombie实例真正释放之后，再次调用野指针还是会出现Crash
+     */
     [self.person1 logPrint];
 }
 
+#pragma mark - UnrecognizedSelector Crash Test
 - (void)testUnrecognizedSelector {
     NSDictionary *dict2 = (NSDictionary *)[UIView new];
     NSString *str3 = dict2[@"key"];

@@ -16,7 +16,6 @@
  *  2. - (void)removeObjectForKey:(id)aKey
  *
  */
-
 @implementation NSMutableDictionary (AvoidCrash)
 
 + (void)avoidCrashExchangeMethod {
@@ -33,9 +32,7 @@
         }
         
         // removeObjectForKey:
-        Method removeObjectForKey = class_getInstanceMethod(dictionaryM, @selector(removeObjectForKey:));
-        Method avoidCrashRemoveObjectForKey = class_getInstanceMethod(dictionaryM, @selector(avoidCrashRemoveObjectForKey:));
-        method_exchangeImplementations(removeObjectForKey, avoidCrashRemoveObjectForKey);
+        [AvoidUtils exchangeInstanceMethod:dictionaryM oldMethod:@selector(removeObjectForKey:) newMethod:@selector(avoidCrashRemoveObjectForKey:)];
     });
 }
 

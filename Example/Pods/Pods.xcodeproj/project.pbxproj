@@ -55,6 +55,10 @@
 		EE579D0225E66F9200236312 /* NSObject+KVCCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = EE579D0025E66F9200236312 /* NSObject+KVCCrash.m */; };
 		EE579D0B25E7BE8A00236312 /* NSTimer+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = EE579D0925E7BE8A00236312 /* NSTimer+AvoidCrash.h */; };
 		EE579D0C25E7BE8A00236312 /* NSTimer+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = EE579D0A25E7BE8A00236312 /* NSTimer+AvoidCrash.m */; };
+		EE579D2B25EE392700236312 /* YHKVOInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = EE579D2925EE392700236312 /* YHKVOInfo.h */; };
+		EE579D2C25EE392700236312 /* YHKVOInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE579D2A25EE392700236312 /* YHKVOInfo.m */; };
+		EE579D3225EE393C00236312 /* YHKVOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = EE579D3025EE393C00236312 /* YHKVOProxy.h */; };
+		EE579D3325EE393C00236312 /* YHKVOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE579D3125EE393C00236312 /* YHKVOProxy.m */; };
 		FDF2701EF5B599B207EFA36AA9BB7442 /* NSObject+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 40050092543B67CFDEA73BFA7F9D2091 /* NSObject+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFF0CFE31E693345D98A3D1AE4D74268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +153,10 @@
 		EE579D0025E66F9200236312 /* NSObject+KVCCrash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVCCrash.m"; sourceTree = "<group>"; };
 		EE579D0925E7BE8A00236312 /* NSTimer+AvoidCrash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+AvoidCrash.h"; sourceTree = "<group>"; };
 		EE579D0A25E7BE8A00236312 /* NSTimer+AvoidCrash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+AvoidCrash.m"; sourceTree = "<group>"; };
+		EE579D2925EE392700236312 /* YHKVOInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHKVOInfo.h; sourceTree = "<group>"; };
+		EE579D2A25EE392700236312 /* YHKVOInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHKVOInfo.m; sourceTree = "<group>"; };
+		EE579D3025EE393C00236312 /* YHKVOProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHKVOProxy.h; sourceTree = "<group>"; };
+		EE579D3125EE393C00236312 /* YHKVOProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHKVOProxy.m; sourceTree = "<group>"; };
 		FD764B04D3E63B4673D679DBB88741C7 /* NSObject+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AvoidCrash.m"; path = "YHCrashProtector/Classes/NSObject+AvoidCrash.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -329,6 +337,10 @@
 			children = (
 				EE579CE325E66B1400236312 /* NSObject+KVOCrash.h */,
 				EE579CE425E66B1400236312 /* NSObject+KVOCrash.m */,
+				EE579D2925EE392700236312 /* YHKVOInfo.h */,
+				EE579D2A25EE392700236312 /* YHKVOInfo.m */,
+				EE579D3025EE393C00236312 /* YHKVOProxy.h */,
+				EE579D3125EE393C00236312 /* YHKVOProxy.m */,
 			);
 			name = KVO;
 			path = YHCrashProtector/Classes/KVO;
@@ -437,6 +449,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE579D2B25EE392700236312 /* YHKVOInfo.h in Headers */,
 				EE579D0B25E7BE8A00236312 /* NSTimer+AvoidCrash.h in Headers */,
 				4A953D722B742556C33196B94DEBD75E /* AvoidCrash.h in Headers */,
 				42FA95CBB43F324868540663E6F1C709 /* AvoidUtils.h in Headers */,
@@ -457,6 +470,7 @@
 				EE579CEC25E66B4D00236312 /* NSObject+NotificationCrash.h in Headers */,
 				D5A6970F55E7534A72938488E38A6987 /* YHCrashProtector-umbrella.h in Headers */,
 				6497F45A975F844E93360870D4BC3516 /* YHDeallocHandle.h in Headers */,
+				EE579D3225EE393C00236312 /* YHKVOProxy.h in Headers */,
 				CCBCE97F515B87689D995768F2DF7412 /* YHForwardingTarget.h in Headers */,
 				26F25CB6C431F383916D4F13EA55C0B7 /* YHZoombie.h in Headers */,
 			);
@@ -602,6 +616,7 @@
 				EE579CED25E66B4D00236312 /* NSObject+NotificationCrash.m in Sources */,
 				808D0422CF0F49BA9644F273BC76D47E /* NSDictionary+AvoidCrash.m in Sources */,
 				2DA5FC9617D0455BFCBF0295736A44A6 /* NSMutableArray+AvoidCrash.m in Sources */,
+				EE579D2C25EE392700236312 /* YHKVOInfo.m in Sources */,
 				893DD50855319F4BBF3C512B2171DAF4 /* NSMutableAttributedString+AvoidCrash.m in Sources */,
 				1F0EBB560B4FD53B47162C40A854F300 /* NSMutableDictionary+AvoidCrash.m in Sources */,
 				E8329983993224A36A191BD0C295AFAA /* NSMutableString+AvoidCrash.m in Sources */,
@@ -613,6 +628,7 @@
 				EE579D0C25E7BE8A00236312 /* NSTimer+AvoidCrash.m in Sources */,
 				44E8E0170FC0EF88DAAC51A2616C162F /* YHCrashProtector-dummy.m in Sources */,
 				EE579CE625E66B1400236312 /* NSObject+KVOCrash.m in Sources */,
+				EE579D3325EE393C00236312 /* YHKVOProxy.m in Sources */,
 				2718B45E28AC1A1887D8BCDE14E82CF9 /* YHDeallocHandle.m in Sources */,
 				221CD1C5CD7F9F355AC95B7E04672744 /* YHForwardingTarget.m in Sources */,
 				7F644C8A29B4659FF54C5512FEE4CE7C /* YHZoombie.m in Sources */,

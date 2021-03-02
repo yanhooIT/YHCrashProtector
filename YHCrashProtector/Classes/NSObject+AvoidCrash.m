@@ -7,8 +7,6 @@
 //
 
 #import "NSObject+AvoidCrash.h"
-#import <objc/runtime.h>
-
 #import "AvoidUtils.h"
 #import "YHForwardingTarget.h"
 #import "YHBadAccessManager.h"

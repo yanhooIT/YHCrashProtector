@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YHAvoidCrashProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (KVOCrash)
+@interface NSObject (KVOCrash) <YHAvoidCrashProtocol>
 
 @end
 
