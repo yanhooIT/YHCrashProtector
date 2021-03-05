@@ -9,10 +9,14 @@
 #import "AvoidCrash.h"
 #import "AvoidUtils.h"
 
-#import "NSObject+AvoidCrash.h"
-#import "YHBadAccessManager.h"
-
+// Avoid "unrecognized selector sent to instance" Crash
+#import "NSObject+UnSELCrash.h"
+// Avoid 野指针 Crash
+#import "NSObject+BadAccessCrash.h"
+// Avoid KVO Crash
 #import "NSObject+KVOCrash.h"
+
+#import "NSObject+AvoidCrash.h"
 
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
@@ -37,8 +41,11 @@
 + (void)startAvoidCrashProtect {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [NSObject avoidCrashExchangeMethod];
+        [NSObject enabledAvoidUnSELCrash];
+        [NSObject enabledAvoidBadAccessCrash];
         [NSObject enabledAvoidKVOCrash];
+        
+        [NSObject avoidCrashExchangeMethod];
         
         [NSArray avoidCrashExchangeMethod];
         [NSMutableArray avoidCrashExchangeMethod];
