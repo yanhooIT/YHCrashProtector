@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 被观察对象
 @property (nonatomic, weak) NSObject *observedObject;
 
-- (BOOL)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+- (BOOL)yh_canAddObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
 
-- (BOOL)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
+- (BOOL)yh_canRemoveObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
 
 @end
 

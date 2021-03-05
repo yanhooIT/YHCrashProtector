@@ -22,23 +22,15 @@
 
 - (void)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
-    if (yh_isSystemClass(observer.class)) {
+    if ([self.kvoProxy yh_canAddObserver:observer forKeyPath:keyPath options:options context:context]) {
         [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
-    } else {
-        if (![self.kvoProxy yh_addObserver:observer forKeyPath:keyPath options:options context:context]) {
-            [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
-        }
     }
 }
 
 - (void)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
-    if (yh_isSystemClass(observer.class)) {
+    if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
         [self yh_removeObserver:observer forKeyPath:keyPath];
-    } else {
-        if ([self.kvoProxy yh_removeObserver:observer forKeyPath:keyPath]) {
-            [self yh_removeObserver:observer forKeyPath:keyPath];
-        }
     }
 }
 

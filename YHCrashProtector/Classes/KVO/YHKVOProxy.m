@@ -28,12 +28,12 @@
     _lock = nil;
 }
 
-- (BOOL)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
+- (BOOL)yh_canAddObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
     YHLock();
     
     // 是否已存在此观察对象
-    BOOL isContainObserver = NO;
+    BOOL canAddObserver = YES;
     
     // 查看被观察对象的keyPath是否有观察对象集合
     NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
@@ -42,26 +42,25 @@
         [_objectInfosMap setObject:kvoInfos forKey:keyPath];
     } else {// 存在观察对象
         for (YHKVOInfo *info in kvoInfos) {
-            if ([info.observer isEqual:observer]
-                && [info.keyPath isEqualToString:keyPath])
+            if ([info.observer isEqual:observer] && [info.keyPath isEqualToString:keyPath])
             {
-                isContainObserver = YES;
+                canAddObserver = NO;
                 break;
             }
         }
     }
     
-    if (!isContainObserver) {
-        YHKVOInfo *kvoInfo = [[YHKVOInfo alloc] initWithObserver:observer keyPath:keyPath options:options context:context];
+    if (canAddObserver) {
+        YHKVOInfo *kvoInfo = [[YHKVOInfo alloc] initWithObserver:observer keyPath:keyPath];
         [kvoInfos addObject:kvoInfo];
     }
     
     YHUnlock();
     
-    return isContainObserver;
+    return canAddObserver;
 }
 
-- (BOOL)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
+- (BOOL)yh_canRemoveObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
     YHLock();
     
@@ -72,8 +71,7 @@
     NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
     if (nil != kvoInfos) {
         for (YHKVOInfo *info in kvoInfos) {
-            if ([info.observer isEqual:observer]
-                && [info.keyPath isEqualToString:keyPath])
+            if ([info.observer isEqual:observer] && [info.keyPath isEqualToString:keyPath])
             {
                 registeredInfo = info;
                 break;
@@ -81,9 +79,10 @@
         }
     }
     
-    BOOL isContainObserver = NO;
+    BOOL canRemoveObserver = NO;
     if (registeredInfo != nil) {
-        isContainObserver = YES;
+        canRemoveObserver = YES;
+        
         [kvoInfos removeObject:registeredInfo];
         
         if (0 == kvoInfos.count) {
@@ -93,7 +92,7 @@
     
     YHUnlock();
     
-    return isContainObserver;
+    return canRemoveObserver;
 }
 
 /// 移除【被观察对象】上的所有【观察对象】

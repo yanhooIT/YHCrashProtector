@@ -15,12 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, readonly) id observer;
 /// 被观察对象的成员变量 or 属性
 @property (nonatomic, copy, readonly) NSString *keyPath;
-/// 监控策略
-@property (nonatomic, assign, readonly) NSKeyValueObservingOptions options;
-/// 上下文传递
-@property (nonatomic, assign, readonly) void *context;
 
-- (instancetype)initWithObserver:(id)observer keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+- (instancetype)initWithObserver:(id)observer keyPath:(NSString *)keyPath;
 
 @end
 

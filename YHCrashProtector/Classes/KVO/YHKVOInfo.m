@@ -9,13 +9,12 @@
 
 @implementation YHKVOInfo
 
-- (instancetype)initWithObserver:(id)observer keyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context {
+- (instancetype)initWithObserver:(id)observer keyPath:(NSString *)keyPath {
     if (self = [super init]) {
         _observer = observer;
         _keyPath = keyPath;
-        _options = options;
-        _context = context;
     }
+    
     return self;
 }
 

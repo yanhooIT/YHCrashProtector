@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YHPerson : NSObject
 
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *name2;
 
 - (void)logPrint;
 
