@@ -6,11 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YHAvoidCrashProtocol.h"
+#import "YHKVOProxy.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (KVOCrash) <YHAvoidCrashProtocol>
+@interface NSObject (KVOCrash)
+
+@property (nonatomic, strong) YHKVOProxy *kvoProxy;
+
++ (void)enabledAvoidKVOCrash;
 
 @end
 

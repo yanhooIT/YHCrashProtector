@@ -39,6 +39,10 @@
 - (void)testKVOCrash {
     self.person = [[YHPerson alloc] init];
     // 多次添加不会导致Crash，但是会产生多个监听，所以移除时记得要移除对应的次数
+    /**
+     self.person是被观察者
+     self是观察者
+     */
     [self.person addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [self.person addObserver:self forKeyPath:@"name" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
@@ -49,9 +53,9 @@
     self.person.name = @"AAA";
     
     // 移除次数与添加次数要一一对应，因为添加了两次监听，这里移除了三次，超过添加次数就会导致Crash了
-//    [self.person removeObserver:self.person forKeyPath:@"name"];
-//    [self.person removeObserver:self.person forKeyPath:@"name"];
-//    [self.person removeObserver:self.person forKeyPath:@"name"];
+    [self.person removeObserver:self.person forKeyPath:@"name"];
+    [self.person removeObserver:self.person forKeyPath:@"name"];
+    [self.person removeObserver:self.person forKeyPath:@"name"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {

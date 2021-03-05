@@ -11,6 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YHKVOProxy : NSObject
 
+/// 被观察对象
+@property (nonatomic, weak) NSObject *observedObject;
+
+- (BOOL)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+
+- (BOOL)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

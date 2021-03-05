@@ -11,6 +11,7 @@
 #import "YHForwardingTarget.h"
 #import "YHBadAccessManager.h"
 #import "YHDeallocHandle.h"
+#import "NSObject+KVOCrash.h"
 
 @implementation NSObject (AvoidCrash)
 

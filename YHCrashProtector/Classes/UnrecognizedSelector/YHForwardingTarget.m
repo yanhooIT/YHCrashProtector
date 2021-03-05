@@ -32,7 +32,7 @@
 // 用一个返回为空的函数来替换，从而达到程序不崩溃的目的
 void addMethod(id self, SEL _cmd) { }
 
-// ----------------- 以上为动态转发阶段动态添加方法的处理逻辑 -----------------
+// ^^^^^^^^^^^^^^^^ 以上为动态转发阶段【桩对象】动态添加方法的处理逻辑 ^^^^^^^^^^^^^^^^
 
 // 返回代理对象
 + (id)handleWithObject:(id)obj forwardingTargetForSelector:(SEL)aSelector {
