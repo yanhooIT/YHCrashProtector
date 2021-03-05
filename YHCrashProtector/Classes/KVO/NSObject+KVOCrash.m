@@ -19,7 +19,7 @@
     // 移除观察对象
     [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:) newMethod:@selector(yh_removeObserver:forKeyPath:)];
     
-    // 移除观察对象
+    // 被观察对象属性发生改变通知观察对象
     [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(observeValueForKeyPath:ofObject:change:context:) newMethod:@selector(yh_observeValueForKeyPath:ofObject:change:context:)];
 }
 
