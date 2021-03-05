@@ -15,8 +15,8 @@
 #import "NSObject+BadAccessCrash.h"
 // Avoid KVO Crash
 #import "NSObject+KVOCrash.h"
-
-#import "NSObject+AvoidCrash.h"
+// Avoid KVC Crash
+#import "NSObject+KVCCrash.h"
 
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
@@ -44,8 +44,7 @@
         [NSObject enabledAvoidUnSELCrash];
         [NSObject enabledAvoidBadAccessCrash];
         [NSObject enabledAvoidKVOCrash];
-        
-        [NSObject avoidCrashExchangeMethod];
+        [NSObject enabledAvoidKVCCrash];
         
         [NSArray avoidCrashExchangeMethod];
         [NSMutableArray avoidCrashExchangeMethod];

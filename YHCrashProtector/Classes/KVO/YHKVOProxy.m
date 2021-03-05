@@ -95,6 +95,33 @@
     return canRemoveObserver;
 }
 
+- (BOOL)yh_canHandleObserverCallbackWithKeyPath:(NSString *)keyPath
+{
+    YHLock();
+    
+    BOOL needHandleObserver = YES;
+    
+    // 查看被观察对象的keyPath是否有观察对象集合
+    NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
+    if (nil != kvoInfos) {
+        NSMutableSet *tmp = [kvoInfos copy];
+        for (YHKVOInfo *info in tmp) {
+            if (nil == info.observer) {
+                [kvoInfos removeObject:info];
+            }
+        }
+    }
+    
+    if (nil == kvoInfos || 0 == kvoInfos.count) {
+        needHandleObserver = NO;
+        [_objectInfosMap removeObjectForKey:keyPath];
+    }
+    
+    YHUnlock();
+    
+    return needHandleObserver;
+}
+
 /// 移除【被观察对象】上的所有【观察对象】
 - (void)_removeAllObservers {
     YHLock();

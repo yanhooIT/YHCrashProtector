@@ -18,6 +18,9 @@
     
     // 移除观察对象
     [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:) newMethod:@selector(yh_removeObserver:forKeyPath:)];
+    
+    // 移除观察对象
+    [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(observeValueForKeyPath:ofObject:change:context:) newMethod:@selector(yh_observeValueForKeyPath:ofObject:change:context:)];
 }
 
 - (void)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
@@ -31,6 +34,13 @@
 {
     if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
         [self yh_removeObserver:observer forKeyPath:keyPath];
+    }
+}
+
+- (void)yh_observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([self.kvoProxy yh_canHandleObserverCallbackWithKeyPath:keyPath]) {
+        [self yh_observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 
