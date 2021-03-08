@@ -1,15 +1,15 @@
 //
-//  NSObject+NotificationCrash.h
+//  NSObject+AvoidCrash.h
 //  YHCrashProtector
 //
-//  Created by 颜琥 on 2021/2/24.
+//  Created by 颜琥 on 2021/3/5.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (NotificationCrash)
+@interface NSObject (AvoidCrash)
 
 @end
 

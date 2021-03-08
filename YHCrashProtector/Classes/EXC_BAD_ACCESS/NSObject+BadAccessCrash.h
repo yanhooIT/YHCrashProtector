@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define AvoidBadAccessCrashFlagKey "YH_EXC_BAD_ACCESS_PROTECTOR_FLAG"
+
 @interface NSObject (BadAccessCrash)
 
 + (void)enabledAvoidBadAccessCrash;
