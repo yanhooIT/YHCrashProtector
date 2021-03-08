@@ -32,7 +32,55 @@
 {
     [super viewDidLoad];
     
-    [self testKVOCrash];
+    [self testKVCCrash];
+}
+
+#pragma mark - KVC Crash Test
+- (void)testKVCCrash {
+    // (1)设置值时找不到对应的key
+    /** 崩溃日志
+     
+     [<YHPerson 0x60000363d840> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: xxx, value:xxx市xxx区.
+     */
+//    YHPerson *objc1 = [[YHPerson alloc] init];
+//    [objc1 setValue:@"xxx市xxx区" forKey:@"xxx"];
+    
+    // (2)设置值时找不到对应的keyPath
+    /** 崩溃日志
+     
+     [<YHPerson 0x600000648540> valueForUndefinedKey:]: this class is not key value coding-compliant for the key: xxx.
+     [<YHPerson 0x600000648540> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: yyy, value:xxx路xxx号.
+     */
+//    YHPerson *objc2 = [[YHPerson alloc] init];
+//    [objc2 setValue:@"xxx路xxx号" forKeyPath:@"xxx.yyy"];
+
+    // (3)key为nil会崩溃（如果传 nil 会提示警告，传空变量则不会提示警告）
+    /** 崩溃日志
+     
+     [<YHPerson 0x600003637c20> setValue:forKey:]: attempt to set a value for a nil key, value:xxx.
+     */
+//    NSString *keyName = nil;
+//    YHPerson *objc3 = [[YHPerson alloc] init];
+//    [objc3 setValue:@"xxx" forKey:keyName];
+
+    // (4)value 为 nil 会崩溃
+    /** 崩溃日志
+     
+     [<YHPerson 0x60000362d400> setNilValueForKey]: could not set nil as the value for the key age.
+     */
+    YHPerson *objc4 = [[YHPerson alloc] init];
+    // NSNumber
+    [objc4 setValue:nil forKey:@"age"];
+    // NSValue
+    [objc4 setValue:nil forKey:@"point"];
+    
+    // (5)找不到对应的key
+    /** 崩溃日志
+     
+     [<YHPerson 0x600003637c00> valueForUndefinedKey:]: this class is not key value coding-compliant for the key: xxx.
+     */
+//    YHPerson *objc5 = [[YHPerson alloc] init];
+//    [objc5 valueForKey:@"xxx"];
 }
 
 #pragma mark - KVO Crash Test

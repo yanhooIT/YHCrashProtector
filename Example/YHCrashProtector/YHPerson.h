@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *name2;
+@property (nonatomic, assign) NSInteger age;
+@property (nonatomic, assign) CGPoint *point;
 
 - (void)logPrint;
 
