@@ -35,6 +35,8 @@
  The proxy target.
  */
 @property (nonatomic, weak, readonly) id target;
+/// 原target对应的方法实现
+@property (nonatomic, assign) SEL oriSEL;
 
 /**
  Creates a new weak proxy for target.
@@ -53,5 +55,9 @@
  @return A new proxy object.
  */
 + (instancetype)proxyWithTarget:(id)target;
+
+/// 代理对象的定时任务
+/// @param timer 定时器
+- (void)proxyTimerAction:(NSTimer *)timer;
 
 @end

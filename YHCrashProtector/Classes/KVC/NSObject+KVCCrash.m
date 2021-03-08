@@ -10,7 +10,7 @@
 
 @implementation NSObject (KVCCrash)
 
-+ (void)enabledAvoidKVCCrash {
++ (void)yh_enabledAvoidKVCCrash {
     // 拦截setValue:forKey:方法，用于处理key为nil的Crash
     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(setValue:forKey:) newMethod:@selector(yh_setValue:forKey:)];
 }

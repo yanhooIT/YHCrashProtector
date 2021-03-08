@@ -12,7 +12,7 @@
 
 @implementation NSObject (KVOCrash)
 
-+ (void)enabledAvoidKVOCrash {
++ (void)yh_enabledAvoidKVOCrash {
     // 注册观察对象
     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(addObserver:forKeyPath:options:context:) newMethod:@selector(yh_addObserver:forKeyPath:options:context:)];
     

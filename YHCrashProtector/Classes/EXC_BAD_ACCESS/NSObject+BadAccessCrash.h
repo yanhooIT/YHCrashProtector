@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (BadAccessCrash)
 
-+ (void)enabledAvoidBadAccessCrash;
++ (void)yh_enabledAvoidBadAccessCrash;
 
 @end
 

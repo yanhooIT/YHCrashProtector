@@ -11,7 +11,7 @@
 
 @implementation NSNotificationCenter (AvoidCrash)
 
-+ (void)enabledAvoidNotificationCrash {
++ (void)yh_enabledAvoidNotificationCrash {
     [YHAvoidUtils yh_exchangeInstanceMethod:self oldMethod:@selector(addObserver:selector:name:object:) newMethod:@selector(yh_addObserver:selector:name:object:)];
 }
 

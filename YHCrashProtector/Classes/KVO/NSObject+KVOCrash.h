@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) YHKVOProxy *kvoProxy;
 
-+ (void)enabledAvoidKVOCrash;
++ (void)yh_enabledAvoidKVOCrash;
 
 @end
 

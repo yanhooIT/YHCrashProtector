@@ -19,6 +19,8 @@
 #import "NSObject+KVCCrash.h"
 // Avoid 通知 Crash
 #import "NSNotificationCenter+AvoidCrash.h"
+// Avoid Timer Crash
+#import "NSTimer+AvoidCrash.h"
 
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
@@ -43,11 +45,12 @@
 + (void)startAvoidCrashProtect {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [NSObject enabledAvoidUnSELCrash];
-        [NSObject enabledAvoidBadAccessCrash];
-        [NSObject enabledAvoidKVOCrash];
-        [NSObject enabledAvoidKVCCrash];
-        [NSNotificationCenter enabledAvoidNotificationCrash];
+        [NSObject yh_enabledAvoidUnSELCrash];
+        [NSObject yh_enabledAvoidBadAccessCrash];
+        [NSObject yh_enabledAvoidKVOCrash];
+        [NSObject yh_enabledAvoidKVCCrash];
+        [NSNotificationCenter yh_enabledAvoidNotificationCrash];
+        [NSTimer yh_enabledAvoidTimerCrash];
         
         [NSArray avoidCrashExchangeMethod];
         [NSMutableArray avoidCrashExchangeMethod];

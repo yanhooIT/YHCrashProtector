@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTimer (AvoidCrash)
 
-+ (void)enabledAvoidTimerCrash;
++ (void)yh_enabledAvoidTimerCrash;
 
 @end
 

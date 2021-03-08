@@ -11,7 +11,7 @@
 
 @implementation NSObject (UnSELCrash)
 
-+ (void)enabledAvoidUnSELCrash {
++ (void)yh_enabledAvoidUnSELCrash {
     /** Avoid "unrecognized selector sent to instance" Crash
      
      1、resolveInstanceMethod/resolveClassMethod需要在类的本身上动态添加它本身不存在的方法，这些方法对于该类本身来说冗余的

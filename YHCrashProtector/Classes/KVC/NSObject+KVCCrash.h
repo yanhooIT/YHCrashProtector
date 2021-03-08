@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (KVCCrash)
 
-+ (void)enabledAvoidKVCCrash;
++ (void)yh_enabledAvoidKVCCrash;
 
 @end
 

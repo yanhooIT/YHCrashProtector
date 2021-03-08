@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSNotificationCenter (AvoidCrash)
 
-+ (void)enabledAvoidNotificationCrash;
++ (void)yh_enabledAvoidNotificationCrash;
 
 @end
 

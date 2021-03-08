@@ -11,7 +11,7 @@
 
 @implementation NSObject (BadAccessCrash)
 
-+ (void)enabledAvoidBadAccessCrash {
++ (void)yh_enabledAvoidBadAccessCrash {
     // Avoid "EXC_BAD_ACCESS" Crash
     [YHAvoidUtils yh_exchangeInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
 }
