@@ -19,23 +19,33 @@
 
 + (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Class metaClass;
-    if (class_isMetaClass(anClass)) {// 判断当前是否为元类对象
+    if (class_isMetaClass(anClass)) {// 判断当前类是否为元类对象
         metaClass = anClass;
     } else {
         metaClass = object_getClass(anClass);
     }
     
-    Method originalMethod = class_getClassMethod(metaClass, oldMethod);
-    Method swizzledMethod = class_getClassMethod(metaClass, newMethod);
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    [self _exchangeMethod:metaClass oldMethod:oldMethod newMethod:newMethod];
 }
 
 + (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
-    Method originalMethod = class_getInstanceMethod(anClass, oldMethod);
-    Method swizzledMethod = class_getInstanceMethod(anClass, newMethod);
-    BOOL didAddMethod = class_addMethod(anClass, oldMethod, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+    [self _exchangeMethod:anClass oldMethod:oldMethod newMethod:newMethod];
+}
+
++ (void)_exchangeMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
+    Method originalMethod = class_getInstanceMethod(cls, oldMethod);
+    Method swizzledMethod = class_getInstanceMethod(cls, newMethod);
+    /** 通过添加方法的方式判断原方法是否存在
+     
+     （1）如果返回YES
+     说明方法添加成功，也说明了源方法不存在，这时源方法的实现已经指向了我们自定义的方法，所以接下来只需要将新方法的实现指向源方法的实现即可，这里使用到了 class_replaceMethod 这个方法，此方法内部实现会调用 class_addMethod 和 method_setImplementation 这两个函数。
+
+     （2）如果返回NO
+     说明方法添加失败，说明源方法已经存在，直接将两个方法的实现交换即可。
+     */
+    BOOL didAddMethod = class_addMethod(cls, oldMethod, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
     if (didAddMethod) {
-        class_replaceMethod(anClass, newMethod, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+        class_replaceMethod(cls, newMethod, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
     } else {
         method_exchangeImplementations(originalMethod, swizzledMethod);
     }
