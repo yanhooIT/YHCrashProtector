@@ -9,13 +9,6 @@
 #import "NSMutableDictionary+AvoidCrash.h"
 #import "YHAvoidUtils.h"
 
-/**
- *  Can avoid crash method
- *
- *  1. - (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey
- *  2. - (void)removeObjectForKey:(id)aKey
- *
- */
 @implementation NSMutableDictionary (AvoidCrash)
 
 + (void)avoidCrashExchangeMethod {

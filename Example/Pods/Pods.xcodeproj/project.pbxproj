@@ -7,181 +7,181 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BFAC1269B7FA24162CB9F25036C88B4 /* YHAvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = F41D3B8268960C7902D09C792303FA82 /* YHAvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C7488C498D6A344604670CF18CD25A4 /* NSArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B8B2FC9CA76645B76F891DCD2319FA /* NSArray+AvoidCrash.m */; };
-		1245548D45C1AE38D28EBE7161A243F0 /* NSObject+BadAccessCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB3827C88F2DC589CAC68383B9262A7 /* NSObject+BadAccessCrash.m */; };
-		18DD010C71C2DF778885DD4ABADDD4FC /* YHCrashProtector-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5B4D27A7479EAE79DECC6B69E8056B /* YHCrashProtector-dummy.m */; };
-		1F97FE2DEE51FE0565895F875F6692B8 /* YHKVOInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AB30F1FC6B4249F1E32939DFEC6AA8FF /* YHKVOInfo.m */; };
-		20DC695654FBA04AF2137C3F254C624B /* NSDictionary+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = B3D7433C2B037AA71341CC7282E74BC4 /* NSDictionary+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		222B82A8D0D9FE1074115A9FE97F715B /* YHKVOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AB44F867245ECB766F857BEC4664FE20 /* YHKVOProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2818F3EE939E4518C3006C045269F9D7 /* YHZoombie.h in Headers */ = {isa = PBXBuildFile; fileRef = FF44CB990FE5EEBEB8E49CEF16E5E250 /* YHZoombie.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28A21D618F9FA28AA511F91C605B8F56 /* NSAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = F7AEED2EDB79F8E4B6EB7CA70E3E40E3 /* NSAttributedString+AvoidCrash.m */; };
-		377BE60B0AE3C1E0651B4B805302207C /* NSObject+KVCCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A64DFCB592622A18A8D4DDA8081747 /* NSObject+KVCCrash.m */; };
-		3C53BAC801DF8567446B9108000B75AB /* YHDeallocHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A701EA98FF250F15ABB59F8488A00E /* YHDeallocHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0774D104F4F841B061CF4D5971F105C2 /* YHWeakProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C5AE0FCC8881E022E0BAFCBE66E043 /* YHWeakProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A3BDE0CAC7E4E5A83F93C3C41BA13F4 /* YHAvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7BD54AEFBB07287C1817F3AE18DCD /* YHAvoidCrash.m */; };
+		0F573D3D1C8DA55D33FEC14D0EFEC6D5 /* NSMutableDictionary+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EDF4BFF7E65F78D9F3AD513DE78C540 /* NSMutableDictionary+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11FFE8BC9D408922838BEAA292771927 /* NSString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B25D19F1984E006935F56597ECB242D /* NSString+AvoidCrash.m */; };
+		12C6978176D70CF12C2AA5159954D146 /* YHZoombie.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D8853B7AC71B4F68F41F4A07A1094A5 /* YHZoombie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		131E501D46018D65E4865CAF5EC2C378 /* NSObject+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D20D1E325449E0D42B37A26A7D145E /* NSObject+AvoidCrash.m */; };
+		1B78C7D02024DF8B4EC57949702EB714 /* YHBadAccessManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F9B72E8B3D3224C6BA4A918FF28C84F /* YHBadAccessManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F6075080EDAC2400C9548E708F303EC /* YHBadAccessManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A96AE38071CA7E3B7A57BB6F6D20B88B /* YHBadAccessManager.m */; };
+		24B14C98D799CBC3FC9A980B0A2C2DD8 /* YHCrashProtector-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 13478EF3A4428DD5FC2E11D3A9651DC6 /* YHCrashProtector-dummy.m */; };
+		2C300C6FE8597EA6B5C23F0ED6DE9159 /* YHZoombie.m in Sources */ = {isa = PBXBuildFile; fileRef = A65412001702F78F15B8977E65240BF1 /* YHZoombie.m */; };
+		32D31D7A850E6BEF2A330AC241C0B842 /* NSObject+UnSELCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B03E3276269CBD7734EE1F10A0874 /* NSObject+UnSELCrash.m */; };
+		3BB2F2A0C23671DF9DAC1493D1E05967 /* NSMutableAttributedString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2A7824E983E98EEABB602479DB1AA9 /* NSMutableAttributedString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3DD5DB2B97355A9B4B8948EACB2C58B3 /* YHKVOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6A3BB62038E2C4F7085724C1228F2D /* YHKVOProxy.m */; };
+		3E0BBD40A7879A3584A75451B95DEE20 /* YHDeallocHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 588EADEA08FD71E58933B4E2FDFB68F5 /* YHDeallocHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E82D3723CFD137E6F1E4E67651EEA57 /* NSTimer+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5F12BDABFF59A50638E5D163CE1663 /* NSTimer+AvoidCrash.m */; };
+		416C4BA2E1210834CA79B394FFDC370B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		41860AA563271AD233CF433CCAAA0A68 /* YHCrashProtector-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7849377529C83536900AEC79B98619DC /* YHCrashProtector-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		44A7F210425C80D1ADC4B65DAEAC76AF /* Pods-YHCrashProtector_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D2BF73832A57278E346781C10C4577 /* Pods-YHCrashProtector_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4AEB6705CEDDA11AEBBAE8BE2E9208E2 /* YHCrashProtector-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6336DDE1E2DC0116E1F597615BB9180A /* YHCrashProtector-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		563FD90B0FAADDE3ABD44B8ECA9C78B1 /* YHKVOInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = EF6980198AD4633C1B31E782F35E79CB /* YHKVOInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5FAD8AF18CA38DCBE8201F516AC98D07 /* NSObject+UnSELCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A0FE3E49B4E22ABBF2E994E8CD2468 /* NSObject+UnSELCrash.m */; };
-		62662ACD981F12786531776405429343 /* NSMutableString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 074CE8311A2E092D67E91B39A4A35B34 /* NSMutableString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		648D94D35D4F4F678834537055BE0E30 /* NSObject+BadAccessCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 202662CB36D840E52D8B34EBA119A7A4 /* NSObject+BadAccessCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46B333FFE9144111EAD4258D5092E2FF /* NSAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DB2BF3EC741D7C796E0CFBFB61D196 /* NSAttributedString+AvoidCrash.m */; };
+		49C6D15AF11B635C212CEF2B83500982 /* NSObject+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B075F19504D26CFB11DFA46FDAC045C /* NSObject+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53C862BCEC4FCEC941B41C180C7D3EBA /* YHForwardingTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = C38D2E61EDAF30FA23C8D0A6F0236949 /* YHForwardingTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D4924E5C7F700513456F756D4AB4392 /* YHWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0BFA12B0546CD99E15DAB47F5E6E6 /* YHWeakProxy.m */; };
+		619A2E4B755F181A26B96F060351A6FC /* NSMutableArray+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = CE1EA06F9DEFB391DA08CBC7FEC60C8E /* NSMutableArray+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		625D36DABBC8B55938025DBCC144CA9C /* YHDeallocHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 037CDE63F87A98723D8C986842ED434E /* YHDeallocHandle.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		69223D0582AF8F77A0C30FB724BF4DE4 /* NSString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 5584622EBD310E2F969F54E476AF6D9A /* NSString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A1C3FF92A2DB9981E7D042A3E1F8315 /* NSObject+KVCCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 696FDFEBAAA90479E028E855B81C2414 /* NSObject+KVCCrash.m */; };
 		6A6EAE23B3FD69887C91AD2C3BA4340C /* Pods-YHCrashProtector_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ECF51C9FF7CA234096A71E011EA9CF1F /* Pods-YHCrashProtector_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6CAA17CA2968BA57C75B1EC70866B77A /* NSObject+KVOCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1024C3C05876D73AF7517014A1943C /* NSObject+KVOCrash.m */; };
-		6D8255351A86F63FBFA5888747AB4AF0 /* YHAvoidUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D5A30D8192FC92818E021512AF18082D /* YHAvoidUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7131ADF7CA27773725075A7E0E31184D /* NSObject+KVOCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = F06D58FAE1747A4B1D364BB56FF94BE9 /* NSObject+KVOCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71CA1AEC21C2675178E69BCB55495B8A /* YHKVOProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4677466AE6CEEE63C433ED3AF77214F /* YHKVOProxy.m */; };
-		724FF5674DC838B88B7F9E1A1390F8EA /* NSArray+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 147DD3B349F2A9C96BC1AF1967806B54 /* NSArray+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		708A5C4B7A92FE1728663C17F82098E5 /* YHAvoidUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E0FB988612E77E66645604327354AA65 /* YHAvoidUtils.m */; };
+		712FE4EAB40ACCBD39312D5A2A100359 /* NSMutableDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8D0952D7BA0D71B9C4453E1E964C9 /* NSMutableDictionary+AvoidCrash.m */; };
+		73A8120FDD1ACCBD8345CE281A9F7AB0 /* NSTimer+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 487AFEA0DB216D5184CCEE718A2554D5 /* NSTimer+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73C63B1EC4CBAFF1BB27ED8233F1D579 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		77AD28D62989C91CD12F5D3071B70195 /* NSMutableAttributedString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = A0B935C3C1230B884DDE98961E614645 /* NSMutableAttributedString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F428DDCC3D58412246A8921215A0ABC /* NSString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4809232B3BCCBF227CAA36D29DADE6 /* NSString+AvoidCrash.m */; };
-		8F64ECAB0ADD90C9C509E84259391279 /* NSMutableArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 598AC34D334B2A20AFFECEC15959D051 /* NSMutableArray+AvoidCrash.m */; };
-		9538B54B0092DA8894D368AC8CCFFA5E /* NSMutableDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FC141A653CAE1DA74556359F3C1BA6 /* NSMutableDictionary+AvoidCrash.m */; };
-		96186E88C1444AF50A09F65F534C0C69 /* NSNotificationCenter+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD3C69302771977D2F73C8D40AD8672 /* NSNotificationCenter+AvoidCrash.m */; };
-		A08EE74CC12597776AE0276B7410CB1F /* NSMutableDictionary+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E60050FEE9A75689119F65D64065CE2 /* NSMutableDictionary+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5F68BE9C362D190F604145382281F80 /* YHForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 71E710FCAB59DF4B8445B5A71A1BF0AC /* YHForwardingTarget.m */; };
-		A99E2E16775EE73F4CAA6F8ECC2B369D /* YHForwardingTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 4507D58069A8E012AF2802AF0A1C718C /* YHForwardingTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ADDF18664881779E616839B9D42A5A13 /* NSNotificationCenter+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9739BB1F673A5724892682E600373B20 /* NSNotificationCenter+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AF1D9D3EF53F3A4F0BAAF46979829E9A /* YHAvoidUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD7010F0662F8B85D840E9DC58384E3 /* YHAvoidUtils.m */; };
-		B088745A5C1436E288866ED99AC7F027 /* YHBadAccessManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 331A251A63A5F46B382162BCFB15404C /* YHBadAccessManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B97CB8EA28FEABDB6076FA97B8871B3F /* YHDeallocHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = B7433DECDCED2443562A9027214FC452 /* YHDeallocHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C23B706C6A8D82914313B3716571484C /* NSTimer+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = A90B6FB60EBF2ABBBD12FC9E275AE35E /* NSTimer+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3151FBC2F1A5D3140CD3EEE1318D623 /* NSObject+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = BC774BCC11E36B63158AADCCCB881CA5 /* NSObject+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C56C8D37433C26485B36B182CD93294A /* NSObject+UnSELCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = B814258E115817B3447E1BD5EC5EFF30 /* NSObject+UnSELCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		745298FA77A7BE07A94E45B145520B10 /* NSAttributedString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 06128AB062A5649823CEB6A7AC2040E5 /* NSAttributedString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		76ED0E505169976058D10B3E01EA3033 /* NSObject+KVCCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 51B367EAF6DB737AB8F16FF7DB7756E1 /* NSObject+KVCCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		853633E458398C975B6AD511AF5EC06B /* NSNotificationCenter+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = FA02CE35C50A303BCF6BFA84AB2E151D /* NSNotificationCenter+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91A14871E462AA66B57CC64C34EFD2D6 /* YHAvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 59BC340B9D93D70ACF0B4084FBE6F61D /* YHAvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		95A87A27CD822D05E01E4E5670CBA15E /* NSNotificationCenter+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E6B8AF927F67C2D2B5D8CC95A1D63 /* NSNotificationCenter+AvoidCrash.m */; };
+		999397C01C86ED3D1662DC7F478F3653 /* NSDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE77DD8CAEBA91567CD374A38448177 /* NSDictionary+AvoidCrash.m */; };
+		9D5ACF3083A503BA434FBE1B42F50A3F /* NSObject+KVOCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B72F3B5B7658D615894DE2901C8FB70 /* NSObject+KVOCrash.m */; };
+		9D665B6097628082CA99BF6E2202A6BE /* YHAvoidUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E200308EBF9CF8D180DA5106D0CE493 /* YHAvoidUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D871B0D2AF7C5C7A1C615A4302A0867 /* NSMutableString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = EA200148A1383A5CCB1D910E2D0A4F4C /* NSMutableString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2C6FACC525635382A8A5E6900708DEF /* NSObject+BadAccessCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E9EB19A2EE97CAA177089184A9091 /* NSObject+BadAccessCrash.m */; };
+		AAC4A5243F6D58D5558BD521B03CE806 /* YHForwardingTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C326E19BBE4CA21DA928A89DAB6CE /* YHForwardingTarget.m */; };
+		B0B4861165CFE1F3F689FAF4048AB000 /* NSObject+UnSELCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 406AC8F13AB13541D80874C0385B1F0A /* NSObject+UnSELCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B226EB590E8CB1871C01B2AD7D3FE6F8 /* YHAvoidCrashProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = A7C5AE5FAE0DA175FF8D1D6100D2C73A /* YHAvoidCrashProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B92C24D506CA034AF5EE2E979221930A /* NSArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C0FE80961F96DFB9B1C5F2040D8DD4 /* NSArray+AvoidCrash.m */; };
+		C013E744630C8BD756F98FD874C56FA2 /* NSMutableAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DDC06B68224B48C536BE6C30635E3A /* NSMutableAttributedString+AvoidCrash.m */; };
 		C6EF2EE4A39392B0EC598270B9FC9C6C /* Pods-YHCrashProtector_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC4F6C77CEF40924080BB4CEF17E4E7 /* Pods-YHCrashProtector_Tests-dummy.m */; };
-		C7ECF0A3F82094A5B35DBCB4D1567759 /* YHZoombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A15E6C49F5F343A542C357D5453524D /* YHZoombie.m */; };
-		C9D09654D6630D08A63D647A3FED02B8 /* NSObject+KVCCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = E127FFD20EF947089E744A665F8B8096 /* NSObject+KVCCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE497A63CFC7ED38D8D0556EB48DF90D /* YHAvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AF61615480239B99541C88AF710DC5 /* YHAvoidCrash.m */; };
-		CE63C706EF3893DCF6A79EA59DDEA1D3 /* NSTimer+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE50A1AD6269B2290BF052A518B8DE8 /* NSTimer+AvoidCrash.m */; };
-		CFC1452442F427BFCC283DA1E231B6B7 /* YHAvoidCrashProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4088053DC0EE9A677267630EFAF1C4D5 /* YHAvoidCrashProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0A0F0CDF6FAA4CDAC57802457A5711B /* YHBadAccessManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A1CE5B76898FC13574FDFDD1EEA606 /* YHBadAccessManager.m */; };
-		D8439AEC1666DC542B96173175993F2D /* NSMutableAttributedString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0A266C0BDBA80D25C5B40C673F862F /* NSMutableAttributedString+AvoidCrash.m */; };
+		CA1AA3085E4EFA28C6544E1D4B73EFB1 /* NSDictionary+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 30B5EDA6A8700A5E475097A836EC6BFC /* NSDictionary+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D39D144953CB80DD8560B4CA75E11234 /* NSObject+KVOCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = C8530C22DAA7835F6D48863B9183E71E /* NSObject+KVOCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D502F8CAD5EA5A610DA40BACEBC101FD /* YHKVOInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = C10985DCE421A9680F42ADAE3A1C5499 /* YHKVOInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D7587BB829AA395CE7A5693A2CCD0988 /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8EA719A54D2F676D2DE6FE23A9F749 /* NSMutableString+AvoidCrash.m */; };
+		D8F1450782470C5BFB69F6D13FE9F0FF /* NSObject+BadAccessCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D4053FA31C40199DC3CCDFF821BABCE /* NSObject+BadAccessCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCEA4716EDF54E5126C8F090B3BFE94C /* NSMutableArray+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 587D344E6101FE6C18FE9A175CE574A2 /* NSMutableArray+AvoidCrash.m */; };
+		E12EE476217D18B7DDE37C3F77233121 /* YHKVOProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A39915E3A70851E56FB896A98157D40 /* YHKVOProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E332737581C2E901CB119DB73EB9025C /* Pods-YHCrashProtector_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 602E133FB367EAAC7F7B16FBF12B51B2 /* Pods-YHCrashProtector_Example-dummy.m */; };
-		E3800980C73ED8BC86B0701F2DAEC50C /* NSObject+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F7409BD6171DA9E84F9D03F086689 /* NSObject+AvoidCrash.m */; };
-		E4586265B43205E4C85ACB5560FF6677 /* NSAttributedString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F80CDB5C14BD000CD93A1005CB472A9 /* NSAttributedString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6A3B27644F9040712BDD32294F379C3 /* NSMutableString+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 743E42AAF216D91A471E69D08D1CE8D7 /* NSMutableString+AvoidCrash.m */; };
-		EA3422B6E5E207A61CAD6D6BDA7210F5 /* NSDictionary+AvoidCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D7EAE3A8135D27E43CBD3E44591B17 /* NSDictionary+AvoidCrash.m */; };
-		EE579D7A25F6115400236312 /* YHWeakProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = EE579D7825F6115400236312 /* YHWeakProxy.h */; };
-		EE579D7B25F6115400236312 /* YHWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EE579D7925F6115400236312 /* YHWeakProxy.m */; };
-		F4D714A691F0B610625DFC5D9DA0FFFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		FAEAE57DCA57E8035071C021D3FDC446 /* NSMutableArray+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = BA8180466D00CF41FAA663FE2E5984BA /* NSMutableArray+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF2B7490A445B9B7C30CE526C1833C17 /* NSString+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 248DA0CFC962A43D8563DBE9782E8176 /* NSString+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E34B13B718C1BCAB2A9527B5916D7EEE /* YHKVOInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 92185077EBB205A8B97889A932AACF1B /* YHKVOInfo.m */; };
+		F431799AD99E99C3E8E521057DD987FB /* NSArray+AvoidCrash.h in Headers */ = {isa = PBXBuildFile; fileRef = 635D7A701522ADD9BF282ED3E33EEA45 /* NSArray+AvoidCrash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFF0CFE31E693345D98A3D1AE4D74268 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A3A1E65C0FAEFE589695EE72825FEC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1DC073103A2407CF1982341C29D56EBA;
-			remoteInfo = YHCrashProtector;
-		};
-		21E76C79D16A08A6B66A6977A08A28FA /* PBXContainerItemProxy */ = {
+		2F4EB9C676BD9A80A9CE0E8706E5B340 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 26AE6741630EBC813296C335DE90D99D;
 			remoteInfo = "Pods-YHCrashProtector_Example";
 		};
+		3C4EE7459D2C478E0FE43533E9D4C4C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DC073103A2407CF1982341C29D56EBA;
+			remoteInfo = YHCrashProtector;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		074CE8311A2E092D67E91B39A4A35B34 /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
-		1040AC68DAA5442662801E3A1547D6DD /* YHCrashProtector.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = YHCrashProtector.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		037CDE63F87A98723D8C986842ED434E /* YHDeallocHandle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHDeallocHandle.m; path = YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.m; sourceTree = "<group>"; };
+		06128AB062A5649823CEB6A7AC2040E5 /* NSAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
+		0B075F19504D26CFB11DFA46FDAC045C /* NSObject+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+AvoidCrash.h"; path = "YHCrashProtector/Classes/NSObject+AvoidCrash.h"; sourceTree = "<group>"; };
+		0EDF4BFF7E65F78D9F3AD513DE78C540 /* NSMutableDictionary+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AvoidCrash.h"; sourceTree = "<group>"; };
 		1209272A345DB421B89B6571C4540A2E /* Pods-YHCrashProtector_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YHCrashProtector_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		13A701EA98FF250F15ABB59F8488A00E /* YHDeallocHandle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHDeallocHandle.m; path = YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.m; sourceTree = "<group>"; };
-		147DD3B349F2A9C96BC1AF1967806B54 /* NSArray+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSArray+AvoidCrash.h"; sourceTree = "<group>"; };
-		18378B56337D057991871DBE66512653 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		1A15E6C49F5F343A542C357D5453524D /* YHZoombie.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHZoombie.m; sourceTree = "<group>"; };
-		1B0A266C0BDBA80D25C5B40C673F862F /* NSMutableAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
-		1CB3827C88F2DC589CAC68383B9262A7 /* NSObject+BadAccessCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BadAccessCrash.m"; sourceTree = "<group>"; };
-		202662CB36D840E52D8B34EBA119A7A4 /* NSObject+BadAccessCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+BadAccessCrash.h"; sourceTree = "<group>"; };
+		13478EF3A4428DD5FC2E11D3A9651DC6 /* YHCrashProtector-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "YHCrashProtector-dummy.m"; sourceTree = "<group>"; };
 		240BBF1426BF9222904ACA6CFB5EE1FB /* Pods-YHCrashProtector_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YHCrashProtector_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		248DA0CFC962A43D8563DBE9782E8176 /* NSString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+AvoidCrash.h"; sourceTree = "<group>"; };
 		27B13EFB4F32882C2633BCB5D46A41BE /* Pods-YHCrashProtector_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YHCrashProtector_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		2B4809232B3BCCBF227CAA36D29DADE6 /* NSString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+AvoidCrash.m"; sourceTree = "<group>"; };
-		317C1E79EF38A851E9D4DFC883BA42A2 /* Pods_YHCrashProtector_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YHCrashProtector_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		32FC141A653CAE1DA74556359F3C1BA6 /* NSMutableDictionary+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
-		331A251A63A5F46B382162BCFB15404C /* YHBadAccessManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHBadAccessManager.h; sourceTree = "<group>"; };
-		3D44991E8D717690C289EDF9B2080E9B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2B72F3B5B7658D615894DE2901C8FB70 /* NSObject+KVOCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVOCrash.m"; sourceTree = "<group>"; };
+		30B5EDA6A8700A5E475097A836EC6BFC /* NSDictionary+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AvoidCrash.h"; sourceTree = "<group>"; };
+		317C1E79EF38A851E9D4DFC883BA42A2 /* Pods_YHCrashProtector_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YHCrashProtector_Tests.framework; path = "Pods-YHCrashProtector_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32B427B7E0A17151CAF08FD0BFB75D5C /* YHCrashProtector-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "YHCrashProtector-Info.plist"; sourceTree = "<group>"; };
+		331B03E3276269CBD7734EE1F10A0874 /* NSObject+UnSELCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UnSELCrash.m"; sourceTree = "<group>"; };
+		376C326E19BBE4CA21DA928A89DAB6CE /* YHForwardingTarget.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHForwardingTarget.m; sourceTree = "<group>"; };
 		3D7AF4DFD938F597D890FE8A1ABDFD39 /* Pods-YHCrashProtector_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-YHCrashProtector_Example.modulemap"; sourceTree = "<group>"; };
-		4088053DC0EE9A677267630EFAF1C4D5 /* YHAvoidCrashProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidCrashProtocol.h; path = YHCrashProtector/Classes/YHAvoidCrashProtocol.h; sourceTree = "<group>"; };
+		3ED8D0952D7BA0D71B9C4453E1E964C9 /* NSMutableDictionary+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
+		3F5F12BDABFF59A50638E5D163CE1663 /* NSTimer+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+AvoidCrash.m"; sourceTree = "<group>"; };
+		406AC8F13AB13541D80874C0385B1F0A /* NSObject+UnSELCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+UnSELCrash.h"; sourceTree = "<group>"; };
+		43D47394308F09F6F8EA236D71FFC87B /* YHCrashProtector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YHCrashProtector.debug.xcconfig; sourceTree = "<group>"; };
 		445B93D644042E8F85E14E6BF4136661 /* Pods-YHCrashProtector_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YHCrashProtector_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4507D58069A8E012AF2802AF0A1C718C /* YHForwardingTarget.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHForwardingTarget.h; sourceTree = "<group>"; };
+		487AFEA0DB216D5184CCEE718A2554D5 /* NSTimer+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSTimer+AvoidCrash.h"; sourceTree = "<group>"; };
 		48A201A9D48AB1031164A7E00E227881 /* Pods-YHCrashProtector_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-YHCrashProtector_Tests.modulemap"; sourceTree = "<group>"; };
-		4CD3C69302771977D2F73C8D40AD8672 /* NSNotificationCenter+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+AvoidCrash.m"; sourceTree = "<group>"; };
+		4BA0BFA12B0546CD99E15DAB47F5E6E6 /* YHWeakProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHWeakProxy.m; sourceTree = "<group>"; };
 		4D3D4BA48F308C4232667C5474BFF2B4 /* Pods-YHCrashProtector_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YHCrashProtector_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		598AC34D334B2A20AFFECEC15959D051 /* NSMutableArray+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+AvoidCrash.m"; sourceTree = "<group>"; };
+		4F9B72E8B3D3224C6BA4A918FF28C84F /* YHBadAccessManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHBadAccessManager.h; sourceTree = "<group>"; };
+		51B367EAF6DB737AB8F16FF7DB7756E1 /* NSObject+KVCCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVCCrash.h"; sourceTree = "<group>"; };
+		528776A0DE9D1EDEDD6539772EE976A8 /* YHCrashProtector.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = YHCrashProtector.modulemap; sourceTree = "<group>"; };
+		5584622EBD310E2F969F54E476AF6D9A /* NSString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+AvoidCrash.h"; sourceTree = "<group>"; };
+		57DDC06B68224B48C536BE6C30635E3A /* NSMutableAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
+		587D344E6101FE6C18FE9A175CE574A2 /* NSMutableArray+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+AvoidCrash.m"; sourceTree = "<group>"; };
+		588EADEA08FD71E58933B4E2FDFB68F5 /* YHDeallocHandle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHDeallocHandle.h; path = YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.h; sourceTree = "<group>"; };
+		58C0FE80961F96DFB9B1C5F2040D8DD4 /* NSArray+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSArray+AvoidCrash.m"; sourceTree = "<group>"; };
+		59BC340B9D93D70ACF0B4084FBE6F61D /* YHAvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidCrash.h; path = YHCrashProtector/Classes/YHAvoidCrash.h; sourceTree = "<group>"; };
+		5B25D19F1984E006935F56597ECB242D /* NSString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+AvoidCrash.m"; sourceTree = "<group>"; };
+		5C8EA719A54D2F676D2DE6FE23A9F749 /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
+		5D4053FA31C40199DC3CCDFF821BABCE /* NSObject+BadAccessCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+BadAccessCrash.h"; sourceTree = "<group>"; };
 		5DCB5D953500AF9040A7A4EE2CED7948 /* Pods-YHCrashProtector_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-YHCrashProtector_Example-frameworks.sh"; sourceTree = "<group>"; };
 		602E133FB367EAAC7F7B16FBF12B51B2 /* Pods-YHCrashProtector_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-YHCrashProtector_Example-dummy.m"; sourceTree = "<group>"; };
-		6336DDE1E2DC0116E1F597615BB9180A /* YHCrashProtector-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YHCrashProtector-umbrella.h"; sourceTree = "<group>"; };
-		68AF61615480239B99541C88AF710DC5 /* YHAvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHAvoidCrash.m; path = YHCrashProtector/Classes/YHAvoidCrash.m; sourceTree = "<group>"; };
-		6BD7010F0662F8B85D840E9DC58384E3 /* YHAvoidUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHAvoidUtils.m; path = YHCrashProtector/Classes/YHAvoidUtils.m; sourceTree = "<group>"; };
-		6C5B4D27A7479EAE79DECC6B69E8056B /* YHCrashProtector-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "YHCrashProtector-dummy.m"; sourceTree = "<group>"; };
-		6DF13912A63B47B9DCAB25E76C628CB2 /* YHCrashProtector-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YHCrashProtector-prefix.pch"; sourceTree = "<group>"; };
-		6F1024C3C05876D73AF7517014A1943C /* NSObject+KVOCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVOCrash.m"; sourceTree = "<group>"; };
-		71E710FCAB59DF4B8445B5A71A1BF0AC /* YHForwardingTarget.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHForwardingTarget.m; sourceTree = "<group>"; };
-		72D7EAE3A8135D27E43CBD3E44591B17 /* NSDictionary+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
+		610CFE4F595B6691BF26323235FC7520 /* YHCrashProtector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YHCrashProtector.release.xcconfig; sourceTree = "<group>"; };
+		635D7A701522ADD9BF282ED3E33EEA45 /* NSArray+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSArray+AvoidCrash.h"; sourceTree = "<group>"; };
+		696FDFEBAAA90479E028E855B81C2414 /* NSObject+KVCCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVCCrash.m"; sourceTree = "<group>"; };
+		6EE77DD8CAEBA91567CD374A38448177 /* NSDictionary+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+AvoidCrash.m"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		73B8B2FC9CA76645B76F891DCD2319FA /* NSArray+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSArray+AvoidCrash.m"; sourceTree = "<group>"; };
-		740F7409BD6171DA9E84F9D03F086689 /* NSObject+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AvoidCrash.m"; path = "YHCrashProtector/Classes/NSObject+AvoidCrash.m"; sourceTree = "<group>"; };
-		743E42AAF216D91A471E69D08D1CE8D7 /* NSMutableString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+AvoidCrash.m"; sourceTree = "<group>"; };
-		74A0FE3E49B4E22ABBF2E994E8CD2468 /* NSObject+UnSELCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UnSELCrash.m"; sourceTree = "<group>"; };
+		7849377529C83536900AEC79B98619DC /* YHCrashProtector-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YHCrashProtector-umbrella.h"; sourceTree = "<group>"; };
+		7A39915E3A70851E56FB896A98157D40 /* YHKVOProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHKVOProxy.h; sourceTree = "<group>"; };
 		7D0E6B4A34D091C70EA0FE90528A301A /* Pods-YHCrashProtector_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YHCrashProtector_Tests-Info.plist"; sourceTree = "<group>"; };
-		87C2BA524C16440E6EA8753AE2DA9ED1 /* Pods_YHCrashProtector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YHCrashProtector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8DF8BAE0042001016BD2878841285924 /* YHCrashProtector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YHCrashProtector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9739BB1F673A5724892682E600373B20 /* NSNotificationCenter+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+AvoidCrash.h"; sourceTree = "<group>"; };
-		99E5E510694C0B5CC93E8D5A7BFB44DC /* YHCrashProtector.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = YHCrashProtector.modulemap; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E60050FEE9A75689119F65D64065CE2 /* NSMutableDictionary+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AvoidCrash.h"; sourceTree = "<group>"; };
-		9F80CDB5C14BD000CD93A1005CB472A9 /* NSAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
-		A0B935C3C1230B884DDE98961E614645 /* NSMutableAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
-		A481120A0D40875FA1B27ABF2C92D180 /* YHCrashProtector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YHCrashProtector.debug.xcconfig; sourceTree = "<group>"; };
-		A90B6FB60EBF2ABBBD12FC9E275AE35E /* NSTimer+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSTimer+AvoidCrash.h"; sourceTree = "<group>"; };
-		AB30F1FC6B4249F1E32939DFEC6AA8FF /* YHKVOInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHKVOInfo.m; sourceTree = "<group>"; };
-		AB44F867245ECB766F857BEC4664FE20 /* YHKVOProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHKVOProxy.h; sourceTree = "<group>"; };
-		ABE50A1AD6269B2290BF052A518B8DE8 /* NSTimer+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+AvoidCrash.m"; sourceTree = "<group>"; };
-		AE5D26C1F393BA21B7B13EC5190F78BD /* YHCrashProtector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YHCrashProtector.release.xcconfig; sourceTree = "<group>"; };
+		8265DA6E2B740CB4841AF53607DBF4AF /* YHCrashProtector-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YHCrashProtector-prefix.pch"; sourceTree = "<group>"; };
+		87C2BA524C16440E6EA8753AE2DA9ED1 /* Pods_YHCrashProtector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_YHCrashProtector_Example.framework; path = "Pods-YHCrashProtector_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89B1016C2F16421B6BCD9B9051FA7474 /* YHCrashProtector.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = YHCrashProtector.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8DF8BAE0042001016BD2878841285924 /* YHCrashProtector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = YHCrashProtector.framework; path = YHCrashProtector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E200308EBF9CF8D180DA5106D0CE493 /* YHAvoidUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidUtils.h; path = YHCrashProtector/Classes/YHAvoidUtils.h; sourceTree = "<group>"; };
+		92185077EBB205A8B97889A932AACF1B /* YHKVOInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHKVOInfo.m; sourceTree = "<group>"; };
+		95D20D1E325449E0D42B37A26A7D145E /* NSObject+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+AvoidCrash.m"; path = "YHCrashProtector/Classes/NSObject+AvoidCrash.m"; sourceTree = "<group>"; };
+		9D8853B7AC71B4F68F41F4A07A1094A5 /* YHZoombie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHZoombie.h; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A65412001702F78F15B8977E65240BF1 /* YHZoombie.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHZoombie.m; sourceTree = "<group>"; };
+		A7C5AE5FAE0DA175FF8D1D6100D2C73A /* YHAvoidCrashProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidCrashProtocol.h; path = YHCrashProtector/Classes/YHAvoidCrashProtocol.h; sourceTree = "<group>"; };
+		A8C5AE0FCC8881E022E0BAFCBE66E043 /* YHWeakProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHWeakProxy.h; sourceTree = "<group>"; };
+		A96AE38071CA7E3B7A57BB6F6D20B88B /* YHBadAccessManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHBadAccessManager.m; sourceTree = "<group>"; };
+		AAD7BD54AEFBB07287C1817F3AE18DCD /* YHAvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHAvoidCrash.m; path = YHCrashProtector/Classes/YHAvoidCrash.m; sourceTree = "<group>"; };
+		AD25F9253CBD621F4E583D4BC20BCB40 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		AE3E9EB19A2EE97CAA177089184A9091 /* NSObject+BadAccessCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BadAccessCrash.m"; sourceTree = "<group>"; };
 		B0D2BF73832A57278E346781C10C4577 /* Pods-YHCrashProtector_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-YHCrashProtector_Example-umbrella.h"; sourceTree = "<group>"; };
-		B3D7433C2B037AA71341CC7282E74BC4 /* NSDictionary+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AvoidCrash.h"; sourceTree = "<group>"; };
-		B7433DECDCED2443562A9027214FC452 /* YHDeallocHandle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHDeallocHandle.h; path = YHCrashProtector/Classes/EXC_BAD_ACCESS/YHDeallocHandle.h; sourceTree = "<group>"; };
-		B814258E115817B3447E1BD5EC5EFF30 /* NSObject+UnSELCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+UnSELCrash.h"; sourceTree = "<group>"; };
 		B893D52ED50DD380CA8B973F60B79259 /* Pods-YHCrashProtector_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-YHCrashProtector_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B9A1CE5B76898FC13574FDFDD1EEA606 /* YHBadAccessManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHBadAccessManager.m; sourceTree = "<group>"; };
-		BA8180466D00CF41FAA663FE2E5984BA /* NSMutableArray+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+AvoidCrash.h"; sourceTree = "<group>"; };
-		BC774BCC11E36B63158AADCCCB881CA5 /* NSObject+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+AvoidCrash.h"; path = "YHCrashProtector/Classes/NSObject+AvoidCrash.h"; sourceTree = "<group>"; };
 		BDC4F6C77CEF40924080BB4CEF17E4E7 /* Pods-YHCrashProtector_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-YHCrashProtector_Tests-dummy.m"; sourceTree = "<group>"; };
-		C4677466AE6CEEE63C433ED3AF77214F /* YHKVOProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHKVOProxy.m; sourceTree = "<group>"; };
-		D5A30D8192FC92818E021512AF18082D /* YHAvoidUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidUtils.h; path = YHCrashProtector/Classes/YHAvoidUtils.h; sourceTree = "<group>"; };
+		C10985DCE421A9680F42ADAE3A1C5499 /* YHKVOInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHKVOInfo.h; sourceTree = "<group>"; };
+		C38D2E61EDAF30FA23C8D0A6F0236949 /* YHForwardingTarget.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHForwardingTarget.h; sourceTree = "<group>"; };
+		C8530C22DAA7835F6D48863B9183E71E /* NSObject+KVOCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOCrash.h"; sourceTree = "<group>"; };
+		CE1EA06F9DEFB391DA08CBC7FEC60C8E /* NSMutableArray+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+AvoidCrash.h"; sourceTree = "<group>"; };
 		D6E62ABA70296C3C08D0031E12C3A363 /* Pods-YHCrashProtector_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-YHCrashProtector_Example-Info.plist"; sourceTree = "<group>"; };
-		E127FFD20EF947089E744A665F8B8096 /* NSObject+KVCCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVCCrash.h"; sourceTree = "<group>"; };
-		E23DCE00D9CC945F1433A78D46630C1E /* YHCrashProtector-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "YHCrashProtector-Info.plist"; sourceTree = "<group>"; };
+		E0FB988612E77E66645604327354AA65 /* YHAvoidUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = YHAvoidUtils.m; path = YHCrashProtector/Classes/YHAvoidUtils.m; sourceTree = "<group>"; };
 		E2E60D701307D38156944EE307E79AF1 /* Pods-YHCrashProtector_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YHCrashProtector_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E78837E93D74A0B4E5BED30FCD7C02F7 /* Pods-YHCrashProtector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-YHCrashProtector_Example.release.xcconfig"; sourceTree = "<group>"; };
+		E7DB2BF3EC741D7C796E0CFBFB61D196 /* NSAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
+		E7E27179A73D23B475CD3CE0AA1C3E59 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		EA200148A1383A5CCB1D910E2D0A4F4C /* NSMutableString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+AvoidCrash.h"; sourceTree = "<group>"; };
 		ECF51C9FF7CA234096A71E011EA9CF1F /* Pods-YHCrashProtector_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-YHCrashProtector_Tests-umbrella.h"; sourceTree = "<group>"; };
-		EE579D7825F6115400236312 /* YHWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWeakProxy.h; sourceTree = "<group>"; };
-		EE579D7925F6115400236312 /* YHWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHWeakProxy.m; sourceTree = "<group>"; };
-		EF6980198AD4633C1B31E782F35E79CB /* YHKVOInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHKVOInfo.h; sourceTree = "<group>"; };
-		F06D58FAE1747A4B1D364BB56FF94BE9 /* NSObject+KVOCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOCrash.h"; sourceTree = "<group>"; };
-		F41D3B8268960C7902D09C792303FA82 /* YHAvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YHAvoidCrash.h; path = YHCrashProtector/Classes/YHAvoidCrash.h; sourceTree = "<group>"; };
-		F7AEED2EDB79F8E4B6EB7CA70E3E40E3 /* NSAttributedString+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+AvoidCrash.m"; sourceTree = "<group>"; };
-		F9A64DFCB592622A18A8D4DDA8081747 /* NSObject+KVCCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVCCrash.m"; sourceTree = "<group>"; };
-		FF44CB990FE5EEBEB8E49CEF16E5E250 /* YHZoombie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YHZoombie.h; sourceTree = "<group>"; };
+		EE6A3BB62038E2C4F7085724C1228F2D /* YHKVOProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = YHKVOProxy.m; sourceTree = "<group>"; };
+		FA02CE35C50A303BCF6BFA84AB2E151D /* NSNotificationCenter+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+AvoidCrash.h"; sourceTree = "<group>"; };
+		FA2A7824E983E98EEABB602479DB1AA9 /* NSMutableAttributedString+AvoidCrash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+AvoidCrash.h"; sourceTree = "<group>"; };
+		FA8E6B8AF927F67C2D2B5D8CC95A1D63 /* NSNotificationCenter+AvoidCrash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+AvoidCrash.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		09EFD9F7D570AB3CF3BE3218EB38F456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				416C4BA2E1210834CA79B394FFDC370B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3CE9E1715946E3F906393607A5F3338A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				FFF0CFE31E693345D98A3D1AE4D74268 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D29F73224964E47B3B06E68FE7FCA0E1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4D714A691F0B610625DFC5D9DA0FFFF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,97 +196,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02907D24DF7C44CA5DB823DD65783093 /* YHCrashProtector */ = {
+		04428DAAB50FAC9C3934D2E5502DF687 /* KVC */ = {
 			isa = PBXGroup;
 			children = (
-				F41D3B8268960C7902D09C792303FA82 /* YHAvoidCrash.h */,
-				68AF61615480239B99541C88AF710DC5 /* YHAvoidCrash.m */,
-				D5A30D8192FC92818E021512AF18082D /* YHAvoidUtils.h */,
-				6BD7010F0662F8B85D840E9DC58384E3 /* YHAvoidUtils.m */,
-				BC774BCC11E36B63158AADCCCB881CA5 /* NSObject+AvoidCrash.h */,
-				740F7409BD6171DA9E84F9D03F086689 /* NSObject+AvoidCrash.m */,
-				4088053DC0EE9A677267630EFAF1C4D5 /* YHAvoidCrashProtocol.h */,
-				933F082D45891FD3087E2A697F2EC446 /* Container */,
-				EDEEEEE1181197D5E909FBF175B62414 /* EXC_BAD_ACCESS */,
-				BEE3D4C5345918C3E007F3C7CB9EA183 /* KVC */,
-				4ABE1017D2C56D54FD2F5190888BBFD6 /* KVO */,
-				5C9F6CF3815613C4AEF37F2A426DF121 /* no-arc */,
-				21D716305F4DE9ACB00CDD022362FD5D /* NSNotificationCenter */,
-				CECB7A49C1B1461E29FCF715CEE2999D /* NSTimer */,
-				6A36E6C4D73CD36B8CAD04A22586ACFF /* Pod */,
-				3650516B9FD254824CB46C5CF9DEFA38 /* String */,
-				536CE6F394B88E40D314A814A38CAD48 /* Support Files */,
-				303A5A9A11716DFE6DF6B4CA651E5022 /* UnrecognizedSelector */,
+				51B367EAF6DB737AB8F16FF7DB7756E1 /* NSObject+KVCCrash.h */,
+				696FDFEBAAA90479E028E855B81C2414 /* NSObject+KVCCrash.m */,
 			);
-			name = YHCrashProtector;
-			path = ../..;
+			name = KVC;
+			path = YHCrashProtector/Classes/KVC;
 			sourceTree = "<group>";
 		};
-		21D716305F4DE9ACB00CDD022362FD5D /* NSNotificationCenter */ = {
+		14F228AFBBEDD5F61B356527BAA58EF4 /* KVO */ = {
 			isa = PBXGroup;
 			children = (
-				9739BB1F673A5724892682E600373B20 /* NSNotificationCenter+AvoidCrash.h */,
-				4CD3C69302771977D2F73C8D40AD8672 /* NSNotificationCenter+AvoidCrash.m */,
-			);
-			name = NSNotificationCenter;
-			path = YHCrashProtector/Classes/NSNotificationCenter;
-			sourceTree = "<group>";
-		};
-		303A5A9A11716DFE6DF6B4CA651E5022 /* UnrecognizedSelector */ = {
-			isa = PBXGroup;
-			children = (
-				B814258E115817B3447E1BD5EC5EFF30 /* NSObject+UnSELCrash.h */,
-				74A0FE3E49B4E22ABBF2E994E8CD2468 /* NSObject+UnSELCrash.m */,
-				4507D58069A8E012AF2802AF0A1C718C /* YHForwardingTarget.h */,
-				71E710FCAB59DF4B8445B5A71A1BF0AC /* YHForwardingTarget.m */,
-			);
-			name = UnrecognizedSelector;
-			path = YHCrashProtector/Classes/UnrecognizedSelector;
-			sourceTree = "<group>";
-		};
-		3650516B9FD254824CB46C5CF9DEFA38 /* String */ = {
-			isa = PBXGroup;
-			children = (
-				9F80CDB5C14BD000CD93A1005CB472A9 /* NSAttributedString+AvoidCrash.h */,
-				F7AEED2EDB79F8E4B6EB7CA70E3E40E3 /* NSAttributedString+AvoidCrash.m */,
-				A0B935C3C1230B884DDE98961E614645 /* NSMutableAttributedString+AvoidCrash.h */,
-				1B0A266C0BDBA80D25C5B40C673F862F /* NSMutableAttributedString+AvoidCrash.m */,
-				074CE8311A2E092D67E91B39A4A35B34 /* NSMutableString+AvoidCrash.h */,
-				743E42AAF216D91A471E69D08D1CE8D7 /* NSMutableString+AvoidCrash.m */,
-				248DA0CFC962A43D8563DBE9782E8176 /* NSString+AvoidCrash.h */,
-				2B4809232B3BCCBF227CAA36D29DADE6 /* NSString+AvoidCrash.m */,
-			);
-			name = String;
-			path = YHCrashProtector/Classes/String;
-			sourceTree = "<group>";
-		};
-		4ABE1017D2C56D54FD2F5190888BBFD6 /* KVO */ = {
-			isa = PBXGroup;
-			children = (
-				F06D58FAE1747A4B1D364BB56FF94BE9 /* NSObject+KVOCrash.h */,
-				6F1024C3C05876D73AF7517014A1943C /* NSObject+KVOCrash.m */,
-				EF6980198AD4633C1B31E782F35E79CB /* YHKVOInfo.h */,
-				AB30F1FC6B4249F1E32939DFEC6AA8FF /* YHKVOInfo.m */,
-				AB44F867245ECB766F857BEC4664FE20 /* YHKVOProxy.h */,
-				C4677466AE6CEEE63C433ED3AF77214F /* YHKVOProxy.m */,
+				C8530C22DAA7835F6D48863B9183E71E /* NSObject+KVOCrash.h */,
+				2B72F3B5B7658D615894DE2901C8FB70 /* NSObject+KVOCrash.m */,
+				C10985DCE421A9680F42ADAE3A1C5499 /* YHKVOInfo.h */,
+				92185077EBB205A8B97889A932AACF1B /* YHKVOInfo.m */,
+				7A39915E3A70851E56FB896A98157D40 /* YHKVOProxy.h */,
+				EE6A3BB62038E2C4F7085724C1228F2D /* YHKVOProxy.m */,
 			);
 			name = KVO;
 			path = YHCrashProtector/Classes/KVO;
 			sourceTree = "<group>";
 		};
-		536CE6F394B88E40D314A814A38CAD48 /* Support Files */ = {
+		1971D307E237892CA1691ED54D5209CF /* no-arc */ = {
 			isa = PBXGroup;
 			children = (
-				99E5E510694C0B5CC93E8D5A7BFB44DC /* YHCrashProtector.modulemap */,
-				6C5B4D27A7479EAE79DECC6B69E8056B /* YHCrashProtector-dummy.m */,
-				E23DCE00D9CC945F1433A78D46630C1E /* YHCrashProtector-Info.plist */,
-				6DF13912A63B47B9DCAB25E76C628CB2 /* YHCrashProtector-prefix.pch */,
-				6336DDE1E2DC0116E1F597615BB9180A /* YHCrashProtector-umbrella.h */,
-				A481120A0D40875FA1B27ABF2C92D180 /* YHCrashProtector.debug.xcconfig */,
-				AE5D26C1F393BA21B7B13EC5190F78BD /* YHCrashProtector.release.xcconfig */,
+				588EADEA08FD71E58933B4E2FDFB68F5 /* YHDeallocHandle.h */,
+				037CDE63F87A98723D8C986842ED434E /* YHDeallocHandle.m */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/YHCrashProtector";
+			name = "no-arc";
+			sourceTree = "<group>";
+		};
+		1D30D7D33B9AC4C4EB6667A99B876584 /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				635D7A701522ADD9BF282ED3E33EEA45 /* NSArray+AvoidCrash.h */,
+				58C0FE80961F96DFB9B1C5F2040D8DD4 /* NSArray+AvoidCrash.m */,
+				CE1EA06F9DEFB391DA08CBC7FEC60C8E /* NSMutableArray+AvoidCrash.h */,
+				587D344E6101FE6C18FE9A175CE574A2 /* NSMutableArray+AvoidCrash.m */,
+			);
+			name = Array;
+			path = Array;
+			sourceTree = "<group>";
+		};
+		38D0938B7C69B3E29B1980F3842F2A14 /* NSNotificationCenter */ = {
+			isa = PBXGroup;
+			children = (
+				FA02CE35C50A303BCF6BFA84AB2E151D /* NSNotificationCenter+AvoidCrash.h */,
+				FA8E6B8AF927F67C2D2B5D8CC95A1D63 /* NSNotificationCenter+AvoidCrash.m */,
+			);
+			name = NSNotificationCenter;
+			path = YHCrashProtector/Classes/NSNotificationCenter;
+			sourceTree = "<group>";
+		};
+		5010C1B72256C09F8444629ED86EC9D2 /* EXC_BAD_ACCESS */ = {
+			isa = PBXGroup;
+			children = (
+				5D4053FA31C40199DC3CCDFF821BABCE /* NSObject+BadAccessCrash.h */,
+				AE3E9EB19A2EE97CAA177089184A9091 /* NSObject+BadAccessCrash.m */,
+				4F9B72E8B3D3224C6BA4A918FF28C84F /* YHBadAccessManager.h */,
+				A96AE38071CA7E3B7A57BB6F6D20B88B /* YHBadAccessManager.m */,
+				9D8853B7AC71B4F68F41F4A07A1094A5 /* YHZoombie.h */,
+				A65412001702F78F15B8977E65240BF1 /* YHZoombie.m */,
+			);
+			name = EXC_BAD_ACCESS;
+			path = YHCrashProtector/Classes/EXC_BAD_ACCESS;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -297,23 +273,86 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		5C9F6CF3815613C4AEF37F2A426DF121 /* no-arc */ = {
+		5825247953C76A586FF2DA4B5F857056 /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				B7433DECDCED2443562A9027214FC452 /* YHDeallocHandle.h */,
-				13A701EA98FF250F15ABB59F8488A00E /* YHDeallocHandle.m */,
+				1D30D7D33B9AC4C4EB6667A99B876584 /* Array */,
+				66066125A4BC9C3A90FB4A662F592DF3 /* Dictionary */,
 			);
-			name = "no-arc";
+			name = Container;
+			path = YHCrashProtector/Classes/Container;
 			sourceTree = "<group>";
 		};
-		6A36E6C4D73CD36B8CAD04A22586ACFF /* Pod */ = {
+		582DD475296D06B2F0862A8E10A4CF8D /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				3D44991E8D717690C289EDF9B2080E9B /* LICENSE */,
-				18378B56337D057991871DBE66512653 /* README.md */,
-				1040AC68DAA5442662801E3A1547D6DD /* YHCrashProtector.podspec */,
+				E7E27179A73D23B475CD3CE0AA1C3E59 /* LICENSE */,
+				AD25F9253CBD621F4E583D4BC20BCB40 /* README.md */,
+				89B1016C2F16421B6BCD9B9051FA7474 /* YHCrashProtector.podspec */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		66066125A4BC9C3A90FB4A662F592DF3 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				30B5EDA6A8700A5E475097A836EC6BFC /* NSDictionary+AvoidCrash.h */,
+				6EE77DD8CAEBA91567CD374A38448177 /* NSDictionary+AvoidCrash.m */,
+				0EDF4BFF7E65F78D9F3AD513DE78C540 /* NSMutableDictionary+AvoidCrash.h */,
+				3ED8D0952D7BA0D71B9C4453E1E964C9 /* NSMutableDictionary+AvoidCrash.m */,
+			);
+			name = Dictionary;
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		6B8A8BBF98B3F8509C3E261492CB4667 /* YHCrashProtector */ = {
+			isa = PBXGroup;
+			children = (
+				0B075F19504D26CFB11DFA46FDAC045C /* NSObject+AvoidCrash.h */,
+				95D20D1E325449E0D42B37A26A7D145E /* NSObject+AvoidCrash.m */,
+				59BC340B9D93D70ACF0B4084FBE6F61D /* YHAvoidCrash.h */,
+				AAD7BD54AEFBB07287C1817F3AE18DCD /* YHAvoidCrash.m */,
+				A7C5AE5FAE0DA175FF8D1D6100D2C73A /* YHAvoidCrashProtocol.h */,
+				8E200308EBF9CF8D180DA5106D0CE493 /* YHAvoidUtils.h */,
+				E0FB988612E77E66645604327354AA65 /* YHAvoidUtils.m */,
+				5825247953C76A586FF2DA4B5F857056 /* Container */,
+				5010C1B72256C09F8444629ED86EC9D2 /* EXC_BAD_ACCESS */,
+				04428DAAB50FAC9C3934D2E5502DF687 /* KVC */,
+				14F228AFBBEDD5F61B356527BAA58EF4 /* KVO */,
+				1971D307E237892CA1691ED54D5209CF /* no-arc */,
+				38D0938B7C69B3E29B1980F3842F2A14 /* NSNotificationCenter */,
+				799C15208A32C15D07E036B95E24C98A /* NSTimer */,
+				582DD475296D06B2F0862A8E10A4CF8D /* Pod */,
+				7DC37CC068BFB3179DB247C0EEE643F9 /* String */,
+				D7BD049EA5465BF802D691E5A998204D /* Support Files */,
+				75F866D8A0A24BE6F6708CB134D6C02F /* UnrecognizedSelector */,
+			);
+			name = YHCrashProtector;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		75F866D8A0A24BE6F6708CB134D6C02F /* UnrecognizedSelector */ = {
+			isa = PBXGroup;
+			children = (
+				406AC8F13AB13541D80874C0385B1F0A /* NSObject+UnSELCrash.h */,
+				331B03E3276269CBD7734EE1F10A0874 /* NSObject+UnSELCrash.m */,
+				C38D2E61EDAF30FA23C8D0A6F0236949 /* YHForwardingTarget.h */,
+				376C326E19BBE4CA21DA928A89DAB6CE /* YHForwardingTarget.m */,
+			);
+			name = UnrecognizedSelector;
+			path = YHCrashProtector/Classes/UnrecognizedSelector;
+			sourceTree = "<group>";
+		};
+		799C15208A32C15D07E036B95E24C98A /* NSTimer */ = {
+			isa = PBXGroup;
+			children = (
+				487AFEA0DB216D5184CCEE718A2554D5 /* NSTimer+AvoidCrash.h */,
+				3F5F12BDABFF59A50638E5D163CE1663 /* NSTimer+AvoidCrash.m */,
+				A8C5AE0FCC8881E022E0BAFCBE66E043 /* YHWeakProxy.h */,
+				4BA0BFA12B0546CD99E15DAB47F5E6E6 /* YHWeakProxy.m */,
+			);
+			name = NSTimer;
+			path = YHCrashProtector/Classes/NSTimer;
 			sourceTree = "<group>";
 		};
 		7D79802CCAB3BE96903AA8B7631A3635 /* Pods-YHCrashProtector_Tests */ = {
@@ -332,20 +371,20 @@
 			path = "Target Support Files/Pods-YHCrashProtector_Tests";
 			sourceTree = "<group>";
 		};
-		933F082D45891FD3087E2A697F2EC446 /* Container */ = {
+		7DC37CC068BFB3179DB247C0EEE643F9 /* String */ = {
 			isa = PBXGroup;
 			children = (
-				147DD3B349F2A9C96BC1AF1967806B54 /* NSArray+AvoidCrash.h */,
-				73B8B2FC9CA76645B76F891DCD2319FA /* NSArray+AvoidCrash.m */,
-				B3D7433C2B037AA71341CC7282E74BC4 /* NSDictionary+AvoidCrash.h */,
-				72D7EAE3A8135D27E43CBD3E44591B17 /* NSDictionary+AvoidCrash.m */,
-				BA8180466D00CF41FAA663FE2E5984BA /* NSMutableArray+AvoidCrash.h */,
-				598AC34D334B2A20AFFECEC15959D051 /* NSMutableArray+AvoidCrash.m */,
-				9E60050FEE9A75689119F65D64065CE2 /* NSMutableDictionary+AvoidCrash.h */,
-				32FC141A653CAE1DA74556359F3C1BA6 /* NSMutableDictionary+AvoidCrash.m */,
+				06128AB062A5649823CEB6A7AC2040E5 /* NSAttributedString+AvoidCrash.h */,
+				E7DB2BF3EC741D7C796E0CFBFB61D196 /* NSAttributedString+AvoidCrash.m */,
+				FA2A7824E983E98EEABB602479DB1AA9 /* NSMutableAttributedString+AvoidCrash.h */,
+				57DDC06B68224B48C536BE6C30635E3A /* NSMutableAttributedString+AvoidCrash.m */,
+				EA200148A1383A5CCB1D910E2D0A4F4C /* NSMutableString+AvoidCrash.h */,
+				5C8EA719A54D2F676D2DE6FE23A9F749 /* NSMutableString+AvoidCrash.m */,
+				5584622EBD310E2F969F54E476AF6D9A /* NSString+AvoidCrash.h */,
+				5B25D19F1984E006935F56597ECB242D /* NSString+AvoidCrash.m */,
 			);
-			name = Container;
-			path = YHCrashProtector/Classes/Container;
+			name = String;
+			path = YHCrashProtector/Classes/String;
 			sourceTree = "<group>";
 		};
 		99149A7BAEAB2B4DF5FC27991C609D10 /* Products */ = {
@@ -370,19 +409,9 @@
 		B1CC460BFD9BC2519F0BC67C512232A2 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				02907D24DF7C44CA5DB823DD65783093 /* YHCrashProtector */,
+				6B8A8BBF98B3F8509C3E261492CB4667 /* YHCrashProtector */,
 			);
 			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		BEE3D4C5345918C3E007F3C7CB9EA183 /* KVC */ = {
-			isa = PBXGroup;
-			children = (
-				E127FFD20EF947089E744A665F8B8096 /* NSObject+KVCCrash.h */,
-				F9A64DFCB592622A18A8D4DDA8081747 /* NSObject+KVCCrash.m */,
-			);
-			name = KVC;
-			path = YHCrashProtector/Classes/KVC;
 			sourceTree = "<group>";
 		};
 		C730B1944410237CCC6BC54F04AAB095 /* Pods-YHCrashProtector_Example */ = {
@@ -400,18 +429,6 @@
 			);
 			name = "Pods-YHCrashProtector_Example";
 			path = "Target Support Files/Pods-YHCrashProtector_Example";
-			sourceTree = "<group>";
-		};
-		CECB7A49C1B1461E29FCF715CEE2999D /* NSTimer */ = {
-			isa = PBXGroup;
-			children = (
-				EE579D7825F6115400236312 /* YHWeakProxy.h */,
-				EE579D7925F6115400236312 /* YHWeakProxy.m */,
-				A90B6FB60EBF2ABBBD12FC9E275AE35E /* NSTimer+AvoidCrash.h */,
-				ABE50A1AD6269B2290BF052A518B8DE8 /* NSTimer+AvoidCrash.m */,
-			);
-			name = NSTimer;
-			path = YHCrashProtector/Classes/NSTimer;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -433,18 +450,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EDEEEEE1181197D5E909FBF175B62414 /* EXC_BAD_ACCESS */ = {
+		D7BD049EA5465BF802D691E5A998204D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				202662CB36D840E52D8B34EBA119A7A4 /* NSObject+BadAccessCrash.h */,
-				1CB3827C88F2DC589CAC68383B9262A7 /* NSObject+BadAccessCrash.m */,
-				331A251A63A5F46B382162BCFB15404C /* YHBadAccessManager.h */,
-				B9A1CE5B76898FC13574FDFDD1EEA606 /* YHBadAccessManager.m */,
-				FF44CB990FE5EEBEB8E49CEF16E5E250 /* YHZoombie.h */,
-				1A15E6C49F5F343A542C357D5453524D /* YHZoombie.m */,
+				528776A0DE9D1EDEDD6539772EE976A8 /* YHCrashProtector.modulemap */,
+				13478EF3A4428DD5FC2E11D3A9651DC6 /* YHCrashProtector-dummy.m */,
+				32B427B7E0A17151CAF08FD0BFB75D5C /* YHCrashProtector-Info.plist */,
+				8265DA6E2B740CB4841AF53607DBF4AF /* YHCrashProtector-prefix.pch */,
+				7849377529C83536900AEC79B98619DC /* YHCrashProtector-umbrella.h */,
+				43D47394308F09F6F8EA236D71FFC87B /* YHCrashProtector.debug.xcconfig */,
+				610CFE4F595B6691BF26323235FC7520 /* YHCrashProtector.release.xcconfig */,
 			);
-			name = EXC_BAD_ACCESS;
-			path = YHCrashProtector/Classes/EXC_BAD_ACCESS;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/YHCrashProtector";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,36 +476,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6167C3515D473D7486F2085D96597415 /* Headers */ = {
+		85B7C48329547E05A79479BDE285473B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BFAC1269B7FA24162CB9F25036C88B4 /* YHAvoidCrash.h in Headers */,
-				6D8255351A86F63FBFA5888747AB4AF0 /* YHAvoidUtils.h in Headers */,
-				724FF5674DC838B88B7F9E1A1390F8EA /* NSArray+AvoidCrash.h in Headers */,
-				E4586265B43205E4C85ACB5560FF6677 /* NSAttributedString+AvoidCrash.h in Headers */,
-				20DC695654FBA04AF2137C3F254C624B /* NSDictionary+AvoidCrash.h in Headers */,
-				EE579D7A25F6115400236312 /* YHWeakProxy.h in Headers */,
-				FAEAE57DCA57E8035071C021D3FDC446 /* NSMutableArray+AvoidCrash.h in Headers */,
-				77AD28D62989C91CD12F5D3071B70195 /* NSMutableAttributedString+AvoidCrash.h in Headers */,
-				A08EE74CC12597776AE0276B7410CB1F /* NSMutableDictionary+AvoidCrash.h in Headers */,
-				62662ACD981F12786531776405429343 /* NSMutableString+AvoidCrash.h in Headers */,
-				ADDF18664881779E616839B9D42A5A13 /* NSNotificationCenter+AvoidCrash.h in Headers */,
-				C3151FBC2F1A5D3140CD3EEE1318D623 /* NSObject+AvoidCrash.h in Headers */,
-				648D94D35D4F4F678834537055BE0E30 /* NSObject+BadAccessCrash.h in Headers */,
-				C9D09654D6630D08A63D647A3FED02B8 /* NSObject+KVCCrash.h in Headers */,
-				7131ADF7CA27773725075A7E0E31184D /* NSObject+KVOCrash.h in Headers */,
-				C56C8D37433C26485B36B182CD93294A /* NSObject+UnSELCrash.h in Headers */,
-				FF2B7490A445B9B7C30CE526C1833C17 /* NSString+AvoidCrash.h in Headers */,
-				C23B706C6A8D82914313B3716571484C /* NSTimer+AvoidCrash.h in Headers */,
-				CFC1452442F427BFCC283DA1E231B6B7 /* YHAvoidCrashProtocol.h in Headers */,
-				B088745A5C1436E288866ED99AC7F027 /* YHBadAccessManager.h in Headers */,
-				4AEB6705CEDDA11AEBBAE8BE2E9208E2 /* YHCrashProtector-umbrella.h in Headers */,
-				B97CB8EA28FEABDB6076FA97B8871B3F /* YHDeallocHandle.h in Headers */,
-				A99E2E16775EE73F4CAA6F8ECC2B369D /* YHForwardingTarget.h in Headers */,
-				563FD90B0FAADDE3ABD44B8ECA9C78B1 /* YHKVOInfo.h in Headers */,
-				222B82A8D0D9FE1074115A9FE97F715B /* YHKVOProxy.h in Headers */,
-				2818F3EE939E4518C3006C045269F9D7 /* YHZoombie.h in Headers */,
+				F431799AD99E99C3E8E521057DD987FB /* NSArray+AvoidCrash.h in Headers */,
+				745298FA77A7BE07A94E45B145520B10 /* NSAttributedString+AvoidCrash.h in Headers */,
+				CA1AA3085E4EFA28C6544E1D4B73EFB1 /* NSDictionary+AvoidCrash.h in Headers */,
+				619A2E4B755F181A26B96F060351A6FC /* NSMutableArray+AvoidCrash.h in Headers */,
+				3BB2F2A0C23671DF9DAC1493D1E05967 /* NSMutableAttributedString+AvoidCrash.h in Headers */,
+				0F573D3D1C8DA55D33FEC14D0EFEC6D5 /* NSMutableDictionary+AvoidCrash.h in Headers */,
+				9D871B0D2AF7C5C7A1C615A4302A0867 /* NSMutableString+AvoidCrash.h in Headers */,
+				853633E458398C975B6AD511AF5EC06B /* NSNotificationCenter+AvoidCrash.h in Headers */,
+				49C6D15AF11B635C212CEF2B83500982 /* NSObject+AvoidCrash.h in Headers */,
+				D8F1450782470C5BFB69F6D13FE9F0FF /* NSObject+BadAccessCrash.h in Headers */,
+				76ED0E505169976058D10B3E01EA3033 /* NSObject+KVCCrash.h in Headers */,
+				D39D144953CB80DD8560B4CA75E11234 /* NSObject+KVOCrash.h in Headers */,
+				B0B4861165CFE1F3F689FAF4048AB000 /* NSObject+UnSELCrash.h in Headers */,
+				69223D0582AF8F77A0C30FB724BF4DE4 /* NSString+AvoidCrash.h in Headers */,
+				73A8120FDD1ACCBD8345CE281A9F7AB0 /* NSTimer+AvoidCrash.h in Headers */,
+				91A14871E462AA66B57CC64C34EFD2D6 /* YHAvoidCrash.h in Headers */,
+				B226EB590E8CB1871C01B2AD7D3FE6F8 /* YHAvoidCrashProtocol.h in Headers */,
+				9D665B6097628082CA99BF6E2202A6BE /* YHAvoidUtils.h in Headers */,
+				1B78C7D02024DF8B4EC57949702EB714 /* YHBadAccessManager.h in Headers */,
+				41860AA563271AD233CF433CCAAA0A68 /* YHCrashProtector-umbrella.h in Headers */,
+				3E0BBD40A7879A3584A75451B95DEE20 /* YHDeallocHandle.h in Headers */,
+				53C862BCEC4FCEC941B41C180C7D3EBA /* YHForwardingTarget.h in Headers */,
+				D502F8CAD5EA5A610DA40BACEBC101FD /* YHKVOInfo.h in Headers */,
+				E12EE476217D18B7DDE37C3F77233121 /* YHKVOProxy.h in Headers */,
+				0774D104F4F841B061CF4D5971F105C2 /* YHWeakProxy.h in Headers */,
+				12C6978176D70CF12C2AA5159954D146 /* YHZoombie.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,12 +522,12 @@
 /* Begin PBXNativeTarget section */
 		1DC073103A2407CF1982341C29D56EBA /* YHCrashProtector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96DA393A7CCB2AD03D8A4F2D7DC34269 /* Build configuration list for PBXNativeTarget "YHCrashProtector" */;
+			buildConfigurationList = 87083C279BE95C09FA6DA8C9E2127731 /* Build configuration list for PBXNativeTarget "YHCrashProtector" */;
 			buildPhases = (
-				6167C3515D473D7486F2085D96597415 /* Headers */,
-				BF0EDFAB7B279D81B2EE33B26B12729D /* Sources */,
-				D29F73224964E47B3B06E68FE7FCA0E1 /* Frameworks */,
-				F4CB8A2DE0EC4CE7208DDC38E41BCDDB /* Resources */,
+				85B7C48329547E05A79479BDE285473B /* Headers */,
+				86E941EF1B968AA2730CD2A9816A104A /* Sources */,
+				09EFD9F7D570AB3CF3BE3218EB38F456 /* Frameworks */,
+				56E7F55A00F4DB0D862E0D0859FF7336 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -532,7 +550,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8EA29E1D995D055BB9C260DC0A114127 /* PBXTargetDependency */,
+				5186028C275129674391332AC74A0919 /* PBXTargetDependency */,
 			);
 			name = "Pods-YHCrashProtector_Example";
 			productName = "Pods-YHCrashProtector_Example";
@@ -551,7 +569,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E412EBBD7BB523E372019B79541C19D7 /* PBXTargetDependency */,
+				3DD7EE41057283BB1B7BC2E4F786C2F8 /* PBXTargetDependency */,
 			);
 			name = "Pods-YHCrashProtector_Tests";
 			productName = "Pods-YHCrashProtector_Tests";
@@ -588,6 +606,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		56E7F55A00F4DB0D862E0D0859FF7336 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		948906F8537BD386B130D9029077573C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -596,13 +621,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D71A6C2DA8627692CF09374D9A3CD386 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4CB8A2DE0EC4CE7208DDC38E41BCDDB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -628,86 +646,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF0EDFAB7B279D81B2EE33B26B12729D /* Sources */ = {
+		86E941EF1B968AA2730CD2A9816A104A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE497A63CFC7ED38D8D0556EB48DF90D /* YHAvoidCrash.m in Sources */,
-				AF1D9D3EF53F3A4F0BAAF46979829E9A /* YHAvoidUtils.m in Sources */,
-				0C7488C498D6A344604670CF18CD25A4 /* NSArray+AvoidCrash.m in Sources */,
-				28A21D618F9FA28AA511F91C605B8F56 /* NSAttributedString+AvoidCrash.m in Sources */,
-				EA3422B6E5E207A61CAD6D6BDA7210F5 /* NSDictionary+AvoidCrash.m in Sources */,
-				8F64ECAB0ADD90C9C509E84259391279 /* NSMutableArray+AvoidCrash.m in Sources */,
-				D8439AEC1666DC542B96173175993F2D /* NSMutableAttributedString+AvoidCrash.m in Sources */,
-				9538B54B0092DA8894D368AC8CCFFA5E /* NSMutableDictionary+AvoidCrash.m in Sources */,
-				E6A3B27644F9040712BDD32294F379C3 /* NSMutableString+AvoidCrash.m in Sources */,
-				96186E88C1444AF50A09F65F534C0C69 /* NSNotificationCenter+AvoidCrash.m in Sources */,
-				E3800980C73ED8BC86B0701F2DAEC50C /* NSObject+AvoidCrash.m in Sources */,
-				1245548D45C1AE38D28EBE7161A243F0 /* NSObject+BadAccessCrash.m in Sources */,
-				377BE60B0AE3C1E0651B4B805302207C /* NSObject+KVCCrash.m in Sources */,
-				6CAA17CA2968BA57C75B1EC70866B77A /* NSObject+KVOCrash.m in Sources */,
-				5FAD8AF18CA38DCBE8201F516AC98D07 /* NSObject+UnSELCrash.m in Sources */,
-				8F428DDCC3D58412246A8921215A0ABC /* NSString+AvoidCrash.m in Sources */,
-				CE63C706EF3893DCF6A79EA59DDEA1D3 /* NSTimer+AvoidCrash.m in Sources */,
-				D0A0F0CDF6FAA4CDAC57802457A5711B /* YHBadAccessManager.m in Sources */,
-				18DD010C71C2DF778885DD4ABADDD4FC /* YHCrashProtector-dummy.m in Sources */,
-				3C53BAC801DF8567446B9108000B75AB /* YHDeallocHandle.m in Sources */,
-				A5F68BE9C362D190F604145382281F80 /* YHForwardingTarget.m in Sources */,
-				1F97FE2DEE51FE0565895F875F6692B8 /* YHKVOInfo.m in Sources */,
-				71CA1AEC21C2675178E69BCB55495B8A /* YHKVOProxy.m in Sources */,
-				C7ECF0A3F82094A5B35DBCB4D1567759 /* YHZoombie.m in Sources */,
-				EE579D7B25F6115400236312 /* YHWeakProxy.m in Sources */,
+				B92C24D506CA034AF5EE2E979221930A /* NSArray+AvoidCrash.m in Sources */,
+				46B333FFE9144111EAD4258D5092E2FF /* NSAttributedString+AvoidCrash.m in Sources */,
+				999397C01C86ED3D1662DC7F478F3653 /* NSDictionary+AvoidCrash.m in Sources */,
+				DCEA4716EDF54E5126C8F090B3BFE94C /* NSMutableArray+AvoidCrash.m in Sources */,
+				C013E744630C8BD756F98FD874C56FA2 /* NSMutableAttributedString+AvoidCrash.m in Sources */,
+				712FE4EAB40ACCBD39312D5A2A100359 /* NSMutableDictionary+AvoidCrash.m in Sources */,
+				D7587BB829AA395CE7A5693A2CCD0988 /* NSMutableString+AvoidCrash.m in Sources */,
+				95A87A27CD822D05E01E4E5670CBA15E /* NSNotificationCenter+AvoidCrash.m in Sources */,
+				131E501D46018D65E4865CAF5EC2C378 /* NSObject+AvoidCrash.m in Sources */,
+				A2C6FACC525635382A8A5E6900708DEF /* NSObject+BadAccessCrash.m in Sources */,
+				6A1C3FF92A2DB9981E7D042A3E1F8315 /* NSObject+KVCCrash.m in Sources */,
+				9D5ACF3083A503BA434FBE1B42F50A3F /* NSObject+KVOCrash.m in Sources */,
+				32D31D7A850E6BEF2A330AC241C0B842 /* NSObject+UnSELCrash.m in Sources */,
+				11FFE8BC9D408922838BEAA292771927 /* NSString+AvoidCrash.m in Sources */,
+				3E82D3723CFD137E6F1E4E67651EEA57 /* NSTimer+AvoidCrash.m in Sources */,
+				0A3BDE0CAC7E4E5A83F93C3C41BA13F4 /* YHAvoidCrash.m in Sources */,
+				708A5C4B7A92FE1728663C17F82098E5 /* YHAvoidUtils.m in Sources */,
+				1F6075080EDAC2400C9548E708F303EC /* YHBadAccessManager.m in Sources */,
+				24B14C98D799CBC3FC9A980B0A2C2DD8 /* YHCrashProtector-dummy.m in Sources */,
+				625D36DABBC8B55938025DBCC144CA9C /* YHDeallocHandle.m in Sources */,
+				AAC4A5243F6D58D5558BD521B03CE806 /* YHForwardingTarget.m in Sources */,
+				E34B13B718C1BCAB2A9527B5916D7EEE /* YHKVOInfo.m in Sources */,
+				3DD5DB2B97355A9B4B8948EACB2C58B3 /* YHKVOProxy.m in Sources */,
+				5D4924E5C7F700513456F756D4AB4392 /* YHWeakProxy.m in Sources */,
+				2C300C6FE8597EA6B5C23F0ED6DE9159 /* YHZoombie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8EA29E1D995D055BB9C260DC0A114127 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = YHCrashProtector;
-			target = 1DC073103A2407CF1982341C29D56EBA /* YHCrashProtector */;
-			targetProxy = 1A3A1E65C0FAEFE589695EE72825FEC5 /* PBXContainerItemProxy */;
-		};
-		E412EBBD7BB523E372019B79541C19D7 /* PBXTargetDependency */ = {
+		3DD7EE41057283BB1B7BC2E4F786C2F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-YHCrashProtector_Example";
 			target = 26AE6741630EBC813296C335DE90D99D /* Pods-YHCrashProtector_Example */;
-			targetProxy = 21E76C79D16A08A6B66A6977A08A28FA /* PBXContainerItemProxy */;
+			targetProxy = 2F4EB9C676BD9A80A9CE0E8706E5B340 /* PBXContainerItemProxy */;
+		};
+		5186028C275129674391332AC74A0919 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YHCrashProtector;
+			target = 1DC073103A2407CF1982341C29D56EBA /* YHCrashProtector */;
+			targetProxy = 3C4EE7459D2C478E0FE43533E9D4C4C6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		21D4E02A7C753D4097B2AB9D21B250DC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A481120A0D40875FA1B27ABF2C92D180 /* YHCrashProtector.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/YHCrashProtector/YHCrashProtector-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/YHCrashProtector/YHCrashProtector-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/YHCrashProtector/YHCrashProtector.modulemap";
-				PRODUCT_MODULE_NAME = YHCrashProtector;
-				PRODUCT_NAME = YHCrashProtector;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -771,6 +759,36 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		4DD52E9AEAB73BA5A9C957A64A043BF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43D47394308F09F6F8EA236D71FFC87B /* YHCrashProtector.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/YHCrashProtector/YHCrashProtector-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/YHCrashProtector/YHCrashProtector-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/YHCrashProtector/YHCrashProtector.modulemap";
+				PRODUCT_MODULE_NAME = YHCrashProtector;
+				PRODUCT_NAME = YHCrashProtector;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -871,9 +889,9 @@
 			};
 			name = Debug;
 		};
-		9FF6DD3964C17ECEC4E1404FD4E41560 /* Release */ = {
+		7F4CAD9E94EDDEEDEFB971FB6117E430 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE5D26C1F393BA21B7B13EC5190F78BD /* YHCrashProtector.release.xcconfig */;
+			baseConfigurationReference = 610CFE4F595B6691BF26323235FC7520 /* YHCrashProtector.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -957,7 +975,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1026,11 +1045,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96DA393A7CCB2AD03D8A4F2D7DC34269 /* Build configuration list for PBXNativeTarget "YHCrashProtector" */ = {
+		87083C279BE95C09FA6DA8C9E2127731 /* Build configuration list for PBXNativeTarget "YHCrashProtector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21D4E02A7C753D4097B2AB9D21B250DC /* Debug */,
-				9FF6DD3964C17ECEC4E1404FD4E41560 /* Release */,
+				4DD52E9AEAB73BA5A9C957A64A043BF5 /* Debug */,
+				7F4CAD9E94EDDEEDEFB971FB6117E430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

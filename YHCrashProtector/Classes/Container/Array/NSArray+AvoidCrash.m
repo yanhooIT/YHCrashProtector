@@ -9,29 +9,13 @@
 #import "NSArray+AvoidCrash.h"
 #import "YHAvoidUtils.h"
 
-/**
- *  Can avoid crash method
- *
- *  NSArray的快速创建方式 NSArray *array = @[@"chenfanfang", @"AvoidCrash"];这种创建方式其实调用的是下面的方法：
- *
- *  + (instancetype)arrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt
- *
- *  - (id)objectAtIndex:(NSUInteger)index
- *  - (void)getObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range
- *
- */
-
 @implementation NSArray (AvoidCrash)
 
 + (void)avoidCrashExchangeMethod {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        // ----------- 以下为类对象方法交换（class method） -----------
-        
         // arrayWithObjects:count:
-        [YHAvoidUtils yh_exchangeClassMethod:[self class] oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(AvoidCrashArrayWithObjects:count:)];
-        
-        // ----------- 以下为对象方法交换（instance method） -----------
+        [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(AvoidCrashArrayWithObjects:count:)];
         
         Class __NSArray = NSClassFromString(@"NSArray");
         Class __NSArrayI = NSClassFromString(@"__NSArrayI");
@@ -58,7 +42,6 @@
     });
 }
 
-#pragma mark - 以下为类对象方法交换（class method）
 #pragma mark - arrayWithObjects:count:
 + (instancetype)AvoidCrashArrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt
 {
@@ -85,7 +68,6 @@
     }
 }
 
-#pragma mark - 以下为对象方法交换（instance method）
 #pragma mark - objectAtIndexedSubscript:
 - (id)__NSArrayIAvoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
     id object = nil;

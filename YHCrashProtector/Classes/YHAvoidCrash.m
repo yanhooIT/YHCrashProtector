@@ -50,15 +50,15 @@
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
         [NSTimer yh_enabledAvoidTimerCrash];
         
-        [NSArray avoidCrashExchangeMethod];
-        [NSMutableArray avoidCrashExchangeMethod];
-        [NSDictionary avoidCrashExchangeMethod];
-        [NSMutableDictionary avoidCrashExchangeMethod];
-        
-        [NSString avoidCrashExchangeMethod];
-        [NSMutableString avoidCrashExchangeMethod];
-        [NSAttributedString avoidCrashExchangeMethod];
-        [NSMutableAttributedString avoidCrashExchangeMethod];
+//        [NSArray avoidCrashExchangeMethod];
+//        [NSMutableArray avoidCrashExchangeMethod];
+//        [NSDictionary avoidCrashExchangeMethod];
+//        [NSMutableDictionary avoidCrashExchangeMethod];
+//        
+//        [NSString avoidCrashExchangeMethod];
+//        [NSMutableString avoidCrashExchangeMethod];
+//        [NSAttributedString avoidCrashExchangeMethod];
+//        [NSMutableAttributedString avoidCrashExchangeMethod];
     });
 }
 
