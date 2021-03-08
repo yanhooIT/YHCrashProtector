@@ -11,7 +11,7 @@
 #endif
 
 #import "AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 #import "NSArray+AvoidCrash.h"
 #import "NSDictionary+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"

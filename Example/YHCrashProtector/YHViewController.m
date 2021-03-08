@@ -10,7 +10,7 @@
 #import "YHPerson.h"
 #import "YHBoy.h"
 #import <objc/runtime.h>
-#import "AvoidCrash.h"
+#import "YHAvoidCrash.h"
 
 @interface YHViewController ()
 
@@ -117,7 +117,7 @@
 
 #pragma mark - EXC_BAD_ACCESS Crash Test
 - (void)testExcBadAccess {
-    [AvoidCrash yh_setupHandleDeallocClassNames:@[@"YHPerson"]];
+    [YHAvoidCrash yh_setupHandleDeallocClassNames:@[@"YHPerson"]];
     
     self.person1 = [[YHPerson alloc] init];
     [self.person1 logPrint];

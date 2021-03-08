@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)yh_canRemoveObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
 
 /// 是否需要处理监听回调
+/// 当观察对象已经销毁此时就无须处理监听回调
 /// @param keyPath 被观察对象的属性 or 成员变量
 - (BOOL)yh_canHandleObserverCallbackWithKeyPath:(NSString *)keyPath;
 

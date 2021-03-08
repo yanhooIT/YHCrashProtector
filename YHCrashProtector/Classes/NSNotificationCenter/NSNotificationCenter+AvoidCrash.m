@@ -7,12 +7,12 @@
 
 #import "NSNotificationCenter+AvoidCrash.h"
 #import <objc/runtime.h>
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 @implementation NSNotificationCenter (AvoidCrash)
 
 + (void)enabledAvoidNotificationCrash {
-    [AvoidUtils exchangeInstanceMethod:self oldMethod:@selector(addObserver:selector:name:object:) newMethod:@selector(yh_addObserver:selector:name:object:)];
+    [YHAvoidUtils yh_exchangeInstanceMethod:self oldMethod:@selector(addObserver:selector:name:object:) newMethod:@selector(yh_addObserver:selector:name:object:)];
 }
 
 - (void)yh_addObserver:(id)observer selector:(SEL)aSelector name:(NSNotificationName)aName object:(id)anObject

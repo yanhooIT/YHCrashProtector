@@ -6,7 +6,7 @@
 //
 
 #import "YHBadAccessManager.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 @implementation YHBadAccessManager
 

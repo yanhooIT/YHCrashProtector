@@ -1,5 +1,5 @@
 //
-//  AvoidUtils.h
+//  YHAvoidUtils.h
 //  https://github.com/yanhooIT/YHCrashProtector
 //
 //  Created by yanhoo on 2020/02/01.
@@ -9,20 +9,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define AvoidCrashNotification @"AvoidCrashNotification"
+#define YHAvoidCrashNotification @"YHAvoidCrashNotification"
 
 // 版本检查，version为float数据类型
-#define AvoidCrashiOSVersionGreaterThanOrEqualTo(version) ([[UIDevice currentDevice].systemVersion floatValue] >= version)
+#define YHAvoidCrashiOSVersionGreaterThanOrEqualTo(version) ([[UIDevice currentDevice].systemVersion floatValue] >= version)
 
 // ignore below define
-#define AvoidCrashDefaultReturnNil  @"AvoidCrash default is to return nil to avoid crash."
-#define AvoidCrashDefaultIgnore     @"AvoidCrash default is to ignore this operation to avoid crash."
+#define YHAvoidCrashDefaultReturnNil  @"AvoidCrash default is to return nil to avoid crash."
+#define YHAvoidCrashDefaultIgnore     @"AvoidCrash default is to ignore this operation to avoid crash."
 
 // 互斥锁
 #define YHLock()    dispatch_semaphore_wait(self->_lock, DISPATCH_TIME_FOREVER)
 #define YHUnlock()  dispatch_semaphore_signal(self->_lock)
 
-@interface AvoidUtils : NSObject
+@interface YHAvoidUtils : NSObject
 
 /**
  *  类方法的交换
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param oldMethod 原本的方法
  *  @param newMethod 替换后的方法
  */
-+ (void)exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
++ (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
 
 /**
  *  对象方法的交换
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param oldMethod 原本的方法
  *  @param newMethod 替换后的方法
  */
-+ (void)exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
++ (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
 
 /**
  *  提示崩溃的信息(控制台输出、通知)
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param exception   捕获到的异常
  *  @param defaultToDo 这个框架里默认的做法
  */
-+ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
++ (void)yh_noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
 
 @end
 

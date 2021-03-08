@@ -6,7 +6,16 @@
 //
 
 #import "NSTimer+AvoidCrash.h"
+#import "YHAvoidUtils.h"
+#import "YHWeakProxy.h"
 
 @implementation NSTimer (AvoidCrash)
+
++ (void)enabledAvoidTimerCrash {
+    // timerWithTimeInterval:target:selector:userInfo:repeats:
+    
+    // scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:
+    
+}
 
 @end

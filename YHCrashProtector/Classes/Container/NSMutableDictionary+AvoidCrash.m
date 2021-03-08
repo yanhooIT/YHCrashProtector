@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableDictionary+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -24,15 +24,15 @@
         Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
         
         // setObject:forKey:
-        [AvoidUtils exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKey:) newMethod:@selector(avoidCrashSetObject:forKey:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKey:) newMethod:@selector(avoidCrashSetObject:forKey:)];
         
         // setObject:forKeyedSubscript:
-        if (AvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [AvoidUtils exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKeyedSubscript:) newMethod:@selector(avoidCrashSetObject:forKeyedSubscript:)];
+        if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
+            [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKeyedSubscript:) newMethod:@selector(avoidCrashSetObject:forKeyedSubscript:)];
         }
         
         // removeObjectForKey:
-        [AvoidUtils exchangeInstanceMethod:dictionaryM oldMethod:@selector(removeObjectForKey:) newMethod:@selector(avoidCrashRemoveObjectForKey:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(removeObjectForKey:) newMethod:@selector(avoidCrashRemoveObjectForKey:)];
     });
 }
 
@@ -41,7 +41,7 @@
     @try {
         [self avoidCrashSetObject:anObject forKey:aKey];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }
@@ -52,7 +52,7 @@
     @try {
         [self avoidCrashSetObject:obj forKeyedSubscript:key];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }
@@ -63,7 +63,7 @@
     @try {
         [self avoidCrashRemoveObjectForKey:aKey];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }

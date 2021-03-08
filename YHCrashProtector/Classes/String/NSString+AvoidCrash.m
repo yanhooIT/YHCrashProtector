@@ -7,7 +7,7 @@
 //
 
 #import "NSString+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -30,25 +30,25 @@
         Class stringClass = NSClassFromString(@"__NSCFConstantString");
         
         // characterAtIndex
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(avoidCrashCharacterAtIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(avoidCrashCharacterAtIndex:)];
         
         // substringFromIndex
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(avoidCrashSubstringFromIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(avoidCrashSubstringFromIndex:)];
         
         // substringToIndex
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(avoidCrashSubstringToIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(avoidCrashSubstringToIndex:)];
         
         // substringWithRange:
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(avoidCrashSubstringWithRange:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(avoidCrashSubstringWithRange:)];
         
         // stringByReplacingOccurrencesOfString:
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
         
         // stringByReplacingOccurrencesOfString:withString:options:range:
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
         
         // stringByReplacingCharactersInRange:withString:
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
     });
 }
 
@@ -59,7 +59,7 @@
         characteristic = [self avoidCrashCharacterAtIndex:index];
     } @catch (NSException *exception) {
         NSString *defaultToDo = @"AvoidCrash default is to return a without assign unichar.";
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return characteristic;
     }
@@ -71,8 +71,8 @@
     @try {
         subString = [self avoidCrashSubstringFromIndex:from];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -85,8 +85,8 @@
     @try {
         subString = [self avoidCrashSubstringToIndex:to];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -99,8 +99,8 @@
     @try {
         subString = [self avoidCrashSubstringWithRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -113,8 +113,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;
@@ -127,8 +127,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;
@@ -141,8 +141,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingCharactersInRange:range withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;

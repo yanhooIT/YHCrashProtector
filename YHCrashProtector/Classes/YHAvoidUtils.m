@@ -1,11 +1,11 @@
 //
-//  AvoidUtils.m
+//  YHAvoidUtils.m
 //  https://github.com/yanhooIT/YHCrashProtector
 //
 //  Created by yanhoo on 2020/02/01.
 //
 
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 #import <objc/runtime.h>
 
 #define key_errorName        @"errorName"
@@ -15,15 +15,22 @@
 #define key_callStackSymbols @"callStackSymbols"
 #define key_exception        @"exception"
 
-@implementation AvoidUtils
+@implementation YHAvoidUtils
 
-+ (void)exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
-    Method originalMethod = class_getClassMethod(anClass, oldMethod);
-    Method swizzledMethod = class_getClassMethod(anClass, newMethod);
++ (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
+    Class metaClass;
+    if (class_isMetaClass(anClass)) {// 判断当前是否为元类对象
+        metaClass = anClass;
+    } else {
+        metaClass = object_getClass(anClass);
+    }
+    
+    Method originalMethod = class_getClassMethod(metaClass, oldMethod);
+    Method swizzledMethod = class_getClassMethod(metaClass, newMethod);
     method_exchangeImplementations(originalMethod, swizzledMethod);
 }
 
-+ (void)exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
++ (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Method originalMethod = class_getInstanceMethod(anClass, oldMethod);
     Method swizzledMethod = class_getInstanceMethod(anClass, newMethod);
     BOOL didAddMethod = class_addMethod(anClass, oldMethod, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
@@ -34,7 +41,7 @@
     }
 }
 
-+ (void)noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
++ (void)yh_noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
     // 堆栈数据
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     // 获取在哪个类的哪个方法中实例化的数组
@@ -63,7 +70,7 @@
     
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errorInfoDic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errorInfoDic];
     });
 }
 

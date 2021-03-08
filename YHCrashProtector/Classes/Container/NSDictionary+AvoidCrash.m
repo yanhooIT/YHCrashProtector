@@ -7,7 +7,7 @@
 //
 
 #import "NSDictionary+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *
@@ -22,7 +22,7 @@
 + (void)avoidCrashExchangeMethod {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [AvoidUtils exchangeClassMethod:self oldMethod:@selector(dictionaryWithObjects:forKeys:count:) newMethod:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
+        [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(dictionaryWithObjects:forKeys:count:) newMethod:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
     });
 }
 
@@ -32,7 +32,7 @@
         instance = [self avoidCrashDictionaryWithObjects:objects forKeys:keys count:cnt];
     } @catch (NSException *exception) {
         NSString *defaultToDo = @"AvoidCrash default is to remove nil key-values and instance a dictionary.";
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
         
         // 处理错误的数据，然后重新初始化一个字典
         NSUInteger index = 0;

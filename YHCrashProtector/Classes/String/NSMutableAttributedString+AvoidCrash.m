@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableAttributedString+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -24,10 +24,10 @@
         Class NSConcreteMutableAttributedString = NSClassFromString(@"NSConcreteMutableAttributedString");
         
         // initWithString:
-        [AvoidUtils exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
         
         // initWithString:attributes:
-        [AvoidUtils exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
     });
 }
 
@@ -37,8 +37,8 @@
     @try {
         object = [self avoidCrashInitWithString:str];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -50,8 +50,8 @@
     @try {
         object = [self avoidCrashInitWithString:str attributes:attrs];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }

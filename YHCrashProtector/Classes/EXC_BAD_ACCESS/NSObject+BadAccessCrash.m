@@ -7,13 +7,13 @@
 
 #import "NSObject+BadAccessCrash.h"
 #import <objc/runtime.h>
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 @implementation NSObject (BadAccessCrash)
 
 + (void)enabledAvoidBadAccessCrash {
     // Avoid "EXC_BAD_ACCESS" Crash
-    [AvoidUtils exchangeInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
+    [YHAvoidUtils yh_exchangeInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
 }
 
 #pragma mark - Avoid "EXC_BAD_ACCESS" Crash

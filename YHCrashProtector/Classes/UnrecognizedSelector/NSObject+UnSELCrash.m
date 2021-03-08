@@ -6,7 +6,7 @@
 //
 
 #import "NSObject+UnSELCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 #import "YHForwardingTarget.h"
 
 @implementation NSObject (UnSELCrash)
@@ -23,10 +23,10 @@
      
      结论：forwardInvocation【不适合】多次重写
     
-     [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(methodSignatureForSelector:) newMethod:@selector(avoidCrashMethodSignatureForSelector:)];
-     [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(forwardInvocation:) newMethod:@selector(avoidCrashForwardInvocation:)];
+     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(methodSignatureForSelector:) newMethod:@selector(avoidCrashMethodSignatureForSelector:)];
+     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(forwardInvocation:) newMethod:@selector(avoidCrashForwardInvocation:)];
      */
-    [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(forwardingTargetForSelector:) newMethod:@selector(yh_forwardingTargetForSelector:)];
+    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(forwardingTargetForSelector:) newMethod:@selector(yh_forwardingTargetForSelector:)];
 }
 
 #pragma mark - Avoid "unrecognized selector sent to instance" Crash

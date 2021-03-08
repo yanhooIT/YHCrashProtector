@@ -1,13 +1,13 @@
 //
-//  AvoidCrash.m
+//  YHAvoidCrash.m
 //  https://github.com/yanhooIT/YHCrashProtector
 //
 //  Created by yanhoo on 2020/02/01.
 //  Copyright © 2020年 yanhoo. All rights reserved.
 //
 
-#import "AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidCrash.h"
+#import "YHAvoidUtils.h"
 
 // Avoid "unrecognized selector sent to instance" Crash
 #import "NSObject+UnSELCrash.h"
@@ -32,7 +32,7 @@
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
 
-@implementation AvoidCrash
+@implementation YHAvoidCrash
 
 + (void)load {
 //#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
@@ -67,7 +67,7 @@
     if(aSelector == nil) return;
     
     // 监听通知, 获取AvoidCrash捕获的崩溃日志的详细信息
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:AvoidCrashNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:YHAvoidCrashNotification object:nil];
 }
 
 + (void)yh_setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames {

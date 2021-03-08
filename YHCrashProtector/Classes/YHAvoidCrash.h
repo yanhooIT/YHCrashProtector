@@ -1,5 +1,5 @@
 //
-//  AvoidCrash.h
+//  YHAvoidCrash.h
 //  https://github.com/yanhooIT/YHCrashProtector
 //
 //  Created by yanhoo on 2020/02/01.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AvoidCrash : NSObject
+@interface YHAvoidCrash : NSObject
 
 /// 搜集被框架避免的Crash信息（详细信息通过 NSNotification对象的 userInfo 返回），！！！此类问题收到后需要立即处理！！！
 /// @param observer 监听通知的对象

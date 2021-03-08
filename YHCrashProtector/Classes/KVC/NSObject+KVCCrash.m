@@ -6,13 +6,13 @@
 //
 
 #import "NSObject+KVCCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 @implementation NSObject (KVCCrash)
 
 + (void)enabledAvoidKVCCrash {
     // 拦截setValue:forKey:方法，用于处理key为nil的Crash
-    [AvoidUtils exchangeInstanceMethod:[self class] oldMethod:@selector(setValue:forKey:) newMethod:@selector(yh_setValue:forKey:)];
+    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(setValue:forKey:) newMethod:@selector(yh_setValue:forKey:)];
 }
 
 /** 避免因key为nil导致的Crash

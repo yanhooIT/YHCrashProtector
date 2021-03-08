@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableString+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -27,13 +27,13 @@
         Class stringClass = NSClassFromString(@"__NSCFString");
         
         // replaceCharactersInRange
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(avoidCrashReplaceCharactersInRange:withString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(avoidCrashReplaceCharactersInRange:withString:)];
         
         // insertString:atIndex:
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(avoidCrashInsertString:atIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(avoidCrashInsertString:atIndex:)];
         
         // deleteCharactersInRange
-        [AvoidUtils exchangeInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(avoidCrashDeleteCharactersInRange:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(avoidCrashDeleteCharactersInRange:)];
     });
 }
 
@@ -42,8 +42,8 @@
     @try {
         [self avoidCrashReplaceCharactersInRange:range withString:aString];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }
@@ -54,8 +54,8 @@
     @try {
         [self avoidCrashInsertString:aString atIndex:loc];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }
@@ -66,8 +66,8 @@
     @try {
         [self avoidCrashDeleteCharactersInRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }

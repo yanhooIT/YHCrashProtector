@@ -7,7 +7,7 @@
 
 #import "YHKVOProxy.h"
 #import "YHKVOInfo.h"
-#import "AVoidUtils.h"
+#import "YHAvoidUtils.h"
 
 @implementation YHKVOProxy {
     dispatch_semaphore_t _lock;
@@ -106,7 +106,7 @@
     if (nil != kvoInfos) {
         NSMutableSet *tmp = [kvoInfos copy];
         for (YHKVOInfo *info in tmp) {
-            if (nil == info.observer) {
+            if (nil == info.observer) {// 观察对象已经释放
                 [kvoInfos removeObject:info];
             }
         }

@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableArray+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -28,27 +28,27 @@
         Class arrayMClass = NSClassFromString(@"__NSArrayM");
         
         // objectAtIndex:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndex:) newMethod:@selector(avoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndex:) newMethod:@selector(avoidCrashObjectAtIndex:)];
         
         // objectAtIndexedSubscript
-        if (AvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(avoidCrashObjectAtIndexedSubscript:)];
+        if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
+            [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(avoidCrashObjectAtIndexedSubscript:)];
         }
         
         // setObject:atIndexedSubscript:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(avoidCrashSetObject:atIndexedSubscript:)];
         
         // removeObjectAtIndex:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(avoidCrashRemoveObjectAtIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(avoidCrashRemoveObjectAtIndex:)];
         
         // insertObject:atIndex:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(avoidCrashInsertObject:atIndex:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(avoidCrashInsertObject:atIndex:)];
         
         // getObjects:range:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(getObjects:range:) newMethod:@selector(avoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(getObjects:range:) newMethod:@selector(avoidCrashGetObjects:range:)];
         
         // replaceObjectAtIndex:withObject:
-        [AvoidUtils exchangeInstanceMethod:arrayMClass oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(avoidCrashReplaceObjectAtIndex:withObject:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(avoidCrashReplaceObjectAtIndex:withObject:)];
     });
 }
 
@@ -57,7 +57,7 @@
     @try {
         [self avoidCrashSetObject:obj atIndexedSubscript:idx];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }
@@ -68,7 +68,7 @@
     @try {
         [self avoidCrashRemoveObjectAtIndex:index];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }
@@ -79,7 +79,7 @@
     @try {
         [self avoidCrashInsertObject:anObject atIndex:index];
     } @catch (NSException *exception) {
-        [AvoidUtils noteErrorWithException:exception defaultToDo:AvoidCrashDefaultIgnore];
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
     } @finally {
         
     }
@@ -91,8 +91,8 @@
     @try {
         object = [self avoidCrashObjectAtIndex:index];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -104,8 +104,8 @@
     @try {
         object = [self avoidCrashObjectAtIndexedSubscript:idx];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -116,8 +116,8 @@
     @try {
         [self avoidCrashGetObjects:objects range:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }
@@ -128,8 +128,8 @@
     @try {
         [self avoidCrashReplaceObjectAtIndex:index withObject:anObject];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultIgnore;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }

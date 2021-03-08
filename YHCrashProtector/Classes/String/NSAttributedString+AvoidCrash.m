@@ -7,7 +7,7 @@
 //
 
 #import "NSAttributedString+AvoidCrash.h"
-#import "AvoidUtils.h"
+#import "YHAvoidUtils.h"
 
 /**
  *  Can avoid crash method
@@ -26,13 +26,13 @@
         Class NSConcreteAttributedString = NSClassFromString(@"NSConcreteAttributedString");
         
         // initWithString:
-        [AvoidUtils exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
         
         // initWithAttributedString
-        [AvoidUtils exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithAttributedString:) newMethod:@selector(avoidCrashInitWithAttributedString:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithAttributedString:) newMethod:@selector(avoidCrashInitWithAttributedString:)];
         
         // initWithString:attributes:
-        [AvoidUtils exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
+        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
     });
 }
 
@@ -42,8 +42,8 @@
     @try {
         object = [self avoidCrashInitWithString:str];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -55,8 +55,8 @@
     @try {
         object = [self avoidCrashInitWithAttributedString:attrStr];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -68,8 +68,8 @@
     @try {
         object = [self avoidCrashInitWithString:str attributes:attrs];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = AvoidCrashDefaultReturnNil;
-        [AvoidUtils noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
+        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
