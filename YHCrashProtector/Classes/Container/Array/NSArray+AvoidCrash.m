@@ -50,39 +50,20 @@
         // NSArray 包含多个对象时生成的是 __NSArrayI 类型
         Class __NSArrayI = NSClassFromString(@"__NSArrayI");
         
-        // arrayWithObjects:count:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderArray oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(yh_arrayWithObjects:count:)];
         // initWithObjects:count:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderArray oldMethod:@selector(initWithObjects:count:) newMethod:@selector(yh_initWithObjects:count:)];
+        // arrayWithObjects:count:不需要hook，最终都会走initWithObjects:count:
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSPlaceholderArray oldMethod:@selector(initWithObjects:count:) newMethod:@selector(yh_initWithObjects:count:)];
         
         // objectAtIndex:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
-        [YHAvoidUtils yh_swizzleClassMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
-        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_NSArray0objectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_NSSingleObjectArrayIobjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_NSArrayIobjectAtIndex:)];
         
         // objectAtIndexedSubscript:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSArray0 oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
-        [YHAvoidUtils yh_swizzleClassMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
-        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray0 oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_NSArray0objectAtIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_NSSingleObjectArrayIobjectAtIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_NSArrayIobjectAtIndexedSubscript:)];
     });
-}
-
-+ (instancetype)yh_arrayWithObjects:(id  _Nonnull const [])objects count:(NSUInteger)cnt {
-    id safeObjects[cnt];
-    NSUInteger j = 0;
-    for (NSUInteger index = 0; index < cnt ; index++) {
-        id obj = objects[index];
-        if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - arrayWithObjects:count:]: The index %ld position in the array is nil", NSStringFromClass(self.class), index];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
-            continue;
-        }
-        
-        safeObjects[j] = obj;
-        j++;
-    }
-    
-    return [self yh_arrayWithObjects:safeObjects count:j];
 }
 
 - (instancetype)yh_initWithObjects:(id  _Nonnull const [])objects count:(NSUInteger)cnt {
@@ -91,7 +72,8 @@
     for (NSUInteger index = 0; index < cnt ; index++) {
         id obj = objects[index];
         if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - initWithObjects:count:]: The index %ld position in the array is nil", NSStringFromClass(self.class), index];
+            // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+            NSString *log = [NSString stringWithFormat:@"*** -[%@ - initWithObjects:count:]: attempt to insert nil object from objects[%ld]", NSStringFromClass(self.class), index];
             [YHAvoidUtils yh_reportErrorWithLog:log];
             continue;
         }
@@ -103,24 +85,64 @@
     return [self yh_initWithObjects:safeObjects count:j];
 }
 
-- (id)yh_objectAtIndex:(NSUInteger)index {
+- (id)yh_NSArray0objectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
-        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndex:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), index, self.count];
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return nil;
     }
     
-    return [self yh_objectAtIndex:index];
+    return [self yh_NSArray0objectAtIndex:index];
 }
 
-- (id)yh_objectAtIndexedSubscript:(NSUInteger)idx {
-    if (idx >= self.count ) {
-        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndexedSubscript:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), idx, self.count];
+- (id)yh_NSSingleObjectArrayIobjectAtIndex:(NSUInteger)index {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return nil;
     }
     
-    return [self yh_objectAtIndexedSubscript:idx];
+    return [self yh_NSSingleObjectArrayIobjectAtIndex:index];
+}
+
+- (id)yh_NSArrayIobjectAtIndex:(NSUInteger)index {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
+    }
+    
+    return [self yh_NSArrayIobjectAtIndex:index];
+}
+
+- (id)yh_NSArray0objectAtIndexedSubscript:(NSUInteger)index {
+    if (index >= self.count ) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndexedSubscript:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
+    }
+    
+    return [self yh_NSArray0objectAtIndexedSubscript:index];
+}
+
+- (id)yh_NSSingleObjectArrayIobjectAtIndexedSubscript:(NSUInteger)index {
+    if (index >= self.count ) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndexedSubscript:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
+    }
+    
+    return [self yh_NSSingleObjectArrayIobjectAtIndexedSubscript:index];
+}
+
+- (id)yh_NSArrayIobjectAtIndexedSubscript:(NSUInteger)index {
+    if (index >= self.count ) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndexedSubscript:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
+    }
+    
+    return [self yh_NSArrayIobjectAtIndexedSubscript:index];
 }
 
 @end

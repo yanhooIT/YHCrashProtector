@@ -41,11 +41,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class __NSPlaceholderDictionary = NSClassFromString(@"__NSPlaceholderDictionary");
-        // dictionaryWithObjects:forKeys:count:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderDictionary oldMethod:@selector(dictionaryWithObjects:forKeys:count:) newMethod:@selector(yh_dictionaryWithObjects:forKeys:count:)];
-        
         // initWithObjects:forKeys:count:
-        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderDictionary oldMethod:@selector(initWithObjects:forKeys:count:) newMethod:@selector(yh_initWithObjects:forKeys:count:)];
+        // dictionaryWithObjects:forKeys:count:不需要hook，最终都会走initWithObjects:forKeys:count:
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSPlaceholderDictionary oldMethod:@selector(initWithObjects:forKeys:count:) newMethod:@selector(yh_initWithObjects:forKeys:count:)];
     });
 }
 

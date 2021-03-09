@@ -69,8 +69,10 @@
     errorReason = [errorReason stringByReplacingOccurrencesOfString:@"yh_" withString:@""];
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place: %@", mainCallStackSymbolMsg];
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n\n",  errorName, errorReason, errorPlace, defaultToDo];
+
+#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
     NSLog(@"CrashProtector - %@", logErrorMessage);
-    
+#else
     NSMutableDictionary *errInfoDic = [NSMutableDictionary dictionary];
     errInfoDic[key_errorName] = errorName;
     errInfoDic[key_errorReason] = errorReason;
@@ -83,19 +85,20 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errInfoDic.copy];
     });
+#endif
 }
 
 + (void)yh_reportErrorWithLog:(NSString *)log {
     if (YH_STRING_IS_EMPTY(log)) return;
     
-    log = [NSString stringWithFormat:@"[YH] - %@", log];
-    
+#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
     NSLog(@"CrashProtector - %@", log);
-    
+#else
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
     });
+#endif
 }
 
 /**
