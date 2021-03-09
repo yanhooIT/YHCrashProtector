@@ -17,7 +17,7 @@
 
 @implementation YHAvoidUtils
 
-+ (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
++ (void)yh_swizzleClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Class metaClass;
     if (class_isMetaClass(anClass)) {// 判断当前类是否为元类对象
         metaClass = anClass;
@@ -25,14 +25,14 @@
         metaClass = object_getClass(anClass);
     }
     
-    [self _exchangeMethod:metaClass oldMethod:oldMethod newMethod:newMethod];
+    [self _swizzleMethod:metaClass oldMethod:oldMethod newMethod:newMethod];
 }
 
-+ (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
-    [self _exchangeMethod:anClass oldMethod:oldMethod newMethod:newMethod];
++ (void)yh_swizzleInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
+    [self _swizzleMethod:anClass oldMethod:oldMethod newMethod:newMethod];
 }
 
-+ (void)_exchangeMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
++ (void)_swizzleMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Method originalMethod = class_getInstanceMethod(cls, oldMethod);
     Method swizzledMethod = class_getInstanceMethod(cls, newMethod);
     /** 通过添加方法的方式判断原方法是否存在

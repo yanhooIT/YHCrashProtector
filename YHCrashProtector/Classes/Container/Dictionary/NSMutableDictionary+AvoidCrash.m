@@ -17,15 +17,15 @@
         Class dictionaryM = NSClassFromString(@"__NSDictionaryM");
         
         // setObject:forKey:
-        [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKey:) newMethod:@selector(avoidCrashSetObject:forKey:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKey:) newMethod:@selector(avoidCrashSetObject:forKey:)];
         
         // setObject:forKeyedSubscript:
         if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKeyedSubscript:) newMethod:@selector(avoidCrashSetObject:forKeyedSubscript:)];
+            [YHAvoidUtils yh_swizzleInstanceMethod:dictionaryM oldMethod:@selector(setObject:forKeyedSubscript:) newMethod:@selector(avoidCrashSetObject:forKeyedSubscript:)];
         }
         
         // removeObjectForKey:
-        [YHAvoidUtils yh_exchangeInstanceMethod:dictionaryM oldMethod:@selector(removeObjectForKey:) newMethod:@selector(avoidCrashRemoveObjectForKey:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:dictionaryM oldMethod:@selector(removeObjectForKey:) newMethod:@selector(avoidCrashRemoveObjectForKey:)];
     });
 }
 

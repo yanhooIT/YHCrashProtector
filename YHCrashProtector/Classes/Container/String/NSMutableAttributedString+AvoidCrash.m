@@ -24,10 +24,10 @@
         Class NSConcreteMutableAttributedString = NSClassFromString(@"NSConcreteMutableAttributedString");
         
         // initWithString:
-        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
         
         // initWithString:attributes:
-        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteMutableAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
     });
 }
 

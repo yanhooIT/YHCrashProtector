@@ -14,14 +14,14 @@
 
 + (void)yh_enabledAvoidKVOCrash {
     // 注册观察对象
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(addObserver:forKeyPath:options:context:) newMethod:@selector(yh_addObserver:forKeyPath:options:context:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(addObserver:forKeyPath:options:context:) newMethod:@selector(yh_addObserver:forKeyPath:options:context:)];
     
     // 移除观察对象
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:) newMethod:@selector(yh_removeObserver:forKeyPath:)];
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:context:) newMethod:@selector(yh_removeObserver:forKeyPath:context:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:) newMethod:@selector(yh_removeObserver:forKeyPath:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(removeObserver:forKeyPath:context:) newMethod:@selector(yh_removeObserver:forKeyPath:context:)];
     
     // 被观察对象属性发生改变通知观察对象
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(observeValueForKeyPath:ofObject:change:context:) newMethod:@selector(yh_observeValueForKeyPath:ofObject:change:context:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(observeValueForKeyPath:ofObject:change:context:) newMethod:@selector(yh_observeValueForKeyPath:ofObject:change:context:)];
 }
 
 - (void)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context

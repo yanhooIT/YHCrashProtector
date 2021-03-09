@@ -32,7 +32,6 @@
 #import "NSObject+UnSELCrash.h"
 #import "YHForwardingTarget.h"
 #import "YHAvoidCrash.h"
-#import "YHAvoidCrashProtocol.h"
 #import "YHAvoidUtils.h"
 #import "YHDeallocHandle.h"
 

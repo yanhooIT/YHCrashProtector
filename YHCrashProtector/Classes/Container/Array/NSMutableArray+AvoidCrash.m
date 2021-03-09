@@ -17,27 +17,27 @@
         Class arrayMClass = NSClassFromString(@"__NSArrayM");
         
         // objectAtIndex:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndex:) newMethod:@selector(avoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndex:) newMethod:@selector(avoidCrashObjectAtIndex:)];
         
         // objectAtIndexedSubscript
         if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(avoidCrashObjectAtIndexedSubscript:)];
+            [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(avoidCrashObjectAtIndexedSubscript:)];
         }
         
         // setObject:atIndexedSubscript:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(avoidCrashSetObject:atIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(avoidCrashSetObject:atIndexedSubscript:)];
         
         // removeObjectAtIndex:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(avoidCrashRemoveObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(avoidCrashRemoveObjectAtIndex:)];
         
         // insertObject:atIndex:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(avoidCrashInsertObject:atIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(avoidCrashInsertObject:atIndex:)];
         
         // getObjects:range:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(getObjects:range:) newMethod:@selector(avoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(getObjects:range:) newMethod:@selector(avoidCrashGetObjects:range:)];
         
         // replaceObjectAtIndex:withObject:
-        [YHAvoidUtils yh_exchangeInstanceMethod:arrayMClass oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(avoidCrashReplaceObjectAtIndex:withObject:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(avoidCrashReplaceObjectAtIndex:withObject:)];
     });
 }
 

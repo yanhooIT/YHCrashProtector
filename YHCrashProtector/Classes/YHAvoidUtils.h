@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param oldMethod 原本的方法
  *  @param newMethod 替换后的方法
  */
-+ (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
++ (void)yh_swizzleClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
 
 /**
  *  对象方法的交换
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param oldMethod 原本的方法
  *  @param newMethod 替换后的方法
  */
-+ (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
++ (void)yh_swizzleInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod;
 
 /**
  *  提示崩溃的信息(控制台输出、通知)

@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YHAvoidCrashProtocol.h"
 
-@interface NSMutableDictionary (AvoidCrash) <YHAvoidCrashProtocol>
+@interface NSMutableDictionary (AvoidCrash)
 
 @end

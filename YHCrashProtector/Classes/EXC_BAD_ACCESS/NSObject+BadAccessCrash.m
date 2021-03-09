@@ -13,7 +13,7 @@
 
 + (void)yh_enabledAvoidBadAccessCrash {
     // Avoid "EXC_BAD_ACCESS" Crash
-    [YHAvoidUtils yh_exchangeInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:object_getClass(self) oldMethod:@selector(allocWithZone:) newMethod:@selector(yh_allocWithZone:)];
 }
 
 #pragma mark - Avoid "EXC_BAD_ACCESS" Crash

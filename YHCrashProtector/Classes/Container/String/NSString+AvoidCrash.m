@@ -30,25 +30,25 @@
         Class stringClass = NSClassFromString(@"__NSCFConstantString");
         
         // characterAtIndex
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(avoidCrashCharacterAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(avoidCrashCharacterAtIndex:)];
         
         // substringFromIndex
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(avoidCrashSubstringFromIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(avoidCrashSubstringFromIndex:)];
         
         // substringToIndex
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(avoidCrashSubstringToIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(avoidCrashSubstringToIndex:)];
         
         // substringWithRange:
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(avoidCrashSubstringWithRange:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(avoidCrashSubstringWithRange:)];
         
         // stringByReplacingOccurrencesOfString:
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
         
         // stringByReplacingOccurrencesOfString:withString:options:range:
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
         
         // stringByReplacingCharactersInRange:withString:
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
     });
 }
 

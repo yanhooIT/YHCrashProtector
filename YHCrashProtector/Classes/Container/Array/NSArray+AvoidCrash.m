@@ -15,7 +15,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // arrayWithObjects:count:
-        [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(AvoidCrashArrayWithObjects:count:)];
+        [YHAvoidUtils yh_swizzleClassMethod:self oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(AvoidCrashArrayWithObjects:count:)];
         
         Class __NSArray = NSClassFromString(@"NSArray");
         Class __NSArrayI = NSClassFromString(@"__NSArrayI");
@@ -23,22 +23,22 @@
         Class __NSArray0 = NSClassFromString(@"__NSArray0");
         
         // objectsAtIndexes:
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSArray oldMethod:@selector(objectsAtIndexes:) newMethod:@selector(avoidCrashObjectsAtIndexes:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray oldMethod:@selector(objectsAtIndexes:) newMethod:@selector(avoidCrashObjectsAtIndexes:)];
         
         // objectAtIndex:
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
         
         // objectAtIndexedSubscript:
         if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [YHAvoidUtils yh_exchangeInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndexedSubscript:)];
+            [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndexedSubscript:)];
         }
         
         // getObjects:range:
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSArray oldMethod:@selector(getObjects:range:) newMethod:@selector(NSArrayAvoidCrashGetObjects:range:)];
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
-        [YHAvoidUtils yh_exchangeInstanceMethod:__NSArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray oldMethod:@selector(getObjects:range:) newMethod:@selector(NSArrayAvoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
     });
 }
 

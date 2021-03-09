@@ -27,13 +27,13 @@
         Class stringClass = NSClassFromString(@"__NSCFString");
         
         // replaceCharactersInRange
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(avoidCrashReplaceCharactersInRange:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(avoidCrashReplaceCharactersInRange:withString:)];
         
         // insertString:atIndex:
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(avoidCrashInsertString:atIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(avoidCrashInsertString:atIndex:)];
         
         // deleteCharactersInRange
-        [YHAvoidUtils yh_exchangeInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(avoidCrashDeleteCharactersInRange:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(avoidCrashDeleteCharactersInRange:)];
     });
 }
 

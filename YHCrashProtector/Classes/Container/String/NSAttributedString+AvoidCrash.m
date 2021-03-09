@@ -26,13 +26,13 @@
         Class NSConcreteAttributedString = NSClassFromString(@"NSConcreteAttributedString");
         
         // initWithString:
-        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(avoidCrashInitWithString:)];
         
         // initWithAttributedString
-        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithAttributedString:) newMethod:@selector(avoidCrashInitWithAttributedString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithAttributedString:) newMethod:@selector(avoidCrashInitWithAttributedString:)];
         
         // initWithString:attributes:
-        [YHAvoidUtils yh_exchangeInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(avoidCrashInitWithString:attributes:)];
     });
 }
 

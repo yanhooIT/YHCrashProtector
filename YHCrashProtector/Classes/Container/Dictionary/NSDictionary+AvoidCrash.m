@@ -14,7 +14,7 @@
 + (void)avoidCrashExchangeMethod {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(dictionaryWithObjects:forKeys:count:) newMethod:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
+        [YHAvoidUtils yh_swizzleClassMethod:self oldMethod:@selector(dictionaryWithObjects:forKeys:count:) newMethod:@selector(avoidCrashDictionaryWithObjects:forKeys:count:)];
     });
 }
 
