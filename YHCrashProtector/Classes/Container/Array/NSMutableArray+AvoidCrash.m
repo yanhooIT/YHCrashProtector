@@ -9,119 +9,137 @@
 #import "NSMutableArray+AvoidCrash.h"
 #import "YHAvoidUtils.h"
 
+/** Array类簇
+ // ------ NSArray ------
+ // __NSPlaceholderArray
+ NSLog(@"[NSArray alloc].class: %@", [NSArray alloc].class);
+ // __NSArray0
+ NSLog(@"[[NSArray alloc] init].class: %@", [[NSArray alloc] init].class);
+ // __NSArray0
+ NSLog(@"@[].class: %@", @[].class);
+ // __NSSingleObjectArrayI
+ NSLog(@"@[@1].class: %@", @[@1].class);
+ // __NSArrayI
+ NSLog(@"@[@1, @2].class: %@", @[@1, @2].class);
+
+ // ------ NSMutableArray ------
+ // __NSPlaceholderArray
+ NSLog(@"[NSMutableArray alloc].class: %@", [NSMutableArray alloc].class);
+ // __NSArrayM
+ NSLog(@"[[NSMutableArray alloc] init].class: %@", [[NSMutableArray alloc] init].class);
+ // __NSArrayM
+ NSLog(@"[@[].mutableCopy class]: %@", [@[].mutableCopy class]);
+ // __NSArrayM
+ NSLog(@"[@[@1].mutableCopy class]: %@", [@[@1].mutableCopy class]);
+ // __NSArrayM
+ NSLog(@"[@[@1, @2].mutableCopy class]: %@", [@[@1, @2].mutableCopy class]);
+ */
+
 @implementation NSMutableArray (AvoidCrash)
 
-+ (void)avoidCrashExchangeMethod {
++ (void)yh_enabledAvoidArrayMCrash {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class arrayMClass = NSClassFromString(@"__NSArrayM");
+        // NSMutableArray 生成的都是 __NSArrayM 类型
+        Class __NSArrayM = NSClassFromString(@"__NSArrayM");
         
         // objectAtIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndex:) newMethod:@selector(avoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayM oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
         
-        // objectAtIndexedSubscript
-        if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(avoidCrashObjectAtIndexedSubscript:)];
-        }
+        // objectAtIndexedSubscript:
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayM oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
         
-        // setObject:atIndexedSubscript:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(avoidCrashSetObject:atIndexedSubscript:)];
-        
-        // removeObjectAtIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(avoidCrashRemoveObjectAtIndex:)];
+        // addObject:
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayM oldMethod:@selector(addObject:) newMethod:@selector(yh_addObject:)];
         
         // insertObject:atIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(avoidCrashInsertObject:atIndex:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayM oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(yh_insertObject:atIndex:)];
         
-        // getObjects:range:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(getObjects:range:) newMethod:@selector(avoidCrashGetObjects:range:)];
+        // setObject:atIndexedSubscript:
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(yh_setObject:atIndexedSubscript:)];
+        
+        // removeObjectAtIndex:
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(yh_removeObjectAtIndex:)];
         
         // replaceObjectAtIndex:withObject:
-        [YHAvoidUtils yh_swizzleInstanceMethod:arrayMClass oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(avoidCrashReplaceObjectAtIndex:withObject:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(yh_replaceObjectAtIndex:withObject:)];
     });
 }
 
-#pragma mark - get object from array
-- (void)avoidCrashSetObject:(id)obj atIndexedSubscript:(NSUInteger)idx {
-    @try {
-        [self avoidCrashSetObject:obj atIndexedSubscript:idx];
-    } @catch (NSException *exception) {
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
-    } @finally {
-        
+- (id)yh_objectAtIndex:(NSUInteger)index {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndex:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
     }
+    
+    return [self yh_objectAtIndex:index];
 }
 
-#pragma mark - removeObjectAtIndex:
-- (void)avoidCrashRemoveObjectAtIndex:(NSUInteger)index {
-    @try {
-        [self avoidCrashRemoveObjectAtIndex:index];
-    } @catch (NSException *exception) {
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
-    } @finally {
-        
+- (id)yh_objectAtIndexedSubscript:(NSUInteger)idx {
+    if (idx >= self.count ) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndexedSubscript:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), idx, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
     }
+    
+    return [self yh_objectAtIndexedSubscript:idx];
 }
 
-#pragma mark - set方法
-- (void)avoidCrashInsertObject:(id)anObject atIndex:(NSUInteger)index {
-    @try {
-        [self avoidCrashInsertObject:anObject atIndex:index];
-    } @catch (NSException *exception) {
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:YHAvoidCrashDefaultIgnore];
-    } @finally {
-        
+- (void)yh_addObject:(id)anObject {
+    if (nil == anObject) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - addObject:]: An attempt was made to set an object nil to the array", NSStringFromClass(self.class)];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
     }
+    
+    [self yh_addObject:anObject];
 }
 
-#pragma mark - objectAtIndex:
-- (id)avoidCrashObjectAtIndex:(NSUInteger)index {
-    id object = nil;
-    @try {
-        object = [self avoidCrashObjectAtIndex:index];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
+- (void)yh_insertObject:(id)anObject atIndex:(NSUInteger)index {
+    if (nil == anObject) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - insertObject:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), index];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
     }
+    
+    [self yh_insertObject:anObject atIndex:index];
 }
 
-#pragma mark - objectAtIndexedSubscript:
-- (id)avoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
-    id object = nil;
-    @try {
-        object = [self avoidCrashObjectAtIndexedSubscript:idx];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
+- (void)yh_setObject:(id)obj atIndexedSubscript:(NSUInteger)idx {
+    if (nil == obj) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - setObject:atIndexedSubscript:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), idx];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
     }
+    
+    [self yh_setObject:obj atIndexedSubscript:idx];
 }
 
-#pragma mark - getObjects:range:
-- (void)avoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range {
-    @try {
-        [self avoidCrashGetObjects:objects range:range];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        
+- (void)yh_removeObjectAtIndex:(NSUInteger)index {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - removeObjectAtIndex:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
     }
+    
+    [self yh_removeObjectAtIndex:index];
 }
 
-#pragma mark - replaceObjectAtIndex:withObject:
-- (void)avoidCrashReplaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
-    @try {
-        [self avoidCrashReplaceObjectAtIndex:index withObject:anObject];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        
+- (void)yh_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - replaceObjectAtIndex:withObject:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
     }
+    
+    if (nil == anObject) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - replaceObjectAtIndex:withObject:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), index];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
+    }
+    
+    [self yh_replaceObjectAtIndex:index withObject:anObject];
 }
 
 @end

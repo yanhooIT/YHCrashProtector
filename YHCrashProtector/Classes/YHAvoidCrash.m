@@ -21,9 +21,10 @@
 #import "NSNotificationCenter+AvoidCrash.h"
 // Avoid Timer Crash
 #import "NSTimer+AvoidCrash.h"
-// Avoid Container Crash
+// Avoid Array Crash
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
+// Avoid Dictionary Crash
 #import "NSDictionary+AvoidCrash.h"
 #import "NSMutableDictionary+AvoidCrash.h"
 // Avoid String Crash
@@ -50,11 +51,12 @@
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
         [NSTimer yh_enabledAvoidTimerCrash];
         
-//        [NSArray avoidCrashExchangeMethod];
-//        [NSMutableArray avoidCrashExchangeMethod];
-//        [NSDictionary avoidCrashExchangeMethod];
-//        [NSMutableDictionary avoidCrashExchangeMethod];
-//        
+        [NSArray yh_enabledAvoidArrayCrash];
+        [NSMutableArray yh_enabledAvoidArrayMCrash];
+        
+        [NSDictionary yh_enabledAvoidDictionaryCrash];
+        [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
+  
 //        [NSString avoidCrashExchangeMethod];
 //        [NSMutableString avoidCrashExchangeMethod];
 //        [NSAttributedString avoidCrashExchangeMethod];

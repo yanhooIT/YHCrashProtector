@@ -10,4 +10,6 @@
 
 @interface NSMutableArray (AvoidCrash)
 
++ (void)yh_enabledAvoidArrayMCrash;
+
 @end

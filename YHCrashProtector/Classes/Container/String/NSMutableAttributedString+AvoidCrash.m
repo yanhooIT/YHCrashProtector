@@ -37,8 +37,8 @@
     @try {
         object = [self avoidCrashInitWithString:str];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }
@@ -50,8 +50,8 @@
     @try {
         object = [self avoidCrashInitWithString:str attributes:attrs];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return object;
     }

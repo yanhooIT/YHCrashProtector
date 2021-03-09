@@ -51,7 +51,9 @@
     }
 }
 
-+ (void)yh_noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
++ (void)yh_reportErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
+    if (nil == exception) return;
+    
     // 堆栈数据
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     // 获取在哪个类的哪个方法中实例化的数组
@@ -63,24 +65,36 @@
     
     NSString *errorName = exception.name;
     NSString *errorReason = exception.reason;
-    // errorReason 可能为 -[__NSCFConstantString avoidCrashCharacterAtIndex:]: Range or index out of bounds, 将avoidCrash前缀去掉
+    // errorReason 可能为 -[__NSCFConstantString yh_characterAtIndex:]: Range or index out of bounds, 将yh_前缀去掉
     errorReason = [errorReason stringByReplacingOccurrencesOfString:@"yh_" withString:@""];
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place: %@", mainCallStackSymbolMsg];
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n\n",  errorName, errorReason, errorPlace, defaultToDo];
-    NSLog(@"%@", logErrorMessage);
+    NSLog(@"CrashProtector - %@", logErrorMessage);
     
-    NSDictionary *errorInfoDic = @{
-        key_errorName        : errorName,
-        key_errorReason      : errorReason,
-        key_errorPlace       : errorPlace,
-        key_defaultToDo      : defaultToDo,
-        key_exception        : exception,
-        key_callStackSymbols : callStackSymbolsArr
-    };
+    NSMutableDictionary *errInfoDic = [NSMutableDictionary dictionary];
+    errInfoDic[key_errorName] = errorName;
+    errInfoDic[key_errorReason] = errorReason;
+    errInfoDic[key_errorPlace] = errorPlace;
+    errInfoDic[key_defaultToDo] = defaultToDo;
+    errInfoDic[key_exception] = exception;
+    errInfoDic[key_callStackSymbols] = callStackSymbolsArr;
     
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errorInfoDic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errInfoDic.copy];
+    });
+}
+
++ (void)yh_reportErrorWithLog:(NSString *)log {
+    if (YH_STRING_IS_EMPTY(log)) return;
+    
+    log = [NSString stringWithFormat:@"[YH] - %@", log];
+    
+    NSLog(@"CrashProtector - %@", log);
+    
+    // 将错误信息放在字典里，用通知的形式发送出去
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
     });
 }
 

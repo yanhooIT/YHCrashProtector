@@ -38,47 +38,53 @@
 #pragma mark - Container Crash Test
 - (void)testContainerCrash {
     // NSArray
-    NSLog(@"arr alloc:%@", [NSArray alloc].class); // __NSPlaceholderArray
-    NSLog(@"arr init:%@", [[NSArray alloc] init].class); // __NSArray0
-
-    NSLog(@"arr:%@", [@[] class]); // __NSArray0
-    NSLog(@"arr:%@", [@[@1] class]); // __NSSingleObjectArrayI
-    NSLog(@"arr:%@", [@[@1, @2] class]); // __NSArrayI
+//    NSLog(@"[NSArray alloc].class: %@", [NSArray alloc].class); // __NSPlaceholderArray
+//    NSLog(@"[[NSArray alloc] init].class: %@", [[NSArray alloc] init].class); // __NSArray0
+//    NSLog(@"@[].class: %@", @[].class); // __NSArray0
+//    NSLog(@"@[@1].class: %@", @[@1].class); // __NSSingleObjectArrayI
+//    NSLog(@"@[@1, @2].class: %@", @[@1, @2].class); // __NSArrayI
         
     // NSMutableArray
-    NSLog(@"mutA alloc:%@", [NSMutableArray alloc].class); // __NSPlaceholderArray
-    NSLog(@"mutA init:%@", [[NSMutableArray alloc] init].class); // __NSArrayM
+//    NSLog(@"[NSMutableArray alloc].class: %@", [NSMutableArray alloc].class); // __NSPlaceholderArray
+//    NSLog(@"[[NSMutableArray alloc] init].class: %@", [[NSMutableArray alloc] init].class); // __NSArrayM
+//    NSLog(@"[@[].mutableCopy class]: %@", [@[].mutableCopy class]); // __NSArrayM
+//    NSLog(@"[@[@1].mutableCopy class]: %@", [@[@1].mutableCopy class]); // __NSArrayM
+//    NSLog(@"[@[@1, @2].mutableCopy class]: %@", [@[@1, @2].mutableCopy class]); // __NSArrayM
 
-    NSLog(@"mutA:%@", [@[].mutableCopy class]); // __NSArrayM
-    NSLog(@"mutA:%@", [@[@1].mutableCopy class]); // __NSArrayM
-    NSLog(@"mutA:%@", [@[@1, @2].mutableCopy class]); // __NSArrayM
+    // ------ NSDictionary ------
+    // __NSPlaceholderDictionary
+    NSLog(@"[NSDictionary alloc].class: %@", [NSDictionary alloc].class);
+    // __NSDictionary0
+    NSLog(@"[[NSDictionary alloc] init].class: %@", [[NSDictionary alloc] init].class);
+    // __NSDictionary0
+    NSLog(@"[@{} class]: %@", [@{} class]);
+    // __NSSingleEntryDictionaryI
+    NSLog(@"[@{@1:@1} class]: %@", [@{@1:@1} class]);
+    // __NSDictionaryI
+    NSLog(@"[@{@1:@1, @2:@2} class]: %@", [@{@1:@1, @2:@2} class]);
 
-    // NSDictionary
-    NSLog(@"dict alloc:%@", [NSDictionary alloc].class); // __NSPlaceholderDictionary
-    NSLog(@"dict init:%@", [[NSDictionary alloc] init].class); // __NSDictionary0
-
-    NSLog(@"dict:%@", [@{} class]); // __NSDictionary0
-    NSLog(@"dict:%@", [@{@1:@1} class]); // __NSSingleEntryDictionaryI
-    NSLog(@"dict:%@", [@{@1:@1, @2:@2} class]); // __NSDictionaryI
-
-    // NSMutableDictionary
-    NSLog(@"mutD alloc:%@", [NSMutableDictionary alloc].class); // __NSPlaceholderDictionary
-    NSLog(@"mutD init:%@", [[NSMutableDictionary alloc] init].class); // __NSDictionaryM
-
-    NSLog(@"mutD:%@", [@{}.mutableCopy class]); // __NSDictionaryM
-    NSLog(@"mutD:%@", [@{@1:@1}.mutableCopy class]); // __NSDictionaryM
-    NSLog(@"mutD:%@", [@{@1:@1, @2:@2}.mutableCopy class]); // __NSDictionaryM
-
-    // NSString
-    NSLog(@"str:%@", [@"" class]); // __NSCFConstantString
-    NSLog(@"mutable str:%@", [@"".mutableCopy class]);
+    // ------ NSMutableDictionary ------
+    // __NSPlaceholderDictionary
+    NSLog(@"[NSMutableDictionary alloc].class: %@", [NSMutableDictionary alloc].class);
+    // __NSDictionaryM
+    NSLog(@"[[NSMutableDictionary alloc] init].class: %@", [[NSMutableDictionary alloc] init].class);
+    // __NSDictionaryM
+    NSLog(@"[@{}.mutableCopy class]: %@", [@{}.mutableCopy class]);
+    // __NSDictionaryM
+    NSLog(@"[@{@1:@1}.mutableCopy class]: %@", [@{@1:@1}.mutableCopy class]);
+    // __NSDictionaryM
+    NSLog(@"[@{@1:@1, @2:@2}.mutableCopy class]: %@", [@{@1:@1, @2:@2}.mutableCopy class]);
     
-    // AttributedString
-    NSLog(@"AttributedString:%@", [[[NSAttributedString alloc] init] class]); // __NSCFConstantString
-    NSLog(@"mutable AttributedString:%@", [[[NSMutableAttributedString alloc] init] class]);
-
-    // NSNumber
-    NSLog(@"num:%@", [@1 class]); // __NSCFNumber
+//    // NSString
+//    NSLog(@"str:%@", [@"" class]); // __NSCFConstantString
+//    NSLog(@"mutable str:%@", [@"".mutableCopy class]);
+//
+//    // AttributedString
+//    NSLog(@"AttributedString:%@", [[[NSAttributedString alloc] init] class]); // __NSCFConstantString
+//    NSLog(@"mutable AttributedString:%@", [[[NSMutableAttributedString alloc] init] class]);
+//
+//    // NSNumber
+//    NSLog(@"num:%@", [@1 class]); // __NSCFNumber
 }
 
 #pragma mark - Timer Crash Test

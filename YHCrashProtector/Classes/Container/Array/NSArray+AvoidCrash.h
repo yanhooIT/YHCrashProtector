@@ -10,4 +10,6 @@
 
 @interface NSArray (AvoidCrash)
 
++ (void)yh_enabledAvoidArrayCrash;
+
 @end   

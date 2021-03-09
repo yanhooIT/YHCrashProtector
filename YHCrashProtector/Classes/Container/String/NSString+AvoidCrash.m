@@ -59,7 +59,7 @@
         characteristic = [self avoidCrashCharacterAtIndex:index];
     } @catch (NSException *exception) {
         NSString *defaultToDo = @"AvoidCrash default is to return a without assign unichar.";
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         return characteristic;
     }
@@ -71,8 +71,8 @@
     @try {
         subString = [self avoidCrashSubstringFromIndex:from];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -85,8 +85,8 @@
     @try {
         subString = [self avoidCrashSubstringToIndex:to];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -99,8 +99,8 @@
     @try {
         subString = [self avoidCrashSubstringWithRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
     } @finally {
         return subString;
@@ -113,8 +113,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;
@@ -127,8 +127,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;
@@ -141,8 +141,8 @@
     @try {
         newStr = [self avoidCrashStringByReplacingCharactersInRange:range withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
     } @finally {
         return newStr;

@@ -10,4 +10,6 @@
 
 @interface NSDictionary (AvoidCrash)
 
++ (void)yh_enabledAvoidDictionaryCrash;
+
 @end

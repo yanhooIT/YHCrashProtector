@@ -42,8 +42,8 @@
     @try {
         [self avoidCrashReplaceCharactersInRange:range withString:aString];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }
@@ -54,8 +54,8 @@
     @try {
         [self avoidCrashInsertString:aString atIndex:loc];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }
@@ -66,8 +66,8 @@
     @try {
         [self avoidCrashDeleteCharactersInRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
+        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
     } @finally {
         
     }

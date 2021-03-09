@@ -9,169 +9,118 @@
 #import "NSArray+AvoidCrash.h"
 #import "YHAvoidUtils.h"
 
+/** Array类簇
+ // ------ NSArray ------
+ // __NSPlaceholderArray
+ NSLog(@"[NSArray alloc].class: %@", [NSArray alloc].class);
+ // __NSArray0
+ NSLog(@"[[NSArray alloc] init].class: %@", [[NSArray alloc] init].class);
+ // __NSArray0
+ NSLog(@"@[].class: %@", @[].class);
+ // __NSSingleObjectArrayI
+ NSLog(@"@[@1].class: %@", @[@1].class);
+ // __NSArrayI
+ NSLog(@"@[@1, @2].class: %@", @[@1, @2].class);
+
+ // ------ NSMutableArray ------
+ // __NSPlaceholderArray
+ NSLog(@"[NSMutableArray alloc].class: %@", [NSMutableArray alloc].class);
+ // __NSArrayM
+ NSLog(@"[[NSMutableArray alloc] init].class: %@", [[NSMutableArray alloc] init].class);
+ // __NSArrayM
+ NSLog(@"[@[].mutableCopy class]: %@", [@[].mutableCopy class]);
+ // __NSArrayM
+ NSLog(@"[@[@1].mutableCopy class]: %@", [@[@1].mutableCopy class]);
+ // __NSArrayM
+ NSLog(@"[@[@1, @2].mutableCopy class]: %@", [@[@1, @2].mutableCopy class]);
+ */
+
 @implementation NSArray (AvoidCrash)
 
-+ (void)avoidCrashExchangeMethod {
++ (void)yh_enabledAvoidArrayCrash {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        // arrayWithObjects:count:
-        [YHAvoidUtils yh_swizzleClassMethod:self oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(AvoidCrashArrayWithObjects:count:)];
+        // NSArray/NSMutableArray 在 alloc 阶段生成的是 __NSPlaceholderArray 的中间对象
+        Class __NSPlaceholderArray = NSClassFromString(@"__NSPlaceholderArray");
         
-        Class __NSArray = NSClassFromString(@"NSArray");
-        Class __NSArrayI = NSClassFromString(@"__NSArrayI");
-        Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
+        // NSArray 包含 0 个对象时生成的是 __NSArray0 类型
         Class __NSArray0 = NSClassFromString(@"__NSArray0");
+        // NSArray 包含 1 个对象生成的是 __NSSingleObjectArrayI 类型
+        Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
+        // NSArray 包含多个对象时生成的是 __NSArrayI 类型
+        Class __NSArrayI = NSClassFromString(@"__NSArrayI");
         
-        // objectsAtIndexes:
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray oldMethod:@selector(objectsAtIndexes:) newMethod:@selector(avoidCrashObjectsAtIndexes:)];
+        // arrayWithObjects:count:
+        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderArray oldMethod:@selector(arrayWithObjects:count:) newMethod:@selector(yh_arrayWithObjects:count:)];
+        // initWithObjects:count:
+        [YHAvoidUtils yh_swizzleClassMethod:__NSPlaceholderArray oldMethod:@selector(initWithObjects:count:) newMethod:@selector(yh_initWithObjects:count:)];
         
         // objectAtIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndex:)];
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashObjectAtIndex:)];
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(__NSArray0AvoidCrashObjectAtIndex:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArray0 oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayI oldMethod:@selector(objectAtIndex:) newMethod:@selector(yh_objectAtIndex:)];
         
         // objectAtIndexedSubscript:
-        if (YHAvoidCrashiOSVersionGreaterThanOrEqualTo(11.0)) {
-            [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(__NSArrayIAvoidCrashObjectAtIndexedSubscript:)];
-        }
-        
-        // getObjects:range:
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArray oldMethod:@selector(getObjects:range:) newMethod:@selector(NSArrayAvoidCrashGetObjects:range:)];
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSSingleObjectArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSSingleObjectArrayIAvoidCrashGetObjects:range:)];
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayI oldMethod:@selector(getObjects:range:) newMethod:@selector(__NSArrayIAvoidCrashGetObjects:range:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArray0 oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSSingleObjectArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
+        [YHAvoidUtils yh_swizzleClassMethod:__NSArrayI oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_objectAtIndexedSubscript:)];
     });
 }
 
-#pragma mark - arrayWithObjects:count:
-+ (instancetype)AvoidCrashArrayWithObjects:(const id  _Nonnull __unsafe_unretained *)objects count:(NSUInteger)cnt
-{
-    id instance = nil;
-    @try {
-        instance = [self AvoidCrashArrayWithObjects:objects count:cnt];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = @"AvoidCrash default is to remove nil object and instance a array.";
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-        
-        // 以下是对错误数据的处理，把为nil的数据去掉，然后初始化数组
-        NSInteger newObjsIndex = 0;
-        id _Nonnull __unsafe_unretained newObjects[cnt];
-        for (int i = 0; i < cnt; i++) {
-            if (objects[i] != nil) {
-                newObjects[newObjsIndex] = objects[i];
-                newObjsIndex++;
-            }
++ (instancetype)yh_arrayWithObjects:(id  _Nonnull const [])objects count:(NSUInteger)cnt {
+    id safeObjects[cnt];
+    NSUInteger j = 0;
+    for (NSUInteger index = 0; index < cnt ; index++) {
+        id obj = objects[index];
+        if (nil == obj) {
+            NSString *log = [NSString stringWithFormat:@"Error[%@ - arrayWithObjects:count:]: The index %ld position in the array is nil", NSStringFromClass(self.class), index];
+            [YHAvoidUtils yh_reportErrorWithLog:log];
+            continue;
         }
         
-        instance = [self AvoidCrashArrayWithObjects:newObjects count:newObjsIndex];
-    } @finally {
-        return instance;
+        safeObjects[j] = obj;
+        j++;
     }
+    
+    return [self yh_arrayWithObjects:safeObjects count:j];
 }
 
-#pragma mark - objectAtIndexedSubscript:
-- (id)__NSArrayIAvoidCrashObjectAtIndexedSubscript:(NSUInteger)idx {
-    id object = nil;
-    @try {
-        object = [self __NSArrayIAvoidCrashObjectAtIndexedSubscript:idx];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
-}
-
-#pragma mark - objectsAtIndexes:
-- (NSArray *)avoidCrashObjectsAtIndexes:(NSIndexSet *)indexes {
-    NSArray *returnArray = nil;
-    @try {
-        returnArray = [self avoidCrashObjectsAtIndexes:indexes];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return returnArray;
-    }
-}
-
-#pragma mark - objectAtIndex:
-// __NSArrayI objectAtIndex:
-- (id)__NSArrayIAvoidCrashObjectAtIndex:(NSUInteger)index {
-    id object = nil;
-    @try {
-        object = [self __NSArrayIAvoidCrashObjectAtIndex:index];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
-}
-
-// __NSSingleObjectArrayI objectAtIndex:
-- (id)__NSSingleObjectArrayIAvoidCrashObjectAtIndex:(NSUInteger)index {
-    id object = nil;
-    @try {
-        object = [self __NSSingleObjectArrayIAvoidCrashObjectAtIndex:index];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
-}
-
-// __NSArray0 objectAtIndex:
-- (id)__NSArray0AvoidCrashObjectAtIndex:(NSUInteger)index {
-    id object = nil;
-    @try {
-        object = [self __NSArray0AvoidCrashObjectAtIndex:index];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultReturnNil;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
-}
-
-#pragma mark - getObjects:range:
-// NSArray getObjects:range:
-- (void)NSArrayAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range
-{
-    @try {
-        [self NSArrayAvoidCrashGetObjects:objects range:range];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
+- (instancetype)yh_initWithObjects:(id  _Nonnull const [])objects count:(NSUInteger)cnt {
+    id safeObjects[cnt];
+    NSUInteger j = 0;
+    for (NSUInteger index = 0; index < cnt ; index++) {
+        id obj = objects[index];
+        if (nil == obj) {
+            NSString *log = [NSString stringWithFormat:@"Error[%@ - initWithObjects:count:]: The index %ld position in the array is nil", NSStringFromClass(self.class), index];
+            [YHAvoidUtils yh_reportErrorWithLog:log];
+            continue;
+        }
         
+        safeObjects[j] = obj;
+        j++;
     }
+    
+    return [self yh_initWithObjects:safeObjects count:j];
 }
 
-// __NSSingleObjectArrayI  getObjects:range:
-- (void)__NSSingleObjectArrayIAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range
-{
-    @try {
-        [self __NSSingleObjectArrayIAvoidCrashGetObjects:objects range:range];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        
+- (id)yh_objectAtIndex:(NSUInteger)index {
+    if (index >= self.count) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndex:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), index, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
     }
+    
+    return [self yh_objectAtIndex:index];
 }
 
-// __NSArrayI  getObjects:range:
-- (void)__NSArrayIAvoidCrashGetObjects:(__unsafe_unretained id  _Nonnull *)objects range:(NSRange)range
-{
-    @try {
-        [self __NSArrayIAvoidCrashGetObjects:objects range:range];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultIgnore;
-        [YHAvoidUtils yh_noteErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        
+- (id)yh_objectAtIndexedSubscript:(NSUInteger)idx {
+    if (idx >= self.count ) {
+        NSString *log = [NSString stringWithFormat:@"Error[%@ - objectAtIndexedSubscript:]: Array out of bounds, index = %ld, count = %ld", NSStringFromClass(self.class), idx, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
     }
+    
+    return [self yh_objectAtIndexedSubscript:idx];
 }
 
 @end
