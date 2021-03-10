@@ -42,38 +42,9 @@
     dispatch_once(&onceToken, ^{
         Class __NSPlaceholderDictionary = NSClassFromString(@"__NSPlaceholderDictionary");
         // initWithObjects:forKeys:count:
-        // dictionaryWithObjects:forKeys:count:不需要hook，最终都会走initWithObjects:forKeys:count:
+        // dictionaryWithObjects:forKeys:count:无需hook，最终都会走initWithObjects:forKeys:count:
         [YHAvoidUtils yh_swizzleInstanceMethod:__NSPlaceholderDictionary oldMethod:@selector(initWithObjects:forKeys:count:) newMethod:@selector(yh_initWithObjects:forKeys:count:)];
     });
-}
-
-+ (instancetype)yh_dictionaryWithObjects:(const id *)objects forKeys:(const id<NSCopying> *)keys count:(NSUInteger)cnt {
-    // 处理错误的数据，然后重新初始化一个字典
-    NSUInteger index = 0;
-    id newObjects[cnt];
-    id newkeys[cnt];
-    for (int i = 0; i < cnt; i++) {
-        id obj = objects[i];
-        id key = keys[i];
-        
-        if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - dictionaryWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
-            continue;
-        }
-        
-        if (nil == key) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - dictionaryWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
-            continue;
-        }
-
-        newObjects[index] = objects[i];
-        newkeys[index] = keys[i];
-        index++;
-    }
-        
-    return [self yh_dictionaryWithObjects:newObjects forKeys:newkeys count:index];
 }
 
 - (instancetype)yh_initWithObjects:(id  _Nonnull const [])objects forKeys:(id<NSCopying>  _Nonnull const [])keys count:(NSUInteger)cnt {
@@ -86,13 +57,13 @@
         id key = keys[i];
         
         if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - dictionaryWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
+            NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
             [YHAvoidUtils yh_reportErrorWithLog:log];
             continue;
         }
         
         if (nil == key) {
-            NSString *log = [NSString stringWithFormat:@"Error[%@ - dictionaryWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
+            NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
             [YHAvoidUtils yh_reportErrorWithLog:log];
             continue;
         }

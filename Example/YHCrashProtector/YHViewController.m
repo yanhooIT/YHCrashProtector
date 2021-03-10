@@ -32,8 +32,8 @@
 {
     [super viewDidLoad];
     
-    [self testArrayCrash];
-    [self testArrayMCrash];
+    [self testDictionaryCrash];
+    [self testDictionaryMCrash];
     
     self.view.backgroundColor = [UIColor orangeColor];
 }
@@ -41,15 +41,47 @@
 #pragma mark - Container Crash Test
 - (void)testDictionaryCrash {
     NSString *str = nil;
-    // 给字典设置nil（两种方式）
+    
+    // value为nil
     // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
-    NSDictionary *dict = @{@"key1":str};
-    // [<__NSDictionary0 0x1c401f360> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key key2.
-    [dict setValue:str forKey:@"key2"];
+    NSDictionary *dict1 = @{@"key1":str};
+    
+    // key为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict2 = @{str:@"123"};
+    
+    // value为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict3 = [NSDictionary dictionaryWithObject:str forKey:@"key"];
+    
+    // key为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict4 = [NSDictionary dictionaryWithObject:@"123" forKey:str];
 }
 
 - (void)testDictionaryMCrash {
+    NSString *str = nil;
     
+    NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
+    // *** -[__NSDictionaryM setObject:forKeyedSubscript:]: key cannot be nil
+    dict1[str] = @"123";
+    
+    // 这种不会Crash
+    dict1[@"key"] = str;
+    [dict1 setObject:str forKeyedSubscript:@"key"];
+    [dict1 removeObjectForKey:@"key"];
+    
+    // *** -[__NSDictionaryM setObject:forKey:]: object cannot be nil (key: key)
+    [dict1 setObject:str forKey:@"key"];
+
+    // =*** -[__NSDictionaryM setObject:forKey:]: key cannot be nil
+    [dict1 setObject:@"123" forKey:str];
+
+    // *** -[__NSDictionaryM setObject:forKeyedSubscript:]: key cannot be nil
+    [dict1 setObject:@"123" forKeyedSubscript:str];
+
+    // *** -[__NSDictionaryM removeObjectForKey:]: key cannot be nil
+    [dict1 removeObjectForKey:str];
 }
 
 - (void)testArrayCrash {

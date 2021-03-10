@@ -54,8 +54,8 @@
         [NSArray yh_enabledAvoidArrayCrash];
         [NSMutableArray yh_enabledAvoidArrayMCrash];
 
-//        [NSDictionary yh_enabledAvoidDictionaryCrash];
-//        [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
+        [NSDictionary yh_enabledAvoidDictionaryCrash];
+        [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
   
 //        [NSString avoidCrashExchangeMethod];
 //        [NSMutableString avoidCrashExchangeMethod];

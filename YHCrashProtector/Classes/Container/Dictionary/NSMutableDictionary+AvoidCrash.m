@@ -54,8 +54,14 @@
 }
 
 - (void)yh_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (nil == anObject || nil == aKey) {
-        NSString *log = [NSString stringWithFormat:@"Error[%@ - setObject:forKey:]: key or object is nil", NSStringFromClass(self.class)];
+    if (nil == anObject) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
+    }
+    
+    if (nil == aKey) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
@@ -63,19 +69,25 @@
     [self yh_setObject:anObject forKey:aKey];
 }
 
-- (void)yh_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
-    if (nil == obj || nil == key) {
-        NSString *log = [NSString stringWithFormat:@"Error[%@ - setObject:forKeyedSubscript:]: key or object is nil", NSStringFromClass(self.class)];
+- (void)yh_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
+    if (nil == anObject) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
     
-    [self yh_setObject:obj forKeyedSubscript:key];
+    if (nil == aKey) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
+    }
+    
+    [self yh_setObject:anObject forKeyedSubscript:aKey];
 }
 
 - (void)yh_removeObjectForKey:(id)aKey {
     if (nil == aKey) {
-        NSString *log = [NSString stringWithFormat:@"Error[%@ - removeObjectForKey:]: key is nil", NSStringFromClass(self.class)];
+        NSString *log = [NSString stringWithFormat:@"[%@ - removeObjectForKey:]: key cannot be nil", NSStringFromClass(self.class)];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
