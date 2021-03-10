@@ -10,4 +10,6 @@
 
 @interface NSMutableString (AvoidCrash)
 
++ (void)yh_enabledAvoidStringMCrash;
+
 @end

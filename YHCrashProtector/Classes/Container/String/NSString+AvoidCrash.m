@@ -19,44 +19,43 @@
  *  5. - (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement
  *  6. - (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange
  *  7. - (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement
- *
  */
 
 @implementation NSString (AvoidCrash)
 
-+ (void)avoidCrashExchangeMethod {
++ (void)yh_enabledAvoidStringCrash {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class stringClass = NSClassFromString(@"__NSCFConstantString");
         
         // characterAtIndex
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(avoidCrashCharacterAtIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(characterAtIndex:) newMethod:@selector(yh_characterAtIndex:)];
         
         // substringFromIndex
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(avoidCrashSubstringFromIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringFromIndex:) newMethod:@selector(yh_substringFromIndex:)];
         
         // substringToIndex
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(avoidCrashSubstringToIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringToIndex:) newMethod:@selector(yh_substringToIndex:)];
         
         // substringWithRange:
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(avoidCrashSubstringWithRange:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(substringWithRange:) newMethod:@selector(yh_substringWithRange:)];
         
         // stringByReplacingOccurrencesOfString:
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:) newMethod:@selector(yh_stringByReplacingOccurrencesOfString:withString:)];
         
         // stringByReplacingOccurrencesOfString:withString:options:range:
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(avoidCrashStringByReplacingOccurrencesOfString:withString:options:range:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) newMethod:@selector(yh_stringByReplacingOccurrencesOfString:withString:options:range:)];
         
         // stringByReplacingCharactersInRange:withString:
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(avoidCrashStringByReplacingCharactersInRange:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(stringByReplacingCharactersInRange:withString:) newMethod:@selector(yh_stringByReplacingCharactersInRange:withString:)];
     });
 }
 
 #pragma mark - characterAtIndex:
-- (unichar)avoidCrashCharacterAtIndex:(NSUInteger)index {
+- (unichar)yh_characterAtIndex:(NSUInteger)index {
     unichar characteristic;
     @try {
-        characteristic = [self avoidCrashCharacterAtIndex:index];
+        characteristic = [self yh_characterAtIndex:index];
     } @catch (NSException *exception) {
         NSString *defaultToDo = @"AvoidCrash default is to return a without assign unichar.";
         [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
@@ -66,84 +65,78 @@
 }
 
 #pragma mark - substringFromIndex:
-- (NSString *)avoidCrashSubstringFromIndex:(NSUInteger)from {
+- (NSString *)yh_substringFromIndex:(NSUInteger)from {
     NSString *subString = nil;
     @try {
-        subString = [self avoidCrashSubstringFromIndex:from];
+        subString = [self yh_substringFromIndex:from];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return subString;
     }
 }
 
 #pragma mark - substringToIndex
-- (NSString *)avoidCrashSubstringToIndex:(NSUInteger)to {
+- (NSString *)yh_substringToIndex:(NSUInteger)to {
     NSString *subString = nil;
     @try {
-        subString = [self avoidCrashSubstringToIndex:to];
+        subString = [self yh_substringToIndex:to];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return subString;
     }
 }
 
 #pragma mark - substringWithRange:
-- (NSString *)avoidCrashSubstringWithRange:(NSRange)range {
+- (NSString *)yh_substringWithRange:(NSRange)range {
     NSString *subString = nil;
     @try {
-        subString = [self avoidCrashSubstringWithRange:range];
+        subString = [self yh_substringWithRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         subString = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return subString;
     }
 }
 
 #pragma mark - stringByReplacingOccurrencesOfString:
-- (NSString *)avoidCrashStringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement {
+- (NSString *)yh_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement {
     NSString *newStr = nil;
     @try {
-        newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement];
+        newStr = [self yh_stringByReplacingOccurrencesOfString:target withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return newStr;
     }
 }
 
 #pragma mark - stringByReplacingOccurrencesOfString:withString:options:range:
-- (NSString *)avoidCrashStringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange {
+- (NSString *)yh_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange {
     NSString *newStr = nil;
     @try {
-        newStr = [self avoidCrashStringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
+        newStr = [self yh_stringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return newStr;
     }
 }
 
 #pragma mark - stringByReplacingCharactersInRange:withString:
-- (NSString *)avoidCrashStringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement {
+- (NSString *)yh_stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement {
     NSString *newStr = nil;
     @try {
-        newStr = [self avoidCrashStringByReplacingCharactersInRange:range withString:replacement];
+        newStr = [self yh_stringByReplacingCharactersInRange:range withString:replacement];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
         newStr = nil;
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoReturnNil];
     } @finally {
         return newStr;
     }

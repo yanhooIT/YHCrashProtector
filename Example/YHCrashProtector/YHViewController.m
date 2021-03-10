@@ -31,11 +31,116 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self testDictionaryCrash];
-    [self testDictionaryMCrash];
+
+    [self testStringCrash];
     
     self.view.backgroundColor = [UIColor orangeColor];
+}
+
+#pragma mark - NSString_Test
+- (void)testStringCrash {
+    NSString *str = @"123";
+    // -[__NSCFConstantString hasPrefix:]: nil argument
+//    [str hasPrefix:nil];
+    
+    // -[__NSCFConstantString hasSuffix:]: nil argument
+//    [str hasSuffix:nil];
+    
+    // *** -[NSPlaceholderString initWithString:]: nil argument
+//    [[NSString alloc] initWithString:nil];
+    
+    // -[__NSCFConstantString characterAtIndex:]: Range or index out of bounds
+//    unichar characteristic = [str characterAtIndex:10];
+    
+    // *** -[__NSCFConstantString substringFromIndex:]: Index 10 out of bounds; string length 3
+//    [str substringFromIndex:10];
+    
+    // *** -[__NSCFConstantString substringToIndex:]: Index 10 out of bounds; string length 3
+//    [str substringToIndex:10];
+    
+    // -[__NSCFConstantString substringWithRange:]: Range {0, 10} out of bounds; string length 3
+//    NSRange range1 = NSMakeRange(0, 10);
+//    [str substringWithRange:range1];
+    
+    // *** -[__NSCFConstantString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
+//    NSString *nilStr = nil;
+//    [str stringByReplacingOccurrencesOfString:nilStr withString:nilStr];
+    
+    // -[__NSCFString replaceOccurrencesOfString:withString:options:range:]: Range {0, 10} out of bounds; string length 3
+//    NSRange range2 = NSMakeRange(0, 10);
+//    [str stringByReplacingOccurrencesOfString:@"8" withString:@"" options:NSCaseInsensitiveSearch range:range2];
+    
+    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
+//    NSRange range3 = NSMakeRange(0, 10);
+//    [str stringByReplacingCharactersInRange:range3 withString:@"cff"];
+}
+
+- (void)testStringMCrash {
+    
+}
+
+- (void)testAttributedStringCrash {
+    
+}
+
+- (void)testAttributedStringMCrash {
+    
+}
+
+#pragma mark - NSMutableString_Test
+- (void)NSMutableString_Test_ReplaceCharactersInRange {
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    NSRange range = NSMakeRange(0, 1000);
+    [strM replaceCharactersInRange:range withString:@"--"];
+}
+
+- (void)NSMutableString_Test_InsertStringAtIndex{
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    [strM insertString:@"cool" atIndex:1000];
+}
+
+- (void)NSMutableString_TestDeleteCharactersInRange{
+    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
+    NSRange range = NSMakeRange(0, 1000);
+    [strM deleteCharactersInRange:range];
+}
+
+#pragma mark - NSAttributedString_Test
+- (void)NSAttributedString_Test_InitWithString {
+    NSString *str = nil;
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:str];
+    NSLog(@"%@", attributeStr);
+}
+
+- (void)NSAttributedString_Test_InitWithAttributedString {
+    NSAttributedString *nilAttributedStr = nil;
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithAttributedString:nilAttributedStr];
+    NSLog(@"%@", attributedStr);
+}
+
+- (void)NSAttributedString_Test_InitWithStringAttributes {
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSString *nilStr = nil;
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
+    NSLog(@"%@", attributedStr);
+}
+
+#pragma mark - NSMutableAttributedString_Test
+- (void)NSMutableAttributedString_Test_InitWithString {
+    NSString *nilStr = nil;
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr];
+    NSLog(@"%@", attrStrM);
+}
+
+- (void)NSMutableAttributedString_Test_InitWithStringAttributes {
+    NSDictionary *attributes = @{
+                                 NSForegroundColorAttributeName : [UIColor redColor]
+                                 };
+    NSString *nilStr = nil;
+    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
+    NSLog(@"%@", attrStrM);
 }
 
 #pragma mark - Container Crash Test

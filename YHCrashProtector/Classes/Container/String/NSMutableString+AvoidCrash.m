@@ -16,58 +16,51 @@
  *  2. - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString
  *  3. - (void)insertString:(NSString *)aString atIndex:(NSUInteger)loc
  *  4. - (void)deleteCharactersInRange:(NSRange)range
- *
  */
 
 @implementation NSMutableString (AvoidCrash)
 
-+ (void)avoidCrashExchangeMethod {
++ (void)yh_enabledAvoidStringMCrash {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class stringClass = NSClassFromString(@"__NSCFString");
         
         // replaceCharactersInRange
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(avoidCrashReplaceCharactersInRange:withString:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(replaceCharactersInRange:withString:) newMethod:@selector(yh_replaceCharactersInRange:withString:)];
         
         // insertString:atIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(avoidCrashInsertString:atIndex:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(insertString:atIndex:) newMethod:@selector(yh_insertString:atIndex:)];
         
         // deleteCharactersInRange
-        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(avoidCrashDeleteCharactersInRange:)];
+        [YHAvoidUtils yh_swizzleInstanceMethod:stringClass oldMethod:@selector(deleteCharactersInRange:) newMethod:@selector(yh_deleteCharactersInRange:)];
     });
 }
 
-#pragma mark - replaceCharactersInRange
-- (void)avoidCrashReplaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
+- (void)yh_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
     @try {
-        [self avoidCrashReplaceCharactersInRange:range withString:aString];
+        [self yh_replaceCharactersInRange:range withString:aString];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoIgnore];
     } @finally {
         
     }
 }
 
-#pragma mark - insertString:atIndex:
-- (void)avoidCrashInsertString:(NSString *)aString atIndex:(NSUInteger)loc {
+- (void)yh_insertString:(NSString *)aString atIndex:(NSUInteger)loc {
     @try {
-        [self avoidCrashInsertString:aString atIndex:loc];
+        [self yh_insertString:aString atIndex:loc];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoIgnore];
     } @finally {
         
     }
 }
 
-#pragma mark - deleteCharactersInRange
-- (void)avoidCrashDeleteCharactersInRange:(NSRange)range {
+- (void)yh_deleteCharactersInRange:(NSRange)range {
     @try {
-        [self avoidCrashDeleteCharactersInRange:range];
+        [self yh_deleteCharactersInRange:range];
     } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoIgnore;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
+        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:YHAvoidCrashDefaultTodoIgnore];
     } @finally {
         
     }
