@@ -49,8 +49,8 @@
         // objectAtIndexedSubscript:
         [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(objectAtIndexedSubscript:) newMethod:@selector(yh_NSArrayMobjectAtIndexedSubscript:)];
         
-        // addObject:
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(addObject:) newMethod:@selector(yh_addObject:)];
+        // addObject:（无需hook，因为最终都会转调insertObject:atIndex:方法）
+//        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(addObject:) newMethod:@selector(yh_addObject:)];
         
         // insertObject:atIndex:
         [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(insertObject:atIndex:) newMethod:@selector(yh_insertObject:atIndex:)];
@@ -58,17 +58,17 @@
         // setObject:atIndexedSubscript:
         [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(setObject:atIndexedSubscript:) newMethod:@selector(yh_setObject:atIndexedSubscript:)];
         
-        // removeObjectAtIndex:
-        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(removeObjectAtIndex:) newMethod:@selector(yh_removeObjectAtIndex:)];
-        
         // replaceObjectAtIndex:withObject:
         [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(replaceObjectAtIndex:withObject:) newMethod:@selector(yh_replaceObjectAtIndex:withObject:)];
+        
+        // removeObjectAtIndex:
+        [YHAvoidUtils yh_swizzleInstanceMethod:__NSArrayM oldMethod:@selector(removeObjectsInRange:) newMethod:@selector(yh_removeObjectsInRange:)];
     });
 }
 
 - (id)yh_NSArrayMobjectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        NSString *log = [self _formatLogWithSEL:@"objectAtIndex:" index:index];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return nil;
     }
@@ -78,7 +78,7 @@
 
 - (id)yh_NSArrayMobjectAtIndexedSubscript:(NSUInteger)index {
     if (index >= self.count ) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - objectAtIndexedSubscript:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        NSString *log = [self _formatLogWithSEL:@"objectAtIndexedSubscript:" index:index];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return nil;
     }
@@ -88,7 +88,7 @@
 
 - (void)yh_addObject:(id)anObject {
     if (nil == anObject) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - addObject:]: An attempt was made to set an object nil to the array", NSStringFromClass(self.class)];
+        NSString *log = [self _formatLogWithSEL:@"addObject:"];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
@@ -98,13 +98,13 @@
 
 - (void)yh_insertObject:(id)anObject atIndex:(NSUInteger)index {
     if (nil == anObject) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - insertObject:atIndex:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), index];
+        NSString *log = [self _formatLogWithSEL:@"insertObject:atIndex:"];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
     
-    if (index > self.count ) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - insertObject:atIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+    if (index > self.count) {
+        NSString *log = [self _formatLogWithSEL:@"insertObject:atIndex:" index:index];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
@@ -114,13 +114,13 @@
 
 - (void)yh_setObject:(id)obj atIndexedSubscript:(NSUInteger)index {
     if (nil == obj) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:atIndexedSubscript:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), index];
+        NSString *log = [self _formatLogWithSEL:@"setObject:atIndexedSubscript:"];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
     
-    if (index > self.count ) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:atIndexedSubscript:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+    if (index > self.count) {
+        NSString *log = [self _formatLogWithSEL:@"setObject:atIndexedSubscript:" index:index];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
@@ -128,30 +128,40 @@
     [self yh_setObject:obj atIndexedSubscript:index];
 }
 
-- (void)yh_removeObjectAtIndex:(NSUInteger)index {
-    if (index >= self.count) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - removeObjectAtIndex:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
-        return;
-    }
-    
-    [self yh_removeObjectAtIndex:index];
-}
-
 - (void)yh_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
     if (index >= self.count) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - replaceObjectAtIndex:withObject:]: index %ld beyond bounds, count = %ld", NSStringFromClass(self.class), index, self.count];
+        NSString *log = [self _formatLogWithSEL:@"replaceObjectAtIndex:withObject:" index:index];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
     
     if (nil == anObject) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - replaceObjectAtIndex:withObject:]: An attempt was made to set an object nil to the array at index %ld", NSStringFromClass(self.class), index];
+        NSString *log = [self _formatLogWithSEL:@"replaceObjectAtIndex:withObject:"];
         [YHAvoidUtils yh_reportErrorWithLog:log];
         return;
     }
     
     [self yh_replaceObjectAtIndex:index withObject:anObject];
+}
+
+- (void)yh_removeObjectsInRange:(NSRange)range {
+    NSUInteger tmp = (range.location + range.length);
+    if (tmp > self.count) {
+        NSString *log = [NSString stringWithFormat:@"[%@ - removeObjectsInRange:]: range {%ld, %ld} extends beyond bounds for array, array count = %ld", NSStringFromClass(self.class), range.location, range.length, self.count];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return;
+    }
+    
+    [self yh_removeObjectsInRange:range];
+}
+
+#pragma mark - Log
+- (NSString *)_formatLogWithSEL:(NSString *)sel index:(NSUInteger)index {
+    return [NSString stringWithFormat:@"[%@ - %@]: index %ld beyond bounds, array count = %ld", NSStringFromClass(self.class), sel, index, self.count];
+}
+
+- (NSString *)_formatLogWithSEL:(NSString *)sel {
+    return [NSString stringWithFormat:@"[%@ - %@]: object cannot be nil", NSStringFromClass(self.class), sel];
 }
 
 @end

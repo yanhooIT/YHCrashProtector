@@ -32,33 +32,24 @@
 {
     [super viewDidLoad];
     
+    [self testArrayCrash];
     [self testArrayMCrash];
+    
+    self.view.backgroundColor = [UIColor orangeColor];
 }
 
 #pragma mark - Container Crash Test
-- (void)testArrayMCrash {
+- (void)testDictionaryCrash {
     NSString *str = nil;
+    // 给字典设置nil（两种方式）
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict = @{@"key1":str};
+    // [<__NSDictionary0 0x1c401f360> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key key2.
+    [dict setValue:str forKey:@"key2"];
+}
 
-    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
-    @[@"111", str].mutableCopy;
+- (void)testDictionaryMCrash {
     
-    NSMutableArray *arr1 = [NSMutableArray array];
-    arr1[1];
-    
-    NSMutableArray *arr2 = [NSMutableArray array];
-    [arr2 addObject:@"1"];
-    arr2[1];
-    
-    NSMutableArray *arr3 = [NSMutableArray array];
-    [arr3 addObject:@"1"];
-    [arr3 addObject:@"2"];
-    arr3[2];
-    
-    NSMutableArray *arr4 = [NSMutableArray array];
-    [arr4 addObject:str];
-    [arr4 insertObject:@"" atIndex:3];
-    [arr4 removeObjectAtIndex:4];
-    arr4[5] = @"";
 }
 
 - (void)testArrayCrash {
@@ -78,9 +69,9 @@
     NSArray *arr3 = [NSArray arrayWithObjects:@"111", str, nil];
     
     // 数组越界检查
-    // *** -[__NSArray0 objectAtIndex:]: index 1 beyond bounds for empty NSArray
+    // *** -[__NSArray0 objectAtIndex:]: index 0 beyond bounds for empty NSArray
     NSArray *arr4 = @[];
-    arr4[1];
+    arr4[0];
 
     // *** -[__NSSingleObjectArrayI objectAtIndex:]: index 1 beyond bounds [0 .. 0]
     NSArray *arr5 = @[@"1"];
@@ -91,17 +82,45 @@
     arr6[2];
 }
 
-- (void)testDictionaryCrash {
+- (void)testArrayMCrash {
     NSString *str = nil;
-    // 给字典设置nil（两种方式）
-    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
-    NSDictionary *dict = @{@"key1":str};
-    // [<__NSDictionary0 0x1c401f360> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key key2.
-    [dict setValue:str forKey:@"key2"];
-}
 
-- (void)testDictionaryMCrash {
+    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+    @[@"111", str].mutableCopy;
     
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 1 beyond bounds for empty array
+    NSMutableArray *arr1 = [NSMutableArray array];
+    arr1[0];
+    
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 1 beyond bounds [0 .. 0]
+    NSMutableArray *arr2 = [NSMutableArray array];
+    [arr2 addObject:@"1"];
+    arr2[1];
+    
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 2 beyond bounds [0 .. 1]
+    NSMutableArray *arr3 = [NSMutableArray array];
+    [arr3 addObject:@"1"];
+    [arr3 addObject:@"2"];
+    arr3[2];
+    
+    NSMutableArray *arr4 = [NSMutableArray array];
+    // *** -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [arr4 addObject:str];
+    
+    // *** -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [arr4 insertObject:nil atIndex:1];
+    
+    // *** -[__NSArrayM insertObject:atIndex:]: index 1 beyond bounds for empty array
+    [arr4 insertObject:@"123" atIndex:1];
+    
+    // *** -[__NSArrayM replaceObjectAtIndex:withObject:]: index 0 beyond bounds for empty array
+    [arr4 replaceObjectAtIndex:0 withObject:@"111"];
+    
+    // *** -[__NSArrayM removeObjectsInRange:]: range {0, 1} extends beyond bounds for empty array
+    [arr4 removeObjectAtIndex:0];
+    
+    // *** -[__NSArrayM setObject:atIndexedSubscript:]: index 5 beyond bounds for empty array
+    arr4[5] = @"";
 }
 
 - (void)printContainerType {
