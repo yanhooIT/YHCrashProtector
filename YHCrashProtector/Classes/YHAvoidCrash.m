@@ -57,8 +57,9 @@
         [NSDictionary yh_enabledAvoidDictionaryCrash];
         [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
   
-//        [NSString yh_enabledAvoidStringCrash];
-//        [NSMutableString yh_enabledAvoidStringMCrash];
+        [NSString yh_enabledAvoidStringCrash];
+        [NSMutableString yh_enabledAvoidStringMCrash];
+        
 //        [NSAttributedString yh_enabledAvoidAttributedStringCrash];
 //        [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
     });

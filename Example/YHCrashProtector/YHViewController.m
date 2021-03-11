@@ -33,6 +33,7 @@
     [super viewDidLoad];
 
     [self testStringCrash];
+    [self testStringMCrash];
     
     self.view.backgroundColor = [UIColor orangeColor];
 }
@@ -40,43 +41,62 @@
 #pragma mark - NSString_Test
 - (void)testStringCrash {
     NSString *str = @"123";
+    
+    // -[NSPlaceholderString initWithString:]: nil argument
+    [[NSString alloc] initWithString:nil];
+
     // -[__NSCFConstantString hasPrefix:]: nil argument
-//    [str hasPrefix:nil];
-    
+    [str hasPrefix:nil];
+
     // -[__NSCFConstantString hasSuffix:]: nil argument
-//    [str hasSuffix:nil];
-    
-    // *** -[NSPlaceholderString initWithString:]: nil argument
-//    [[NSString alloc] initWithString:nil];
-    
+    [str hasSuffix:nil];
+
     // -[__NSCFConstantString characterAtIndex:]: Range or index out of bounds
-//    unichar characteristic = [str characterAtIndex:10];
+    unichar characteristic = [str characterAtIndex:3];
+
+    // -[__NSCFConstantString substringFromIndex:]: Index 10 out of bounds; string length 3
+    [str substringFromIndex:4];
     
-    // *** -[__NSCFConstantString substringFromIndex:]: Index 10 out of bounds; string length 3
-//    [str substringFromIndex:10];
-    
-    // *** -[__NSCFConstantString substringToIndex:]: Index 10 out of bounds; string length 3
-//    [str substringToIndex:10];
+    // -[__NSCFConstantString substringToIndex:]: Index 10 out of bounds; string length 3
+    [str substringToIndex:4];
     
     // -[__NSCFConstantString substringWithRange:]: Range {0, 10} out of bounds; string length 3
-//    NSRange range1 = NSMakeRange(0, 10);
-//    [str substringWithRange:range1];
+    NSRange range1 = NSMakeRange(0, 10);
+    [str substringWithRange:range1];
     
-    // *** -[__NSCFConstantString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
-//    NSString *nilStr = nil;
-//    [str stringByReplacingOccurrencesOfString:nilStr withString:nilStr];
-    
-    // -[__NSCFString replaceOccurrencesOfString:withString:options:range:]: Range {0, 10} out of bounds; string length 3
-//    NSRange range2 = NSMakeRange(0, 10);
-//    [str stringByReplacingOccurrencesOfString:@"8" withString:@"" options:NSCaseInsensitiveSearch range:range2];
-    
-    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
-//    NSRange range3 = NSMakeRange(0, 10);
-//    [str stringByReplacingCharactersInRange:range3 withString:@"cff"];
+    // -[__NSCFConstantString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
+    NSString *nilStr = nil;
+    [str stringByReplacingOccurrencesOfString:@"" withString:nilStr];
+    [str stringByReplacingOccurrencesOfString:nilStr withString:@""];
 }
 
 - (void)testStringMCrash {
+    NSMutableString *strM = @"123".mutableCopy;
     
+    // -[__NSCFString insertString:atIndex:]: nil argument
+    [strM insertString:nil atIndex:1];
+    // -[__NSCFString insertString:atIndex:]: Range or index out of bounds
+    [strM insertString:@"cool" atIndex:4];
+    
+    // -[__NSCFString deleteCharactersInRange:]: Range or index out of bounds
+    NSRange range2 = NSMakeRange(0, 10);
+    [strM deleteCharactersInRange:range2];
+    
+    // -[__NSCFString replaceOccurrencesOfString:withString:options:range:]: Range {0, 10} out of bounds; string length 3
+    NSRange range3 = NSMakeRange(0, 10);
+    NSString *nilStr = nil;
+    [strM stringByReplacingOccurrencesOfString:nilStr withString:@"" options:NSCaseInsensitiveSearch range:range3];
+    // -[__NSCFString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
+    [strM stringByReplacingOccurrencesOfString:@"8" withString:nilStr options:NSCaseInsensitiveSearch range:range3];
+    [strM stringByReplacingOccurrencesOfString:@"8" withString:@"" options:NSCaseInsensitiveSearch range:range3];
+    
+    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
+    NSRange range4 = NSMakeRange(0, 10);
+    [strM stringByReplacingCharactersInRange:range4 withString:@"cff"];
+    
+    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
+    NSRange range1 = NSMakeRange(0, 10);
+    [strM replaceCharactersInRange:range1 withString:@"-"];
 }
 
 - (void)testAttributedStringCrash {
@@ -85,24 +105,6 @@
 
 - (void)testAttributedStringMCrash {
     
-}
-
-#pragma mark - NSMutableString_Test
-- (void)NSMutableString_Test_ReplaceCharactersInRange {
-    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
-    NSRange range = NSMakeRange(0, 1000);
-    [strM replaceCharactersInRange:range withString:@"--"];
-}
-
-- (void)NSMutableString_Test_InsertStringAtIndex{
-    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
-    [strM insertString:@"cool" atIndex:1000];
-}
-
-- (void)NSMutableString_TestDeleteCharactersInRange{
-    NSMutableString *strM = [NSMutableString stringWithFormat:@"chenfanfang"];
-    NSRange range = NSMakeRange(0, 1000);
-    [strM deleteCharactersInRange:range];
 }
 
 #pragma mark - NSAttributedString_Test

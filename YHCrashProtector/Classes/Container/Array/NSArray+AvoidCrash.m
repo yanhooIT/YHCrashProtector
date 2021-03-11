@@ -149,8 +149,4 @@
     return [NSString stringWithFormat:@"[%@ - %@]: index %ld beyond bounds, array count = %ld", NSStringFromClass(self.class), sel, index, self.count];
 }
 
-- (NSString *)_formatLogWithSEL:(NSString *)sel {
-    return [NSString stringWithFormat:@"[%@ - %@]: object cannot be nil", NSStringFromClass(self.class), sel];
-}
-
 @end
