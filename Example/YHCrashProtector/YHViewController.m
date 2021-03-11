@@ -32,10 +32,36 @@
 {
     [super viewDidLoad];
 
-    [self testStringCrash];
-    [self testStringMCrash];
+    [self testAttributedStringCrash];
+    [self testAttributedStringMCrash];
     
     self.view.backgroundColor = [UIColor orangeColor];
+}
+
+#pragma mark - NSAttributedString
+- (void)testAttributedStringCrash {
+    NSString *nilStr = nil;
+    
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithString:nilStr];
+    
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithAttributedString:nilStr];
+    
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
+}
+
+- (void)testAttributedStringMCrash {
+    NSString *nilStr = nil;
+    
+    // NSConcreteMutableAttributedString initWithString:: nil value
+    [[NSMutableAttributedString alloc] initWithString:nilStr];
+
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+    // NSConcreteMutableAttributedString initWithString:attributes:: nil value
+    [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
 }
 
 #pragma mark - NSString_Test
@@ -97,52 +123,6 @@
     // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
     NSRange range1 = NSMakeRange(0, 10);
     [strM replaceCharactersInRange:range1 withString:@"-"];
-}
-
-- (void)testAttributedStringCrash {
-    
-}
-
-- (void)testAttributedStringMCrash {
-    
-}
-
-#pragma mark - NSAttributedString_Test
-- (void)NSAttributedString_Test_InitWithString {
-    NSString *str = nil;
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:str];
-    NSLog(@"%@", attributeStr);
-}
-
-- (void)NSAttributedString_Test_InitWithAttributedString {
-    NSAttributedString *nilAttributedStr = nil;
-    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithAttributedString:nilAttributedStr];
-    NSLog(@"%@", attributedStr);
-}
-
-- (void)NSAttributedString_Test_InitWithStringAttributes {
-    NSDictionary *attributes = @{
-                                 NSForegroundColorAttributeName : [UIColor redColor]
-                                 };
-    NSString *nilStr = nil;
-    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
-    NSLog(@"%@", attributedStr);
-}
-
-#pragma mark - NSMutableAttributedString_Test
-- (void)NSMutableAttributedString_Test_InitWithString {
-    NSString *nilStr = nil;
-    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr];
-    NSLog(@"%@", attrStrM);
-}
-
-- (void)NSMutableAttributedString_Test_InitWithStringAttributes {
-    NSDictionary *attributes = @{
-                                 NSForegroundColorAttributeName : [UIColor redColor]
-                                 };
-    NSString *nilStr = nil;
-    NSMutableAttributedString *attrStrM = [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
-    NSLog(@"%@", attrStrM);
 }
 
 #pragma mark - Container Crash Test

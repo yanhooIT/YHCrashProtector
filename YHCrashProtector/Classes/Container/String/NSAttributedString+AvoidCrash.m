@@ -9,13 +9,6 @@
 #import "NSAttributedString+AvoidCrash.h"
 #import "YHAvoidUtils.h"
 
-/**
- *  Can avoid crash method
- *
- *  1.- (instancetype)initWithString:(NSString *)str
- *  2.- (instancetype)initWithAttributedString:(NSAttributedString *)attrStr
- *  3.- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs
- */
 @implementation NSAttributedString (AvoidCrash)
 
 + (void)yh_enabledAvoidAttributedStringCrash {
@@ -24,50 +17,24 @@
         Class NSConcreteAttributedString = NSClassFromString(@"NSConcreteAttributedString");
         
         // initWithString:
+        // initWithAttributedString会转调initWithString:，所以此方法无需hook
+        // initWithString:attributes:会转调initWithString:，所以此方法无需hook
         [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:) newMethod:@selector(yh_initWithString:)];
-        
-        // initWithAttributedString
-        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithAttributedString:) newMethod:@selector(yh_initWithAttributedString:)];
-        
-        // initWithString:attributes:
-        [YHAvoidUtils yh_swizzleInstanceMethod:NSConcreteAttributedString oldMethod:@selector(initWithString:attributes:) newMethod:@selector(yh_initWithString:attributes:)];
     });
 }
 
 - (instancetype)yh_initWithString:(NSString *)str {
-    id object = nil;
-    @try {
-        object = [self yh_initWithString:str];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
+    if (nil == str) {
+        NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
+        [YHAvoidUtils yh_reportErrorWithLog:log];
+        return nil;
     }
+    
+    return [self yh_initWithString:str];
 }
 
-- (instancetype)yh_initWithAttributedString:(NSAttributedString *)attrStr {
-    id object = nil;
-    @try {
-        object = [self yh_initWithAttributedString:attrStr];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
-}
-
-- (instancetype)yh_initWithString:(NSString *)str attributes:(NSDictionary<NSString *,id> *)attrs {
-    id object = nil;
-    @try {
-        object = [self yh_initWithString:str attributes:attrs];
-    } @catch (NSException *exception) {
-        NSString *defaultToDo = YHAvoidCrashDefaultTodoReturnNil;
-        [YHAvoidUtils yh_reportErrorWithException:exception defaultToDo:defaultToDo];
-    } @finally {
-        return object;
-    }
+- (NSString *)_formatLogWithSEL:(NSString *)sel error:(NSString *)error {
+    return [NSString stringWithFormat:@"- [%@ - %@]: %@", NSStringFromClass(self.class), sel, error];
 }
 
 @end

@@ -60,8 +60,8 @@
         [NSString yh_enabledAvoidStringCrash];
         [NSMutableString yh_enabledAvoidStringMCrash];
         
-//        [NSAttributedString yh_enabledAvoidAttributedStringCrash];
-//        [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
+        [NSAttributedString yh_enabledAvoidAttributedStringCrash];
+        [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
     });
 }
 
