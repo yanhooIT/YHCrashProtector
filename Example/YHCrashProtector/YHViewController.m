@@ -34,27 +34,27 @@
 {
     [super viewDidLoad];
     
-    [self testAttributedStringCrash];
-    [self testAttributedStringMCrash];
-    
-    [self testStringCrash];
-    [self testStringMCrash];
-    
-    [self testDictionaryCrash];
-    [self testDictionaryMCrash];
-    
-    [self testArrayCrash];
-    [self testArrayMCrash];
-    
-    [self testTimerCrash];
-    
-    [self testKVCCrash];
-    
-    [self testKVOCrash];
-    
-    [self testExcBadAccess];
-    
-    [self testUnrecognizedSelector];
+//    [self testAttributedStringCrash];
+//    [self testAttributedStringMCrash];
+//
+//    [self testStringCrash];
+//    [self testStringMCrash];
+//
+//    [self testDictionaryCrash];
+//    [self testDictionaryMCrash];
+//
+//    [self testArrayCrash];
+//    [self testArrayMCrash];
+//
+//    [self testTimerCrash];
+//
+//    [self testKVCCrash];
+//
+//    [self testKVOCrash];
+//
+//    [self testExcBadAccess];
+//
+//    [self testUnrecognizedSelector];
     
     self.view.backgroundColor = [UIColor orangeColor];
 }
@@ -302,8 +302,8 @@
     // __NSDictionaryM
     NSLog(@"[@{@1:@1, @2:@2}.mutableCopy class]: %@", [@{@1:@1, @2:@2}.mutableCopy class]);
 
-//    // NSNumber
-//    NSLog(@"num:%@", [@1 class]); // __NSCFNumber
+    // __NSCFNumber
+    NSLog(@"num:%@", [@1 class]);
 }
 
 #pragma mark - Timer Crash Test
