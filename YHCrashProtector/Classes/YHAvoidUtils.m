@@ -83,20 +83,20 @@
     
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errInfoDic.copy];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errInfoDic.copy];
     });
 #endif
 }
 
 + (void)yh_reportErrorWithLog:(NSString *)log {
-    if (YH_STRING_IS_EMPTY(log)) return;
+    if (AvoidCrash_STRING_IS_EMPTY(log)) return;
     
 #if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
     NSLog(@"CrashProtector - %@", log);
 #else
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
     });
 #endif
 }

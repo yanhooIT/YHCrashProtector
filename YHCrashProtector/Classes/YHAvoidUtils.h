@@ -9,28 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define YHAvoidCrashNotification @"YHAvoidCrashNotification"
-
-// Avoid Crash Default Todo
-#define YHAvoidCrashDefaultTodoReturnNil  @"[YH] - return nil to avoid crash."
-#define YHAvoidCrashDefaultTodoIgnore     @"[YH] - ignore this operation to avoid crash."
+#define AvoidCrashNotification @"AvoidCrashNotification"
 
 // 互斥锁
-#define YHLock()    dispatch_semaphore_wait(self->_lock, DISPATCH_TIME_FOREVER)
-#define YHUnlock()  dispatch_semaphore_signal(self->_lock)
+#define AvoidCrashLock()    dispatch_semaphore_wait(self->_lock, DISPATCH_TIME_FOREVER)
+#define AvoidCrashUnlock()  dispatch_semaphore_signal(self->_lock)
 
-#pragma mark - 判断对象是否为空
 // 【字符串】是否为空（YES为空，NO不为空）
-#define YH_STRING_IS_EMPTY(str) (nil == str || [str isKindOfClass:[NSNull class]] || [[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] < 1)
-// 【数组】是否为空（YES为空，NO不为空）
-#define YH_ARRAY_IS_EMPTY(array) (nil == array || [array isKindOfClass:[NSNull class]] || array.count == 0)
-// 【字典】是否为空（YES为空，NO不为空）
-#define YH_DICT_IS_EMPTY(dict) (nil == dict || [dict isKindOfClass:[NSNull class]] || dict.allKeys.count == 0)
-// 是否是空对象（YES为空，NO不为空）
-#define YH_OBJECT_IS_EMPTY(_object) (_object == nil \
-|| [_object isKindOfClass:[NSNull class]] \
-|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
-|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
+#define AvoidCrash_STRING_IS_EMPTY(str) (nil == str || [str isKindOfClass:[NSNull class]] || [[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] < 1)
 
 @interface YHAvoidUtils : NSObject
 

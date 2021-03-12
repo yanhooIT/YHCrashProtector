@@ -30,7 +30,7 @@
 
 - (BOOL)yh_canAddObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
-    YHLock();
+    AvoidCrashLock();
     
     // 是否已存在此观察对象
     BOOL canAddObserver = YES;
@@ -55,14 +55,14 @@
         [kvoInfos addObject:kvoInfo];
     }
     
-    YHUnlock();
+    AvoidCrashUnlock();
     
     return canAddObserver;
 }
 
 - (BOOL)yh_canRemoveObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
-    YHLock();
+    AvoidCrashLock();
     
     // 是否存在观察对象
     YHKVOInfo *registeredInfo = nil;
@@ -90,14 +90,14 @@
         }
     }
     
-    YHUnlock();
+    AvoidCrashUnlock();
     
     return canRemoveObserver;
 }
 
 - (BOOL)yh_canHandleObserverCallbackWithKeyPath:(NSString *)keyPath
 {
-    YHLock();
+    AvoidCrashLock();
     
     BOOL needHandleObserver = YES;
     
@@ -117,14 +117,14 @@
         [_objectInfosMap removeObjectForKey:keyPath];
     }
     
-    YHUnlock();
+    AvoidCrashUnlock();
     
     return needHandleObserver;
 }
 
 /// 移除【被观察对象】上的所有【观察对象】
 - (void)_removeAllObservers {
-    YHLock();
+    AvoidCrashLock();
     
     NSMapTable *objectInfosMap = [_objectInfosMap copy];
     [_objectInfosMap removeAllObjects];
@@ -137,7 +137,7 @@
         }
     }
     
-    YHUnlock();
+    AvoidCrashUnlock();
 }
 
 @end

@@ -69,7 +69,7 @@
     if(aSelector == nil) return;
     
     // 监听通知, 获取AvoidCrash捕获的崩溃日志的详细信息
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:YHAvoidCrashNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:AvoidCrashNotification object:nil];
 }
 
 + (void)yh_setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames {
