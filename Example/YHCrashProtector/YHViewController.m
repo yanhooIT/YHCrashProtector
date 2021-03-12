@@ -25,20 +25,41 @@
 @implementation YHViewController
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self testKVOCrashRemove];
+//    [self testKVOCrashRemove];
+    
+//    [self triggerExcBadAccess];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self testAttributedStringCrash];
     [self testAttributedStringMCrash];
+    
+    [self testStringCrash];
+    [self testStringMCrash];
+    
+    [self testDictionaryCrash];
+    [self testDictionaryMCrash];
+    
+    [self testArrayCrash];
+    [self testArrayMCrash];
+    
+    [self testTimerCrash];
+    
+    [self testKVCCrash];
+    
+    [self testKVOCrash];
+    
+    [self testExcBadAccess];
+    
+    [self testUnrecognizedSelector];
     
     self.view.backgroundColor = [UIColor orangeColor];
 }
 
-#pragma mark - NSAttributedString
+#pragma mark - NSAttributedString Crash Test
 - (void)testAttributedStringCrash {
     NSString *nilStr = nil;
     
@@ -64,7 +85,7 @@
     [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
 }
 
-#pragma mark - NSString_Test
+#pragma mark - NSString Crash Test
 - (void)testStringCrash {
     NSString *str = @"123";
     
@@ -280,15 +301,7 @@
     NSLog(@"[@{@1:@1}.mutableCopy class]: %@", [@{@1:@1}.mutableCopy class]);
     // __NSDictionaryM
     NSLog(@"[@{@1:@1, @2:@2}.mutableCopy class]: %@", [@{@1:@1, @2:@2}.mutableCopy class]);
-    
-//    // NSString
-//    NSLog(@"str:%@", [@"" class]); // __NSCFConstantString
-//    NSLog(@"mutable str:%@", [@"".mutableCopy class]);
-//
-//    // AttributedString
-//    NSLog(@"AttributedString:%@", [[[NSAttributedString alloc] init] class]); // __NSCFConstantString
-//    NSLog(@"mutable AttributedString:%@", [[[NSMutableAttributedString alloc] init] class]);
-//
+
 //    // NSNumber
 //    NSLog(@"num:%@", [@1 class]); // __NSCFNumber
 }
@@ -406,6 +419,7 @@
     NSLog(@"%@", str3);
 }
 
+#pragma mark - respondsToSelector
 /** 测试以下三个方法的作用
  
  class_respondsToSelector
@@ -423,7 +437,7 @@
     // object_getClass([YHPerson class])是元类对象，run是类方法，存储在元类对象的方法列表中，所以为YES
     BOOL yn2 = class_respondsToSelector(object_getClass([YHPerson class]), sel2); // YES
     
-    // ------ （方法声明在 NSObject 协议中）respondsToSelector根据当前对象的isa所指的对象中查找方法 ------
+    // ------ （方法声明在 NSObject 协议中）respondsToSelector根据当前对象的isa指针所指向的对象中查找方法 ------
     // [YHPerson class]的isa指向的是元类对象，ages是实例方法，存储在类对象的方法列表中，所以为NO
     BOOL yn3 = [[YHPerson class] respondsToSelector:sel1];// NO
     // [YHPerson class]的isa指向的是元类对象，run是类方法，存储在元类对象的方法列表中，所以为YES
