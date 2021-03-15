@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 // 根据前缀判断是否是系统类
-CG_INLINE BOOL yh_isSystemClassPrefix(NSString *classPrefix) {
+CG_INLINE BOOL yh_isSystemClassByPrefix(NSString *classPrefix) {
     if ([classPrefix hasPrefix:@"UI"] ||
         [classPrefix hasPrefix:@"NS"] ||
         [classPrefix hasPrefix:@"__NS"] ||
@@ -72,7 +72,7 @@ CG_INLINE BOOL yh_isSystemClass(Class cls) {
     }
     
     NSString *className = NSStringFromClass(cls);
-    return yh_isSystemClassPrefix(className);
+    return yh_isSystemClassByPrefix(className);
 }
 
 // 根据类名称判断是否是系统类

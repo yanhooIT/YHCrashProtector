@@ -52,7 +52,7 @@ static NSMutableArray *_classPrefixs;
 
 + (void)setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
     for (NSString *classPrefix in classPrefixs) {
-        if (!yh_isSystemClassPrefix(classPrefix)) {
+        if (!yh_isSystemClassByPrefix(classPrefix)) {
             [_classPrefixs addObject:classPrefix];
         }
     }
