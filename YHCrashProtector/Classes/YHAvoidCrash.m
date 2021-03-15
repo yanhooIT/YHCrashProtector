@@ -30,15 +30,16 @@
 // Avoid String Crash
 #import "NSString+AvoidCrash.h"
 #import "NSMutableString+AvoidCrash.h"
+// Avoid AttributedString Crash
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
 
 @implementation YHAvoidCrash
 
 + (void)load {
-//#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
+#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
     [self startAvoidCrashProtect];
-//#endif
+#endif
 }
 
 + (void)startAvoidCrashProtect {
