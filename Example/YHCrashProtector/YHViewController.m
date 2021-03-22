@@ -12,6 +12,11 @@
 #import <objc/runtime.h>
 #import "YHAvoidCrash.h"
 
+#import "YHParent.h"
+#import "YHSon1.h"
+#import "YHSon2.h"
+#import "YHSon3.h"
+
 @interface YHViewController ()
 
 @property (nonatomic, strong) YHPerson *person;
@@ -32,7 +37,13 @@
 {
     [super viewDidLoad];
     
-    [self testContainerCrash];
+    [self testInitialize];
+}
+
+- (void)testInitialize {
+    YHSon1 *son1 = [[YHSon1 alloc] init];
+    YHSon2 *son2 = [[YHSon2 alloc] init];
+    YHSon3 *son3 = [[YHSon3 alloc] init];
 }
 
 #pragma mark - Container Crash Test
