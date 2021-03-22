@@ -17,7 +17,7 @@
 @implementation NSObject (AvoidCrash)
 
 + (void)load {
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:NSSelectorFromString(@"dealloc") newMethod:@selector(yh_dealloc)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:NSSelectorFromString(@"dealloc") newMethod:@selector(yh_dealloc)];
 }
 
 - (void)yh_dealloc {

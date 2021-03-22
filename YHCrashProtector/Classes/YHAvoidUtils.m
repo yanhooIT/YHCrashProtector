@@ -17,7 +17,7 @@
 
 @implementation YHAvoidUtils
 
-+ (void)yh_exchangeClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
++ (void)yh_swizzleClassMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Class metaClass;
     if (class_isMetaClass(anClass)) {// 判断当前类是否为元类对象
         metaClass = anClass;
@@ -25,14 +25,14 @@
         metaClass = object_getClass(anClass);
     }
     
-    [self _exchangeMethod:metaClass oldMethod:oldMethod newMethod:newMethod];
+    [self _swizzleMethod:metaClass oldMethod:oldMethod newMethod:newMethod];
 }
 
-+ (void)yh_exchangeInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
-    [self _exchangeMethod:anClass oldMethod:oldMethod newMethod:newMethod];
++ (void)yh_swizzleInstanceMethod:(Class)anClass oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
+    [self _swizzleMethod:anClass oldMethod:oldMethod newMethod:newMethod];
 }
 
-+ (void)_exchangeMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
++ (void)_swizzleMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Method originalMethod = class_getInstanceMethod(cls, oldMethod);
     Method swizzledMethod = class_getInstanceMethod(cls, newMethod);
     /** 通过添加方法的方式判断原方法是否存在
@@ -51,7 +51,9 @@
     }
 }
 
-+ (void)yh_noteErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
++ (void)yh_reportErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
+    if (nil == exception) return;
+    
     // 堆栈数据
     NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
     // 获取在哪个类的哪个方法中实例化的数组
@@ -63,25 +65,40 @@
     
     NSString *errorName = exception.name;
     NSString *errorReason = exception.reason;
-    // errorReason 可能为 -[__NSCFConstantString avoidCrashCharacterAtIndex:]: Range or index out of bounds, 将avoidCrash前缀去掉
+    // errorReason 可能为 -[__NSCFConstantString yh_characterAtIndex:]: Range or index out of bounds, 将yh_前缀去掉
     errorReason = [errorReason stringByReplacingOccurrencesOfString:@"yh_" withString:@""];
     NSString *errorPlace = [NSString stringWithFormat:@"Error Place: %@", mainCallStackSymbolMsg];
     NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n\n",  errorName, errorReason, errorPlace, defaultToDo];
-    NSLog(@"%@", logErrorMessage);
-    
-    NSDictionary *errorInfoDic = @{
-        key_errorName        : errorName,
-        key_errorReason      : errorReason,
-        key_errorPlace       : errorPlace,
-        key_defaultToDo      : defaultToDo,
-        key_exception        : exception,
-        key_callStackSymbols : callStackSymbolsArr
-    };
+
+#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
+    NSLog(@"CrashProtector - %@", logErrorMessage);
+#else
+    NSMutableDictionary *errInfoDic = [NSMutableDictionary dictionary];
+    errInfoDic[key_errorName] = errorName;
+    errInfoDic[key_errorReason] = errorReason;
+    errInfoDic[key_errorPlace] = errorPlace;
+    errInfoDic[key_defaultToDo] = defaultToDo;
+    errInfoDic[key_exception] = exception;
+    errInfoDic[key_callStackSymbols] = callStackSymbolsArr;
     
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:YHAvoidCrashNotification object:nil userInfo:errorInfoDic];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errInfoDic.copy];
     });
+#endif
+}
+
++ (void)yh_reportErrorWithLog:(NSString *)log {
+    if (AvoidCrash_STRING_IS_EMPTY(log)) return;
+    
+#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
+    NSLog(@"CrashProtector - %@", log);
+#else
+    // 将错误信息放在字典里，用通知的形式发送出去
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
+    });
+#endif
 }
 
 /**

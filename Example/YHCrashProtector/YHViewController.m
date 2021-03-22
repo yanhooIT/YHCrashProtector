@@ -30,66 +30,297 @@
 @implementation YHViewController
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self testKVOCrashRemove];
+//    [self testKVOCrashRemove];
+    
+//    [self triggerExcBadAccess];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+//    [self testAttributedStringCrash];
+//    [self testAttributedStringMCrash];
+//
+//    [self testStringCrash];
+//    [self testStringMCrash];
+//
+//    [self testDictionaryCrash];
+//    [self testDictionaryMCrash];
+//
+//    [self testArrayCrash];
+//    [self testArrayMCrash];
+//
+//    [self testTimerCrash];
+//
+//    [self testKVCCrash];
+//
+//    [self testKVOCrash];
+//
+//    [self testExcBadAccess];
+//
+//    [self testUnrecognizedSelector];
     
-    [self testInitialize];
+    self.view.backgroundColor = [UIColor orangeColor];
+    
+    NSArray *arr = [NSArray new];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+    }];
 }
 
+#pragma mark - load & initialize Test
 - (void)testInitialize {
     YHSon1 *son1 = [[YHSon1 alloc] init];
     YHSon2 *son2 = [[YHSon2 alloc] init];
     YHSon3 *son3 = [[YHSon3 alloc] init];
 }
 
-#pragma mark - Container Crash Test
-- (void)testContainerCrash {
-    // NSArray
-    NSLog(@"arr alloc:%@", [NSArray alloc].class); // __NSPlaceholderArray
-    NSLog(@"arr init:%@", [[NSArray alloc] init].class); // __NSArray0
+#pragma mark - NSAttributedString Crash Test
+- (void)testAttributedStringCrash {
+    NSString *nilStr = nil;
+    
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithString:nilStr];
+    
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithAttributedString:nilStr];
+    
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+    // NSConcreteAttributedString initWithString:: nil value
+    [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
+}
 
-    NSLog(@"arr:%@", [@[] class]); // __NSArray0
-    NSLog(@"arr:%@", [@[@1] class]); // __NSSingleObjectArrayI
-    NSLog(@"arr:%@", [@[@1, @2] class]); // __NSArrayI
+- (void)testAttributedStringMCrash {
+    NSString *nilStr = nil;
+    
+    // NSConcreteMutableAttributedString initWithString:: nil value
+    [[NSMutableAttributedString alloc] initWithString:nilStr];
+
+    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+    // NSConcreteMutableAttributedString initWithString:attributes:: nil value
+    [[NSMutableAttributedString alloc] initWithString:nilStr attributes:attributes];
+}
+
+#pragma mark - NSString Crash Test
+- (void)testStringCrash {
+    NSString *str = @"123";
+    
+    // -[NSPlaceholderString initWithString:]: nil argument
+    [[NSString alloc] initWithString:nil];
+
+    // -[__NSCFConstantString hasPrefix:]: nil argument
+    [str hasPrefix:nil];
+
+    // -[__NSCFConstantString hasSuffix:]: nil argument
+    [str hasSuffix:nil];
+
+    // -[__NSCFConstantString characterAtIndex:]: Range or index out of bounds
+    unichar characteristic = [str characterAtIndex:3];
+
+    // -[__NSCFConstantString substringFromIndex:]: Index 10 out of bounds; string length 3
+    [str substringFromIndex:4];
+    
+    // -[__NSCFConstantString substringToIndex:]: Index 10 out of bounds; string length 3
+    [str substringToIndex:4];
+    
+    // -[__NSCFConstantString substringWithRange:]: Range {0, 10} out of bounds; string length 3
+    NSRange range1 = NSMakeRange(0, 10);
+    [str substringWithRange:range1];
+    
+    // -[__NSCFConstantString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
+    NSString *nilStr = nil;
+    [str stringByReplacingOccurrencesOfString:@"" withString:nilStr];
+    [str stringByReplacingOccurrencesOfString:nilStr withString:@""];
+}
+
+- (void)testStringMCrash {
+    NSMutableString *strM = @"123".mutableCopy;
+    
+    // -[__NSCFString insertString:atIndex:]: nil argument
+    [strM insertString:nil atIndex:1];
+    // -[__NSCFString insertString:atIndex:]: Range or index out of bounds
+    [strM insertString:@"cool" atIndex:4];
+    
+    // -[__NSCFString deleteCharactersInRange:]: Range or index out of bounds
+    NSRange range2 = NSMakeRange(0, 10);
+    [strM deleteCharactersInRange:range2];
+    
+    // -[__NSCFString replaceOccurrencesOfString:withString:options:range:]: Range {0, 10} out of bounds; string length 3
+    NSRange range3 = NSMakeRange(0, 10);
+    NSString *nilStr = nil;
+    [strM stringByReplacingOccurrencesOfString:nilStr withString:@"" options:NSCaseInsensitiveSearch range:range3];
+    // -[__NSCFString stringByReplacingOccurrencesOfString:withString:options:range:]: nil argument
+    [strM stringByReplacingOccurrencesOfString:@"8" withString:nilStr options:NSCaseInsensitiveSearch range:range3];
+    [strM stringByReplacingOccurrencesOfString:@"8" withString:@"" options:NSCaseInsensitiveSearch range:range3];
+    
+    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
+    NSRange range4 = NSMakeRange(0, 10);
+    [strM stringByReplacingCharactersInRange:range4 withString:@"cff"];
+    
+    // -[__NSCFString replaceCharactersInRange:withString:]: Range or index out of bounds
+    NSRange range1 = NSMakeRange(0, 10);
+    [strM replaceCharactersInRange:range1 withString:@"-"];
+}
+
+#pragma mark - Container Crash Test
+- (void)testDictionaryCrash {
+    NSString *str = nil;
+    
+    // value为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict1 = @{@"key1":str};
+    
+    // key为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict2 = @{str:@"123"};
+    
+    // value为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict3 = [NSDictionary dictionaryWithObject:str forKey:@"key"];
+    
+    // key为nil
+    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
+    NSDictionary *dict4 = [NSDictionary dictionaryWithObject:@"123" forKey:str];
+}
+
+- (void)testDictionaryMCrash {
+    NSString *str = nil;
+    
+    NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
+    // *** -[__NSDictionaryM setObject:forKeyedSubscript:]: key cannot be nil
+    dict1[str] = @"123";
+    
+    // 这种不会Crash
+    dict1[@"key"] = str;
+    [dict1 setObject:str forKeyedSubscript:@"key"];
+    [dict1 removeObjectForKey:@"key"];
+    
+    // *** -[__NSDictionaryM setObject:forKey:]: object cannot be nil (key: key)
+    [dict1 setObject:str forKey:@"key"];
+
+    // =*** -[__NSDictionaryM setObject:forKey:]: key cannot be nil
+    [dict1 setObject:@"123" forKey:str];
+
+    // *** -[__NSDictionaryM setObject:forKeyedSubscript:]: key cannot be nil
+    [dict1 setObject:@"123" forKeyedSubscript:str];
+
+    // *** -[__NSDictionaryM removeObjectForKey:]: key cannot be nil
+    [dict1 removeObjectForKey:str];
+}
+
+- (void)testArrayCrash {
+    NSString *str = nil;
+
+    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+    NSArray *arr1 = @[@"111", str];
+
+    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[2]
+    NSString *strings[3];
+    strings[0] = @"111";
+    strings[1] = @"222";
+    strings[2] = nil;
+    NSArray *arr2 = [NSArray arrayWithObjects:strings count:4];
+
+    // 这种不会发生Crash
+    NSArray *arr3 = [NSArray arrayWithObjects:@"111", str, nil];
+    
+    // 数组越界检查
+    // *** -[__NSArray0 objectAtIndex:]: index 0 beyond bounds for empty NSArray
+    NSArray *arr4 = @[];
+    arr4[0];
+
+    // *** -[__NSSingleObjectArrayI objectAtIndex:]: index 1 beyond bounds [0 .. 0]
+    NSArray *arr5 = @[@"1"];
+    arr5[1];
+    
+    // *** -[__NSArrayI objectAtIndexedSubscript:]: index 2 beyond bounds [0 .. 1]
+    NSArray *arr6 = @[@"1", @"2"];
+    arr6[2];
+}
+
+- (void)testArrayMCrash {
+    NSString *str = nil;
+
+    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+    @[@"111", str].mutableCopy;
+    
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 1 beyond bounds for empty array
+    NSMutableArray *arr1 = [NSMutableArray array];
+    arr1[0];
+    
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 1 beyond bounds [0 .. 0]
+    NSMutableArray *arr2 = [NSMutableArray array];
+    [arr2 addObject:@"1"];
+    arr2[1];
+    
+    // *** -[__NSArrayM objectAtIndexedSubscript:]: index 2 beyond bounds [0 .. 1]
+    NSMutableArray *arr3 = [NSMutableArray array];
+    [arr3 addObject:@"1"];
+    [arr3 addObject:@"2"];
+    arr3[2];
+    
+    NSMutableArray *arr4 = [NSMutableArray array];
+    // *** -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [arr4 addObject:str];
+    
+    // *** -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [arr4 insertObject:nil atIndex:1];
+    
+    // *** -[__NSArrayM insertObject:atIndex:]: index 1 beyond bounds for empty array
+    [arr4 insertObject:@"123" atIndex:1];
+    
+    // *** -[__NSArrayM replaceObjectAtIndex:withObject:]: index 0 beyond bounds for empty array
+    [arr4 replaceObjectAtIndex:0 withObject:@"111"];
+    
+    // *** -[__NSArrayM removeObjectsInRange:]: range {0, 1} extends beyond bounds for empty array
+    [arr4 removeObjectAtIndex:0];
+    
+    // *** -[__NSArrayM setObject:atIndexedSubscript:]: index 5 beyond bounds for empty array
+    arr4[5] = @"";
+}
+
+- (void)printContainerType {
+    // NSArray
+    NSLog(@"[NSArray alloc].class: %@", [NSArray alloc].class); // __NSPlaceholderArray
+    NSLog(@"[[NSArray alloc] init].class: %@", [[NSArray alloc] init].class); // __NSArray0
+    NSLog(@"@[].class: %@", @[].class); // __NSArray0
+    NSLog(@"@[@1].class: %@", @[@1].class); // __NSSingleObjectArrayI
+    NSLog(@"@[@1, @2].class: %@", @[@1, @2].class); // __NSArrayI
         
     // NSMutableArray
-    NSLog(@"mutA alloc:%@", [NSMutableArray alloc].class); // __NSPlaceholderArray
-    NSLog(@"mutA init:%@", [[NSMutableArray alloc] init].class); // __NSArrayM
+    NSLog(@"[NSMutableArray alloc].class: %@", [NSMutableArray alloc].class); // __NSPlaceholderArray
+    NSLog(@"[[NSMutableArray alloc] init].class: %@", [[NSMutableArray alloc] init].class); // __NSArrayM
+    NSLog(@"[@[].mutableCopy class]: %@", [@[].mutableCopy class]); // __NSArrayM
+    NSLog(@"[@[@1].mutableCopy class]: %@", [@[@1].mutableCopy class]); // __NSArrayM
+    NSLog(@"[@[@1, @2].mutableCopy class]: %@", [@[@1, @2].mutableCopy class]); // __NSArrayM
 
-    NSLog(@"mutA:%@", [@[].mutableCopy class]); // __NSArrayM
-    NSLog(@"mutA:%@", [@[@1].mutableCopy class]); // __NSArrayM
-    NSLog(@"mutA:%@", [@[@1, @2].mutableCopy class]); // __NSArrayM
+    // ------ NSDictionary ------
+    // __NSPlaceholderDictionary
+    NSLog(@"[NSDictionary alloc].class: %@", [NSDictionary alloc].class);
+    // __NSDictionary0
+    NSLog(@"[[NSDictionary alloc] init].class: %@", [[NSDictionary alloc] init].class);
+    // __NSDictionary0
+    NSLog(@"[@{} class]: %@", [@{} class]);
+    // __NSSingleEntryDictionaryI
+    NSLog(@"[@{@1:@1} class]: %@", [@{@1:@1} class]);
+    // __NSDictionaryI
+    NSLog(@"[@{@1:@1, @2:@2} class]: %@", [@{@1:@1, @2:@2} class]);
 
-    // NSDictionary
-    NSLog(@"dict alloc:%@", [NSDictionary alloc].class); // __NSPlaceholderDictionary
-    NSLog(@"dict init:%@", [[NSDictionary alloc] init].class); // __NSDictionary0
+    // ------ NSMutableDictionary ------
+    // __NSPlaceholderDictionary
+    NSLog(@"[NSMutableDictionary alloc].class: %@", [NSMutableDictionary alloc].class);
+    // __NSDictionaryM
+    NSLog(@"[[NSMutableDictionary alloc] init].class: %@", [[NSMutableDictionary alloc] init].class);
+    // __NSDictionaryM
+    NSLog(@"[@{}.mutableCopy class]: %@", [@{}.mutableCopy class]);
+    // __NSDictionaryM
+    NSLog(@"[@{@1:@1}.mutableCopy class]: %@", [@{@1:@1}.mutableCopy class]);
+    // __NSDictionaryM
+    NSLog(@"[@{@1:@1, @2:@2}.mutableCopy class]: %@", [@{@1:@1, @2:@2}.mutableCopy class]);
 
-    NSLog(@"dict:%@", [@{} class]); // __NSDictionary0
-    NSLog(@"dict:%@", [@{@1:@1} class]); // __NSSingleEntryDictionaryI
-    NSLog(@"dict:%@", [@{@1:@1, @2:@2} class]); // __NSDictionaryI
-
-    // NSMutableDictionary
-    NSLog(@"mutD alloc:%@", [NSMutableDictionary alloc].class); // __NSPlaceholderDictionary
-    NSLog(@"mutD init:%@", [[NSMutableDictionary alloc] init].class); // __NSDictionaryM
-
-    NSLog(@"mutD:%@", [@{}.mutableCopy class]); // __NSDictionaryM
-    NSLog(@"mutD:%@", [@{@1:@1}.mutableCopy class]); // __NSDictionaryM
-    NSLog(@"mutD:%@", [@{@1:@1, @2:@2}.mutableCopy class]); // __NSDictionaryM
-
-    // NSString
-    NSLog(@"str:%@", [@"" class]); // __NSCFConstantString
-    NSLog(@"mutable str:%@", [@"".mutableCopy class]);
-    
-    // AttributedString
-    NSLog(@"AttributedString:%@", [[[NSAttributedString alloc] init] class]); // __NSCFConstantString
-    NSLog(@"mutable AttributedString:%@", [[[NSMutableAttributedString alloc] init] class]);
-
-    // NSNumber
-    NSLog(@"num:%@", [@1 class]); // __NSCFNumber
+    // __NSCFNumber
+    NSLog(@"num:%@", [@1 class]);
 }
 
 #pragma mark - Timer Crash Test
@@ -205,28 +436,9 @@
     NSLog(@"%@", str3);
 }
 
-+ (void)crashTest {
-    NSString *str = nil;
-    
-    // 1、数组越界检查
-    // *** -[__NSArray0 objectAtIndex:]: index 1 beyond bounds for empty NSArray
-    NSArray *arr = @[];
-    NSString *str1 = arr[1];
-    
-    // 2、数组里设置nil
-    // *** -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
-    // *** -[__NSSingleObjectArrayI objectAtIndex:]: index 1 beyond bounds [0 .. 0]
-    NSArray *arr2 = @[@"111", str];
-    NSString *str2 = arr2[1];
-    
-    // 3、给字典设置nil（两种方式）
-    // *** -[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[0]
-    NSDictionary *dict = @{@"key1":str};
-    // [<__NSDictionary0 0x1c401f360> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key key2.
-    [dict setValue:str forKey:@"key2"];
-}
-
+#pragma mark - respondsToSelector
 /** 测试以下三个方法的作用
+ 
  class_respondsToSelector
  respondsToSelector
  instancesRespondToSelector
@@ -242,7 +454,7 @@
     // object_getClass([YHPerson class])是元类对象，run是类方法，存储在元类对象的方法列表中，所以为YES
     BOOL yn2 = class_respondsToSelector(object_getClass([YHPerson class]), sel2); // YES
     
-    // ------ （方法声明在 NSObject 协议中）respondsToSelector根据当前对象的isa所指的对象中查找方法 ------
+    // ------ （方法声明在 NSObject 协议中）respondsToSelector根据当前对象的isa指针所指向的对象中查找方法 ------
     // [YHPerson class]的isa指向的是元类对象，ages是实例方法，存储在类对象的方法列表中，所以为NO
     BOOL yn3 = [[YHPerson class] respondsToSelector:sel1];// NO
     // [YHPerson class]的isa指向的是元类对象，run是类方法，存储在元类对象的方法列表中，所以为YES

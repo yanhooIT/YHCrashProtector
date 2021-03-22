@@ -13,8 +13,8 @@
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     // 上报错误信息
-    NSString *errMsg = [NSString stringWithFormat:@"CrashProtector - \"%@\" message sent to a deallocated instance, the instance's class is \"%@\"", NSStringFromSelector(aSelector), objc_getAssociatedObject(self, "originClassName")];
-    NSLog(@"%@", errMsg);
+    NSString *errMsg = [NSString stringWithFormat:@"\"%@\" message sent to a deallocated instance, the instance's class is \"%@\"", NSStringFromSelector(aSelector), objc_getAssociatedObject(self, "originClassName")];
+    NSLog(@"CrashProtector - %@", errMsg);
     
     return [YHForwardingTarget handleWithObject:self forwardingTargetForSelector:aSelector];
 }

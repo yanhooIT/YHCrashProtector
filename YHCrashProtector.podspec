@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YHCrashProtector'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of YHCrashProtector.'
+  s.version          = '1.0.0'
+  s.summary          = '对于常见的iOS Crash进行防护'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  对于常见的iOS Crash进行防护，框架中涉及到的 Crash 防护 如下：
+  （1）unrecognized selector sent to instance
+  （2）EXC_BAD_ACCESS
+  （3）KVO
+  （4）KVC
+  （5）NSNotificationCenter
+  （6）NSTimer
+  （7）NSArray/NSMutableArray
+  （8）NSDictionary/NSMutableDictionary
+  （9）NSString/NSMutableString
+  （10）NSAttributedString/NSMutableAttributedString
                        DESC
 
   s.homepage         = 'https://github.com/yanhooit/YHCrashProtector'
@@ -29,7 +39,6 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
-
   s.source_files = 'YHCrashProtector/Classes/**/*'
   
   # ---------------- pod库包含MRC的文件处理 ----------------

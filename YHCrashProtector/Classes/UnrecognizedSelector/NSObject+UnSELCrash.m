@@ -23,10 +23,10 @@
      
      结论：forwardInvocation【不适合】多次重写
     
-     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(methodSignatureForSelector:) newMethod:@selector(avoidCrashMethodSignatureForSelector:)];
-     [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(forwardInvocation:) newMethod:@selector(avoidCrashForwardInvocation:)];
+     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(methodSignatureForSelector:) newMethod:@selector(avoidCrashMethodSignatureForSelector:)];
+     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(forwardInvocation:) newMethod:@selector(avoidCrashForwardInvocation:)];
      */
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(forwardingTargetForSelector:) newMethod:@selector(yh_forwardingTargetForSelector:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(forwardingTargetForSelector:) newMethod:@selector(yh_forwardingTargetForSelector:)];
 }
 
 #pragma mark - Avoid "unrecognized selector sent to instance" Crash

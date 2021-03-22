@@ -12,7 +12,7 @@
 
 + (void)yh_enabledAvoidKVCCrash {
     // 拦截setValue:forKey:方法，用于处理key为nil的Crash
-    [YHAvoidUtils yh_exchangeInstanceMethod:[self class] oldMethod:@selector(setValue:forKey:) newMethod:@selector(yh_setValue:forKey:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(setValue:forKey:) newMethod:@selector(yh_setValue:forKey:)];
 }
 
 /** 避免因key为nil导致的Crash
@@ -57,7 +57,7 @@
 /** 避免因value为nil导致的Crash
  
  在调用 setValue:forKey: 方法时，系统如果查找到名为 set<Key>: 方法的时候，会去检测 value 的参数类型，
- 当参数类型为 NSNmber 的标量类型或者是 NSValue 的结构类型，但是 value 为 nil 时，会自动调用 setNilValueForKey: 方法。
+ 当value类型为 NSNmber 的标量类型或者是 NSValue 的结构类型，但是 value 为 nil 时，会自动调用 setNilValueForKey: 方法。
  
  NSNmber 的标量类型: @(数值类型)
  NSValue 的结构类型: @(CGPoint)

@@ -12,7 +12,7 @@
 @implementation NSNotificationCenter (AvoidCrash)
 
 + (void)yh_enabledAvoidNotificationCrash {
-    [YHAvoidUtils yh_exchangeInstanceMethod:self oldMethod:@selector(addObserver:selector:name:object:) newMethod:@selector(yh_addObserver:selector:name:object:)];
+    [YHAvoidUtils yh_swizzleInstanceMethod:self oldMethod:@selector(addObserver:selector:name:object:) newMethod:@selector(yh_addObserver:selector:name:object:)];
 }
 
 - (void)yh_addObserver:(id)observer selector:(SEL)aSelector name:(NSNotificationName)aName object:(id)anObject

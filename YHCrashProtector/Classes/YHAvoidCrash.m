@@ -21,23 +21,25 @@
 #import "NSNotificationCenter+AvoidCrash.h"
 // Avoid Timer Crash
 #import "NSTimer+AvoidCrash.h"
-// Avoid Container Crash
+// Avoid Array Crash
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
+// Avoid Dictionary Crash
 #import "NSDictionary+AvoidCrash.h"
 #import "NSMutableDictionary+AvoidCrash.h"
 // Avoid String Crash
 #import "NSString+AvoidCrash.h"
 #import "NSMutableString+AvoidCrash.h"
+// Avoid AttributedString Crash
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
 
 @implementation YHAvoidCrash
 
 + (void)load {
-//#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
+#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
     [self startAvoidCrashProtect];
-//#endif
+#endif
 }
 
 + (void)startAvoidCrashProtect {
@@ -50,15 +52,17 @@
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
         [NSTimer yh_enabledAvoidTimerCrash];
         
-//        [NSArray avoidCrashExchangeMethod];
-//        [NSMutableArray avoidCrashExchangeMethod];
-//        [NSDictionary avoidCrashExchangeMethod];
-//        [NSMutableDictionary avoidCrashExchangeMethod];
-//        
-//        [NSString avoidCrashExchangeMethod];
-//        [NSMutableString avoidCrashExchangeMethod];
-//        [NSAttributedString avoidCrashExchangeMethod];
-//        [NSMutableAttributedString avoidCrashExchangeMethod];
+        [NSArray yh_enabledAvoidArrayCrash];
+        [NSMutableArray yh_enabledAvoidArrayMCrash];
+
+        [NSDictionary yh_enabledAvoidDictionaryCrash];
+        [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
+  
+        [NSString yh_enabledAvoidStringCrash];
+        [NSMutableString yh_enabledAvoidStringMCrash];
+        
+        [NSAttributedString yh_enabledAvoidAttributedStringCrash];
+        [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
     });
 }
 
@@ -66,7 +70,7 @@
     if(aSelector == nil) return;
     
     // 监听通知, 获取AvoidCrash捕获的崩溃日志的详细信息
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:YHAvoidCrashNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:AvoidCrashNotification object:nil];
 }
 
 + (void)yh_setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames {

@@ -48,6 +48,7 @@ void addMethod(id self, SEL _cmd) { }
     return [YHForwardingTarget new];
 }
 
+// 判断对象本身是否重写了 forwardInvocation 方法
 + (BOOL)_hasOverrideWithObject:(id)obj selector:(SEL)sel {
     /**
      通过object_getClass函数

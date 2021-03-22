@@ -1,5 +1,5 @@
 //
-//  NSAttributedString+AvoidCrash.h
+//  NSString+AvoidCrash.h
 //  https://github.com/yanhooIT/YHCrashProtector
 //
 //  Created by yanhoo on 2020/02/01.
@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YHAvoidCrashProtocol.h"
 
-@interface NSAttributedString (AvoidCrash) <YHAvoidCrashProtocol>
+@interface NSString (AvoidCrash)
+
++ (void)yh_enabledAvoidStringCrash;
 
 @end

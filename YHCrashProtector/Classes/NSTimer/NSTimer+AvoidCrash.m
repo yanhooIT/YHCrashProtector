@@ -13,10 +13,10 @@
 
 + (void)yh_enabledAvoidTimerCrash {
     // timerWithTimeInterval:target:selector:userInfo:repeats:
-    [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(timerWithTimeInterval:target:selector:userInfo:repeats:) newMethod:@selector(yh_timerWithTimeInterval:target:selector:userInfo:repeats:)];
+    [YHAvoidUtils yh_swizzleClassMethod:self oldMethod:@selector(timerWithTimeInterval:target:selector:userInfo:repeats:) newMethod:@selector(yh_timerWithTimeInterval:target:selector:userInfo:repeats:)];
     
     // scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:
-    [YHAvoidUtils yh_exchangeClassMethod:self oldMethod:@selector(scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:) newMethod:@selector(yh_scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:)];
+    [YHAvoidUtils yh_swizzleClassMethod:self oldMethod:@selector(scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:) newMethod:@selector(yh_scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:)];
 }
 
 + (NSTimer *)yh_timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo repeats:(BOOL)yesOrNo
