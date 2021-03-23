@@ -12,6 +12,11 @@
 #import <objc/runtime.h>
 #import "YHAvoidCrash.h"
 
+#import "YHParent.h"
+#import "YHSon1.h"
+#import "YHSon2.h"
+#import "YHSon3.h"
+
 @interface YHViewController ()
 
 @property (nonatomic, strong) YHPerson *person;
@@ -33,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
 //    [self testAttributedStringCrash];
 //    [self testAttributedStringMCrash];
 //
@@ -57,6 +62,18 @@
 //    [self testUnrecognizedSelector];
     
     self.view.backgroundColor = [UIColor orangeColor];
+    
+    NSArray *arr = [NSArray new];
+    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+    }];
+}
+
+#pragma mark - load & initialize Test
+- (void)testInitialize {
+    YHSon1 *son1 = [[YHSon1 alloc] init];
+    YHSon2 *son2 = [[YHSon2 alloc] init];
+    YHSon3 *son3 = [[YHSon3 alloc] init];
 }
 
 #pragma mark - NSAttributedString Crash Test

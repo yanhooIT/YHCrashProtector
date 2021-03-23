@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4AF93559D907F6FC657BDACF /* Pods_YHCrashProtector_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E7CF2C875D75E01C9567DA1 /* Pods_YHCrashProtector_Tests.framework */; };
+		534DC17F25F679EF0040F934 /* YHParent.m in Sources */ = {isa = PBXBuildFile; fileRef = 534DC17E25F679EF0040F934 /* YHParent.m */; };
+		534DC18625F67A0B0040F934 /* YHSon1.m in Sources */ = {isa = PBXBuildFile; fileRef = 534DC18525F67A0B0040F934 /* YHSon1.m */; };
+		534DC18B25F67A180040F934 /* YHSon2.m in Sources */ = {isa = PBXBuildFile; fileRef = 534DC18A25F67A180040F934 /* YHSon2.m */; };
+		534DC19025F67A230040F934 /* YHSon3.m in Sources */ = {isa = PBXBuildFile; fileRef = 534DC18F25F67A230040F934 /* YHSon3.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -40,6 +44,14 @@
 
 /* Begin PBXFileReference section */
 		46E7939FAE550BE93D02557A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		534DC17D25F679EF0040F934 /* YHParent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHParent.h; sourceTree = "<group>"; };
+		534DC17E25F679EF0040F934 /* YHParent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHParent.m; sourceTree = "<group>"; };
+		534DC18425F67A0B0040F934 /* YHSon1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHSon1.h; sourceTree = "<group>"; };
+		534DC18525F67A0B0040F934 /* YHSon1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHSon1.m; sourceTree = "<group>"; };
+		534DC18925F67A180040F934 /* YHSon2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHSon2.h; sourceTree = "<group>"; };
+		534DC18A25F67A180040F934 /* YHSon2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHSon2.m; sourceTree = "<group>"; };
+		534DC18E25F67A230040F934 /* YHSon3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHSon3.h; sourceTree = "<group>"; };
+		534DC18F25F67A230040F934 /* YHSon3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHSon3.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YHCrashProtector_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YHCrashProtector_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +124,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		534DC17C25F679CE0040F934 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				534DC17D25F679EF0040F934 /* YHParent.h */,
+				534DC17E25F679EF0040F934 /* YHParent.m */,
+				534DC18425F67A0B0040F934 /* YHSon1.h */,
+				534DC18525F67A0B0040F934 /* YHSon1.m */,
+				534DC18925F67A180040F934 /* YHSon2.h */,
+				534DC18A25F67A180040F934 /* YHSon2.m */,
+				534DC18E25F67A230040F934 /* YHSon3.h */,
+				534DC18F25F67A230040F934 /* YHSon3.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +176,7 @@
 		6003F593195388D20070C39A /* Example for YHCrashProtector */ = {
 			isa = PBXGroup;
 			children = (
+				534DC17C25F679CE0040F934 /* Models */,
 				6003F59C195388D20070C39A /* YHAppDelegate.h */,
 				6003F59D195388D20070C39A /* YHAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -374,10 +402,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534DC17F25F679EF0040F934 /* YHParent.m in Sources */,
 				6003F59E195388D20070C39A /* YHAppDelegate.m in Sources */,
 				EE9D7DBA25C8242D000EABA1 /* YHBoy.m in Sources */,
+				534DC18625F67A0B0040F934 /* YHSon1.m in Sources */,
 				EE9D7DB525C81D28000EABA1 /* YHPerson.m in Sources */,
 				6003F5A7195388D20070C39A /* YHViewController.m in Sources */,
+				534DC18B25F67A180040F934 /* YHSon2.m in Sources */,
+				534DC19025F67A230040F934 /* YHSon3.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
