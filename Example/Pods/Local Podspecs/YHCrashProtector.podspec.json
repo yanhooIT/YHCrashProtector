@@ -1,8 +1,8 @@
 {
   "name": "YHCrashProtector",
-  "version": "0.1.0",
-  "summary": "A short description of YHCrashProtector.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "1.0.0",
+  "summary": "对于常见的iOS Crash进行防护",
+  "description": "对于常见的iOS Crash进行防护，框架中涉及到的 Crash 防护 如下：\n（1）unrecognized selector sent to instance\n（2）EXC_BAD_ACCESS\n（3）KVO\n（4）KVC\n（5）NSNotificationCenter\n（6）NSTimer\n（7）NSArray/NSMutableArray\n（8）NSDictionary/NSMutableDictionary\n（9）NSString/NSMutableString\n（10）NSAttributedString/NSMutableAttributedString",
   "homepage": "https://github.com/yanhooit/YHCrashProtector",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/yanhooit/YHCrashProtector.git",
-    "tag": "0.1.0"
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "9.0"

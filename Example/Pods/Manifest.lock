@@ -1,7 +1,7 @@
 PODS:
-  - YHCrashProtector (0.1.0):
-    - YHCrashProtector/no-arc (= 0.1.0)
-  - YHCrashProtector/no-arc (0.1.0)
+  - YHCrashProtector (1.0.0):
+    - YHCrashProtector/no-arc (= 1.0.0)
+  - YHCrashProtector/no-arc (1.0.0)
 
 DEPENDENCIES:
   - YHCrashProtector (from `../`)
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  YHCrashProtector: e79f68c0bbf8f60d7b20f3744b5bef30dcac79f7
+  YHCrashProtector: 33bd401f7dffdf8f07acece2e9aef7a863686eb3
 
 PODFILE CHECKSUM: 8915c2f085b7e418185661950959b7fe3a7a1588
 
