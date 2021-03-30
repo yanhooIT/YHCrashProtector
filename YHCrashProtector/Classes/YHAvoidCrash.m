@@ -9,12 +9,14 @@
 #import "YHAvoidCrash.h"
 #import "YHAvoidUtils.h"
 
-// Avoid "unrecognized selector sent to instance" Crash
-#import "NSObject+UnSELCrash.h"
 // Avoid 野指针 Crash
 #import "NSObject+BadAccessCrash.h"
 // Avoid KVO Crash
 #import "NSObject+KVOCrash.h"
+#import "YHKVOProxy.h"
+
+// Avoid "unrecognized selector sent to instance" Crash
+#import "NSObject+UnSELCrash.h"
 // Avoid KVC Crash
 #import "NSObject+KVCCrash.h"
 // Avoid 通知 Crash
@@ -33,11 +35,13 @@
 // Avoid AttributedString Crash
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
+// Avoid Can't Add Self as Subview Crash
+#import "UINavigationController+AvoidCrash.h"
 
 @implementation YHAvoidCrash
 
 + (void)load {
-#if defined(POD_CONFIGURATION_RELEASE) || defined(RELEASE)
+#if _INTERNAL_AVC_ENABLED
     [self startAvoidCrashProtect];
 #endif
 }
@@ -45,9 +49,9 @@
 + (void)startAvoidCrashProtect {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+//        [NSObject yh_enabledAvoidBadAccessCrash];
+//        [NSObject yh_enabledAvoidKVOCrash];
         [NSObject yh_enabledAvoidUnSELCrash];
-        [NSObject yh_enabledAvoidBadAccessCrash];
-        [NSObject yh_enabledAvoidKVOCrash];
         [NSObject yh_enabledAvoidKVCCrash];
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
         [NSTimer yh_enabledAvoidTimerCrash];
@@ -63,22 +67,36 @@
         
         [NSAttributedString yh_enabledAvoidAttributedStringCrash];
         [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
+        
+        [UINavigationController yh_enabledAvoidNoAddSelfAsSubviewCrash];
     });
 }
 
 + (void)yh_avoidCrashWithObserver:(id)observer selector:(SEL)aSelector {
+#if _INTERNAL_AVC_ENABLED
     if(aSelector == nil) return;
     
     // 监听通知, 获取AvoidCrash捕获的崩溃日志的详细信息
     [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:AvoidCrashNotification object:nil];
+#endif
 }
 
-+ (void)yh_setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames {
++ (void)yh_setupHandleExcBadAccessCrashClassNames:(NSArray<NSString *> *)classNames {
+#if _INTERNAL_AVC_ENABLED
     [YHBadAccessManager setupHandleDeallocClassNames:classNames];
+#endif
 }
 
-+ (void)yh_setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
++ (void)yh_setupHandleExcBadAccessCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+#if _INTERNAL_AVC_ENABLED
     [YHBadAccessManager setupHandleDeallocClassPrefixs:classPrefixs];
+#endif
+}
+
++ (void)yh_setupHandleKVOCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+#if _INTERNAL_AVC_ENABLED
+    [YHKVOProxy setupHandleKVOCrashClassPrefixs:classPrefixs];
+#endif
 }
 
 @end

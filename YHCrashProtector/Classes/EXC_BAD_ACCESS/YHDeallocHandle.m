@@ -11,9 +11,9 @@
 
 #if DEBUG
     // 调试阶段为了测试方便
-    static NSInteger ZoombieObjectMax = 2;
+    static NSInteger ZoombieObjectMax = 5;
 #else
-    static NSInteger ZoombieObjectMax = 50;
+    static NSInteger ZoombieObjectMax = 30;
 #endif
 
 @implementation YHDeallocHandle
@@ -48,7 +48,7 @@ static NSMutableArray *_zoombieObjects;
 }
 
 + (void)_saveZoombieObject:(id)obj {
-    if (_zoombieObjects.count >= ZoombieObjectMax) {
+    if (_zoombieObjects.count > ZoombieObjectMax) {
         id firstObj = _zoombieObjects[0];
         [_zoombieObjects removeObjectAtIndex:0];
         [firstObj release];

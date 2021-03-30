@@ -24,7 +24,8 @@
     if (yesOrNo) {
         YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
         proxy.oriSEL = aSelector;
-        SEL proxySEL = @selector(proxyTimerAction:);
+        proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
+        SEL proxySEL = @selector(proxyTimerActionWithTimer:);
         return [self yh_timerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
     } else {
         return [self yh_timerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
@@ -36,7 +37,8 @@
     if (yesOrNo) {
         YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
         proxy.oriSEL = aSelector;
-        SEL proxySEL = @selector(proxyTimerAction:);
+        proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
+        SEL proxySEL = @selector(proxyTimerActionWithTimer:);
         return [self yh_scheduledTimerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
     } else {
         return [self yh_scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];

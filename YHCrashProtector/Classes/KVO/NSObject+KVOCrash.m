@@ -26,32 +26,28 @@
 
 - (void)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
-    if (yh_isSystemClass(self.class)) {// 一般来说很少监控系统对象的属性
-        [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
-    } else if ([self.kvoProxy yh_canAddObserver:observer forKeyPath:keyPath options:options context:context]) {
+    if ([self.kvoProxy yh_canAddObserver:observer forKeyPath:keyPath options:options context:context]) {
         [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
     }
 }
 
 - (void)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
-    [self yh_removeObserver:observer forKeyPath:keyPath context:NULL];
+    if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
+        [self yh_removeObserver:observer forKeyPath:keyPath];
+    }
 }
 
 - (void)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context
 {
-    if (yh_isSystemClass(self.class)) {
-        [self yh_removeObserver:observer forKeyPath:keyPath context:context];
-    } else if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
+    if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
         [self yh_removeObserver:observer forKeyPath:keyPath context:context];
     }
 }
 
 - (void)yh_observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    if (yh_isSystemClass(self.class)) {
-        [self yh_observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    } else if ([self.kvoProxy yh_canHandleObserverCallbackWithKeyPath:keyPath]) {
+    if ([self.kvoProxy yh_canHandleObserverCallbackWithKeyPath:keyPath]) {
         [self yh_observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
@@ -65,7 +61,8 @@
     if (nil == proxy) {
         proxy = [[YHKVOProxy alloc] init];
         proxy.observedObject = self;
-        objc_setAssociatedObject(self, _cmd, proxy, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        [self setKvoProxy:proxy];
     }
     
     return proxy;

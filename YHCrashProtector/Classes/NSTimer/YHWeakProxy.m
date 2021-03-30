@@ -88,7 +88,7 @@
     return [_target debugDescription];
 }
 
-- (void)proxyTimerAction:(NSTimer *)timer {
+- (void)proxyTimerActionWithTimer:(NSTimer *)timer {
     if (self.target != nil) {// 判断原target是否已经被释放
         [self _safePerformAction:self.oriSEL target:self.target params:timer];
     } else {
@@ -104,15 +104,15 @@
 
 - (id)_safePerformAction:(SEL)action target:(NSObject *)target params:(id)params
 {
-    NSMethodSignature* methodSig = [target methodSignatureForSelector:action];
+    NSMethodSignature *methodSig = [target methodSignatureForSelector:action];
     if(methodSig == nil) {
         return nil;
     }
-    const char* retType = [methodSig methodReturnType];
-
+    
+    const char *retType = [methodSig methodReturnType];
     if (strcmp(retType, @encode(void)) == 0) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-        [invocation setArgument:&params atIndex:2];
+        if (self.oriSELHasParam) [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
         [invocation invoke];
@@ -121,7 +121,7 @@
 
     if (strcmp(retType, @encode(NSInteger)) == 0) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-        [invocation setArgument:&params atIndex:2];
+        if (self.oriSELHasParam) [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
         [invocation invoke];
@@ -132,7 +132,7 @@
 
     if (strcmp(retType, @encode(BOOL)) == 0) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-        [invocation setArgument:&params atIndex:2];
+        if (self.oriSELHasParam) [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
         [invocation invoke];
@@ -143,7 +143,7 @@
 
     if (strcmp(retType, @encode(CGFloat)) == 0) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-        [invocation setArgument:&params atIndex:2];
+        if (self.oriSELHasParam) [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
         [invocation invoke];
@@ -154,7 +154,7 @@
 
     if (strcmp(retType, @encode(NSUInteger)) == 0) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSig];
-        [invocation setArgument:&params atIndex:2];
+        if (self.oriSELHasParam) [invocation setArgument:&params atIndex:2];
         [invocation setSelector:action];
         [invocation setTarget:target];
         [invocation invoke];

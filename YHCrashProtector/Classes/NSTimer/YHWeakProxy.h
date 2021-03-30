@@ -37,6 +37,8 @@
 @property (nonatomic, weak, readonly) id target;
 /// 原target对应的方法实现
 @property (nonatomic, assign) SEL oriSEL;
+/// 回调方法是否有timer参数
+@property (nonatomic, assign) SEL oriSELHasParam;
 
 /**
  Creates a new weak proxy for target.
@@ -58,6 +60,6 @@
 
 /// 代理对象的定时任务
 /// @param timer 定时器
-- (void)proxyTimerAction:(NSTimer *)timer;
+- (void)proxyTimerActionWithTimer:(NSTimer *)timer;
 
 @end

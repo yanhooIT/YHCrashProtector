@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 观察对象
 @property (nonatomic, weak, readonly) id observer;
+/// 观察对象的Hash值，用于做比较
+@property (nonatomic, assign, readonly) NSUInteger observerHash;
 /// 被观察对象的成员变量 or 属性
 @property (nonatomic, copy, readonly) NSString *keyPath;
 

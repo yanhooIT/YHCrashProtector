@@ -12,6 +12,16 @@
 @implementation YHKVOProxy {
     dispatch_semaphore_t _lock;
     NSMapTable<NSString *, NSMutableSet<YHKVOInfo *> *> *_objectInfosMap;
+    NSString *_observedObjClassName;
+}
+
+// 自定义类的前缀
+static NSMutableArray *_cusClassPrefixs;
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _cusClassPrefixs = [NSMutableArray array];
+    });
 }
 
 - (instancetype)init {
@@ -28,31 +38,40 @@
     _lock = nil;
 }
 
++ (void)setupHandleKVOCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+    for (NSString *classPrefix in classPrefixs) {
+        if (yh_isSystemClassWithPrefix(classPrefix)) continue;
+        
+        [_cusClassPrefixs addObject:classPrefix];
+    }
+}
+
 - (BOOL)yh_canAddObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
     AvoidCrashLock();
     
     // 是否已存在此观察对象
     BOOL canAddObserver = YES;
-    
-    // 查看被观察对象的keyPath是否有观察对象集合
-    NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
-    if (nil == kvoInfos) {// 没有观察对象
-        kvoInfos = [NSMutableSet set];
-        [_objectInfosMap setObject:kvoInfos forKey:keyPath];
-    } else {// 存在观察对象
-        for (YHKVOInfo *info in kvoInfos) {
-            if ([info.observer isEqual:observer] && [info.keyPath isEqualToString:keyPath])
-            {
-                canAddObserver = NO;
-                break;
+    if (![self _isSystemClass]) {
+        // 查看被观察对象的keyPath是否有观察对象集合
+        NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
+        if (nil == kvoInfos) {// 没有观察对象
+            kvoInfos = [NSMutableSet set];
+            [_objectInfosMap setObject:kvoInfos forKey:keyPath];
+        } else {// 存在观察对象
+            for (YHKVOInfo *info in kvoInfos) {
+                if (info.observerHash == [observer hash] && [info.keyPath isEqualToString:keyPath])
+                {
+                    canAddObserver = NO;
+                    break;
+                }
             }
         }
-    }
-    
-    if (canAddObserver) {
-        YHKVOInfo *kvoInfo = [[YHKVOInfo alloc] initWithObserver:observer keyPath:keyPath];
-        [kvoInfos addObject:kvoInfo];
+        
+        if (canAddObserver && observer && !AvoidCrash_STRING_IS_EMPTY(keyPath)) {
+            YHKVOInfo *kvoInfo = [[YHKVOInfo alloc] initWithObserver:observer keyPath:keyPath];
+            [kvoInfos addObject:kvoInfo];
+        }
     }
     
     AvoidCrashUnlock();
@@ -64,29 +83,30 @@
 {
     AvoidCrashLock();
     
-    // 是否存在观察对象
-    YHKVOInfo *registeredInfo = nil;
-    
-    // 查看被观察对象的keyPath是否有观察对象集合
-    NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
-    if (nil != kvoInfos) {
-        for (YHKVOInfo *info in kvoInfos) {
-            if ([info.observer isEqual:observer] && [info.keyPath isEqualToString:keyPath])
-            {
-                registeredInfo = info;
-                break;
+    BOOL canRemoveObserver = YES;
+    if (![self _isSystemClass]) {
+        YHKVOInfo *registeredInfo = nil;
+        // 查看被观察对象的keyPath是否有观察对象集合
+        NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
+        if (nil != kvoInfos) {
+            for (YHKVOInfo *info in kvoInfos) {
+                if (info.observerHash == [observer hash] && [info.keyPath isEqualToString:keyPath])
+                {
+                    registeredInfo = info;
+                    break;
+                }
             }
         }
-    }
-    
-    BOOL canRemoveObserver = NO;
-    if (registeredInfo != nil) {
-        canRemoveObserver = YES;
         
-        [kvoInfos removeObject:registeredInfo];
-        
-        if (0 == kvoInfos.count) {
-            [_objectInfosMap removeObjectForKey:keyPath];
+        canRemoveObserver = NO;
+        if (registeredInfo != nil) {// 存在观察对象
+            canRemoveObserver = YES;
+            
+            [kvoInfos removeObject:registeredInfo];
+            
+            if (0 == kvoInfos.count) {
+                [_objectInfosMap removeObjectForKey:keyPath];
+            }
         }
     }
     
@@ -100,21 +120,22 @@
     AvoidCrashLock();
     
     BOOL needHandleObserver = YES;
-    
-    // 查看被观察对象的keyPath是否有观察对象集合
-    NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
-    if (nil != kvoInfos) {
-        NSMutableSet *tmp = [kvoInfos copy];
-        for (YHKVOInfo *info in tmp) {
-            if (nil == info.observer) {// 观察对象已经释放
-                [kvoInfos removeObject:info];
+    if (![self _isSystemClass]) {
+        // 查看被观察对象的keyPath是否有观察对象集合
+        NSMutableSet *kvoInfos = [_objectInfosMap objectForKey:keyPath];
+        if (nil != kvoInfos) {
+            NSMutableSet *tmp = [kvoInfos copy];
+            for (YHKVOInfo *info in tmp) {
+                if (nil == info.observer) {// 观察对象已经释放
+                    [kvoInfos removeObject:info];
+                }
             }
         }
-    }
-    
-    if (nil == kvoInfos || 0 == kvoInfos.count) {
-        needHandleObserver = NO;
-        [_objectInfosMap removeObjectForKey:keyPath];
+        
+        if (nil == kvoInfos || 0 == kvoInfos.count) {
+            needHandleObserver = NO;
+            [_objectInfosMap removeObjectForKey:keyPath];
+        }
     }
     
     AvoidCrashUnlock();
@@ -138,6 +159,27 @@
     }
     
     AvoidCrashUnlock();
+}
+
+- (BOOL)_isSystemClass {
+    // 没有设置就说明无需做KVO Crash防护
+    if (AvoidCrash_STRING_IS_EMPTY(_observedObjClassName)) return YES;
+    
+    for (NSString *clsPrefix in _cusClassPrefixs) {
+        if ([_observedObjClassName hasPrefix:clsPrefix]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (void)setObservedObject:(NSObject *)observedObject {
+    _observedObject = observedObject;
+    
+    if (_observedObject) {
+        _observedObjClassName = NSStringFromClass(observedObject.class);
+    }
 }
 
 @end

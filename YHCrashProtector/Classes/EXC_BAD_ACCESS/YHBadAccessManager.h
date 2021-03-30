@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  初始化一个需要防止”EXC_BAD_ACCESS”的崩溃的类名数组
+ *
  *  ⚠️不可将@"NSObject"加入classNames数组中
  *  ⚠️不可将UI前缀的字符串(包括@"UI")加入classPrefixs数组中
  *  ⚠️不可将NS前缀的字符串(包括@"NS")加入classPrefixs数组中
@@ -25,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  初始化一个需要防止”EXC_BAD_ACCESS”的崩溃的类名前缀的数组
+ *
  *  ⚠️不可将UI前缀的字符串(包括@"UI")加入classPrefixs数组中
  *  ⚠️不可将NS前缀的字符串(包括@"NS")加入classPrefixs数组中
  */

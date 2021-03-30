@@ -12,6 +12,7 @@
 - (instancetype)initWithObserver:(id)observer keyPath:(NSString *)keyPath {
     if (self = [super init]) {
         _observer = observer;
+        _observerHash = [observer hash];
         _keyPath = keyPath;
     }
     

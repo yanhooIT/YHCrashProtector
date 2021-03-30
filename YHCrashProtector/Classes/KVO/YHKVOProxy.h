@@ -14,6 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 被观察对象
 @property (nonatomic, weak) NSObject *observedObject;
 
+/**
+ *  初始化一个需要防止 KVO 的崩溃的类名前缀的数组
+ *
+ *  ⚠️不可将UI前缀的字符串(包括@"UI")加入classPrefixs数组中
+ *  ⚠️不可将NS前缀的字符串(包括@"NS")加入classPrefixs数组中
+ */
++ (void)setupHandleKVOCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs;
+
 /// 是否可以添加观察对象
 /// @param observer 观察对象
 /// @param keyPath 被观察对象的属性 or 成员变量
