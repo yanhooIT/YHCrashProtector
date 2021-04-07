@@ -9,32 +9,31 @@
 #import "YHAvoidCrash.h"
 #import "YHAvoidUtils.h"
 
-// Avoid 野指针 Crash
 #import "NSObject+BadAccessCrash.h"
-// Avoid KVO Crash
+
+#import "NSObject+UnSELCrash.h"
+
 #import "NSObject+KVOCrash.h"
 #import "YHKVOProxy.h"
-// Avoid "unrecognized selector sent to instance" Crash
-#import "NSObject+UnSELCrash.h"
-// Avoid KVC Crash
+
 #import "NSObject+KVCCrash.h"
-// Avoid 通知 Crash
+
 #import "NSNotificationCenter+AvoidCrash.h"
-// Avoid Timer Crash
+
 #import "NSTimer+AvoidCrash.h"
-// Avoid Array Crash
+
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
-// Avoid Dictionary Crash
+
 #import "NSDictionary+AvoidCrash.h"
 #import "NSMutableDictionary+AvoidCrash.h"
-// Avoid String Crash
+
 #import "NSString+AvoidCrash.h"
 #import "NSMutableString+AvoidCrash.h"
-// Avoid AttributedString Crash
+
 #import "NSAttributedString+AvoidCrash.h"
 #import "NSMutableAttributedString+AvoidCrash.h"
-// Avoid Can't Add Self as Subview Crash
+
 #import "UINavigationController+AvoidCrash.h"
 
 @implementation YHAvoidCrash
@@ -48,25 +47,41 @@
 + (void)startAvoidCrashProtect {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        // 启用 Avoid 野指针 Crash
 //        [NSObject yh_enabledAvoidBadAccessCrash];
-        [NSObject yh_enabledAvoidKVOCrash];
+        
+        // 启用 Avoid "unrecognized selector sent to instance" Crash
         [NSObject yh_enabledAvoidUnSELCrash];
+        
+        // 启用 Avoid KVO Crash
+        [NSObject yh_enabledAvoidKVOCrash];
+        
+        // 启用 Avoid KVC Crash
         [NSObject yh_enabledAvoidKVCCrash];
+        
+        // 启用 Avoid 通知 Crash
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
+        
+        // 启用 Avoid Timer Crash
         [NSTimer yh_enabledAvoidTimerCrash];
         
+        // 启用 Avoid Array Crash
         [NSArray yh_enabledAvoidArrayCrash];
         [NSMutableArray yh_enabledAvoidArrayMCrash];
-
+        
+        // 启用 Avoid Dictionary Crash
         [NSDictionary yh_enabledAvoidDictionaryCrash];
         [NSMutableDictionary yh_enabledAvoidDictionaryMCrash];
-  
+        
+        // 启用 Avoid String Crash
         [NSString yh_enabledAvoidStringCrash];
         [NSMutableString yh_enabledAvoidStringMCrash];
         
+        // 启用 Avoid AttributedString Crash
         [NSAttributedString yh_enabledAvoidAttributedStringCrash];
         [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
         
+        // 启用 Avoid Can't Add Self as Subview Crash
         [UINavigationController yh_enabledAvoidNoAddSelfAsSubviewCrash];
     });
 }
