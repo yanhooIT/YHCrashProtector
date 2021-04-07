@@ -410,7 +410,7 @@
 
 #pragma mark - EXC_BAD_ACCESS Crash Test
 - (void)testExcBadAccess {
-    [YHAvoidCrash yh_setupHandleDeallocClassNames:@[@"YHPerson"]];
+    [YHAvoidCrash yh_setupHandleExcBadAccessCrashClassNames:@[@"YHPerson"]];
     
     self.person1 = [[YHPerson alloc] init];
     [self.person1 logPrint];
