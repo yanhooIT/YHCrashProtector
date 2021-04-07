@@ -12,7 +12,7 @@
     // 开启Avoid Crash监控
     #define _INTERNAL_AVC_ENABLED 1
 #else
-    #define _INTERNAL_AVC_ENABLED 1
+    #define _INTERNAL_AVC_ENABLED 0
 #endif
 
 @interface YHAvoidCrash : NSObject
