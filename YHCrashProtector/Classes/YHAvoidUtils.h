@@ -50,47 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param log 日志信息
 + (void)yh_reportErrorWithLog:(NSString *)log;
 
+/// 根据前缀判断是否是系统类（并不全面，只是做一个简单的过滤）
++ (BOOL)yh_isSystemClassWithPrefix:(NSString *)classPrefix;
+
+/// 根据Class判断是否是系统类
++ (BOOL)yh_isSystemClass:(Class)cls;
+
+/// 判断selector有几个参数
++ (NSUInteger)yh_selectorArgumentCount:(SEL)selector;
+
 @end
-
-// 根据Class判断是否是系统类
-CG_INLINE BOOL yh_isSystemClass(Class cls) {
-    NSBundle *mainBundle = [NSBundle bundleForClass:cls];
-    if (mainBundle == [NSBundle mainBundle]) {
-        return NO;
-    }
-    
-    return YES;
-}
-
-// 根据前缀判断是否是系统类（并不全面，只是做一个简单的过滤）
-CG_INLINE BOOL yh_isSystemClassWithPrefix(NSString *classPrefix) {
-    if ([classPrefix hasPrefix:@"NS"]
-        || [classPrefix hasPrefix:@"__NS"]
-        || [classPrefix hasPrefix:@"UI"]
-        || [classPrefix hasPrefix:@"OS_xpc"])
-    {
-        return YES;
-    }
-    
-    return NO;
-}
-
-// 判断selector有几个参数
-CG_INLINE NSUInteger yh_selectorArgumentCount(SEL selector) {
-    NSUInteger argumentCount = 0;
-    // sel_getName获取selector名的C字符串
-    const char *selectorStringCursor = sel_getName(selector);
-    // 遍历字符串有几个:来确定有几个参数
-    char ch;
-    while((ch = *selectorStringCursor)) {
-        if (ch == ':') {
-            ++argumentCount;
-        }
-
-        ++selectorStringCursor;
-    }
-    
-    return argumentCount;
-}
 
 NS_ASSUME_NONNULL_END

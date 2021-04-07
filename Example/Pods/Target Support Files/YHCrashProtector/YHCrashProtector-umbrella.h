@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "NSObject+AvoidCrash.h"
 #import "NSArray+AvoidCrash.h"
 #import "NSMutableArray+AvoidCrash.h"
 #import "NSDictionary+AvoidCrash.h"
@@ -19,13 +18,14 @@
 #import "NSMutableAttributedString+AvoidCrash.h"
 #import "NSMutableString+AvoidCrash.h"
 #import "NSString+AvoidCrash.h"
+#import "NSObject+Dealloc.h"
 #import "NSObject+BadAccessCrash.h"
 #import "YHBadAccessManager.h"
 #import "YHZoombie.h"
 #import "NSObject+KVCCrash.h"
 #import "NSObject+KVOCrash.h"
-#import "YHKVOInfo.h"
 #import "YHKVOProxy.h"
+#import "UINavigationController+AvoidCrash.h"
 #import "NSNotificationCenter+AvoidCrash.h"
 #import "NSTimer+AvoidCrash.h"
 #import "YHWeakProxy.h"

@@ -45,7 +45,7 @@ static NSMutableArray *_classPrefixs;
 + (void)setupHandleDeallocClassNames:(NSArray<NSString *> *)classNames; {
     for (NSString *className in classNames) {
         Class cls = NSClassFromString(className);
-        if (cls && !yh_isSystemClass(cls)) {
+        if (cls && ![YHAvoidUtils yh_isSystemClass:cls]) {
             [_classNames addObject:className];
         }
     }
@@ -53,7 +53,7 @@ static NSMutableArray *_classPrefixs;
 
 + (void)setupHandleDeallocClassPrefixs:(NSArray<NSString *> *)classPrefixs {
     for (NSString *classPrefix in classPrefixs) {
-        if (yh_isSystemClassWithPrefix(classPrefix)) continue;
+        if ([YHAvoidUtils yh_isSystemClassWithPrefix:classPrefix]) continue;
         
         [_classPrefixs addObject:classPrefix];
     }

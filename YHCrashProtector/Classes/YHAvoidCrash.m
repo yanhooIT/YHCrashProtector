@@ -14,7 +14,6 @@
 // Avoid KVO Crash
 #import "NSObject+KVOCrash.h"
 #import "YHKVOProxy.h"
-
 // Avoid "unrecognized selector sent to instance" Crash
 #import "NSObject+UnSELCrash.h"
 // Avoid KVC Crash
@@ -50,7 +49,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 //        [NSObject yh_enabledAvoidBadAccessCrash];
-//        [NSObject yh_enabledAvoidKVOCrash];
+        [NSObject yh_enabledAvoidKVOCrash];
         [NSObject yh_enabledAvoidUnSELCrash];
         [NSObject yh_enabledAvoidKVCCrash];
         [NSNotificationCenter yh_enabledAvoidNotificationCrash];
@@ -90,12 +89,6 @@
 + (void)yh_setupHandleExcBadAccessCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
 #if _INTERNAL_AVC_ENABLED
     [YHBadAccessManager setupHandleDeallocClassPrefixs:classPrefixs];
-#endif
-}
-
-+ (void)yh_setupHandleKVOCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
-#if _INTERNAL_AVC_ENABLED
-    [YHKVOProxy setupHandleKVOCrashClassPrefixs:classPrefixs];
 #endif
 }
 

@@ -101,6 +101,47 @@
 #endif
 }
 
++ (BOOL)yh_isSystemClassWithPrefix:(NSString *)classPrefix {
+    if ([classPrefix hasPrefix:@"NS"]
+        || [classPrefix hasPrefix:@"__NS"]
+        || [classPrefix hasPrefix:@"UI"]
+        || [classPrefix hasPrefix:@"OS_xpc"])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+/// 根据Class判断是否是系统类
++ (BOOL)yh_isSystemClass:(Class)cls {
+    NSString *className = NSStringFromClass(cls);
+    BOOL isSystem = [self yh_isSystemClassWithPrefix:className];
+    if (isSystem) return YES;
+    
+    NSBundle *mainBundle = [NSBundle bundleForClass:cls];
+    return !(mainBundle == [NSBundle mainBundle]);
+}
+
+/// 判断selector有几个参数
++ (NSUInteger)yh_selectorArgumentCount:(SEL)selector {
+    NSUInteger argumentCount = 0;
+    // sel_getName获取selector名的C字符串
+    const char *selectorStringCursor = sel_getName(selector);
+    // 遍历字符串有几个:来确定有几个参数
+    char ch;
+    while((ch = *selectorStringCursor)) {
+        if (ch == ':') {
+            ++argumentCount;
+        }
+
+        ++selectorStringCursor;
+    }
+    
+    return argumentCount;
+}
+
+#pragma mark - Private Methods
 /**
  *  获取堆栈主要崩溃精简化的信息<根据正则表达式匹配出来>
  *
