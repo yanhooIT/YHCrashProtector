@@ -51,7 +51,7 @@
     }
 }
 
-+ (void)yh_reportErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
++ (void)yh_reportException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
     if (nil == exception) return;
     
     // 堆栈数据
@@ -88,15 +88,15 @@
 #endif
 }
 
-+ (void)yh_reportErrorWithLog:(NSString *)log {
-    if (AvoidCrash_STRING_IS_EMPTY(log)) return;
++ (void)yh_reportError:(NSString *)errLog {
+    if (AvoidCrash_STRING_IS_EMPTY(errLog)) return;
     
 #if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
-    NSLog(@"CrashProtector - %@", log);
+    NSLog(@"CrashProtector - %@", errLog);
 #else
     // 将错误信息放在字典里，用通知的形式发送出去
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:@{key_errorReason:log}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:@{key_errorReason:errLog}];
     });
 #endif
 }

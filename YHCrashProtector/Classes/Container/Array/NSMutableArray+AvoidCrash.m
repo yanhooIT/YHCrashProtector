@@ -69,7 +69,7 @@
 - (id)yh_NSArrayMobjectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
         NSString *log = [self _formatLogWithSEL:@"objectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -79,7 +79,7 @@
 - (id)yh_NSArrayMobjectAtIndexedSubscript:(NSUInteger)index {
     if (index >= self.count ) {
         NSString *log = [self _formatLogWithSEL:@"objectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -89,7 +89,7 @@
 - (void)yh_addObject:(id)anObject {
     if (nil == anObject) {
         NSString *log = [self _formatLogWithSEL:@"addObject:"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -99,13 +99,13 @@
 - (void)yh_insertObject:(id)anObject atIndex:(NSUInteger)index {
     if (nil == anObject) {
         NSString *log = [self _formatLogWithSEL:@"insertObject:atIndex:"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
     if (index > self.count) {
         NSString *log = [self _formatLogWithSEL:@"insertObject:atIndex:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -115,13 +115,13 @@
 - (void)yh_setObject:(id)obj atIndexedSubscript:(NSUInteger)index {
     if (nil == obj) {
         NSString *log = [self _formatLogWithSEL:@"setObject:atIndexedSubscript:"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
     if (index > self.count) {
         NSString *log = [self _formatLogWithSEL:@"setObject:atIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -131,13 +131,13 @@
 - (void)yh_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject {
     if (index >= self.count) {
         NSString *log = [self _formatLogWithSEL:@"replaceObjectAtIndex:withObject:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
     if (nil == anObject) {
         NSString *log = [self _formatLogWithSEL:@"replaceObjectAtIndex:withObject:"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -148,7 +148,7 @@
     NSUInteger tmp = (range.location + range.length);
     if (tmp > self.count) {
         NSString *log = [NSString stringWithFormat:@"[%@ - removeObjectsInRange:]: range {%ld, %ld} extends beyond bounds for array, array count = %ld", NSStringFromClass(self.class), range.location, range.length, self.count];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     

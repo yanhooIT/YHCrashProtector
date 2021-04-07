@@ -73,7 +73,7 @@
         id obj = objects[index];
         if (nil == obj) {
             NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:count:]: attempt to insert nil object from objects[%ld]", NSStringFromClass(self.class), index];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
+            [YHAvoidUtils yh_reportError:log];
             continue;
         }
         
@@ -87,7 +87,7 @@
 - (id)yh_NSArray0objectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
         NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -97,7 +97,7 @@
 - (id)yh_NSSingleObjectArrayIobjectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
         NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -107,7 +107,7 @@
 - (id)yh_NSArrayIobjectAtIndex:(NSUInteger)index {
     if (index >= self.count) {
         NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -117,7 +117,7 @@
 - (id)yh_NSArray0objectAtIndexedSubscript:(NSUInteger)index {
     if (index >= self.count ) {
         NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -127,7 +127,7 @@
 - (id)yh_NSSingleObjectArrayIobjectAtIndexedSubscript:(NSUInteger)index {
     if (index >= self.count ) {
         NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -137,7 +137,7 @@
 - (id)yh_NSArrayIobjectAtIndexedSubscript:(NSUInteger)index {
     if (index >= self.count ) {
         NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     

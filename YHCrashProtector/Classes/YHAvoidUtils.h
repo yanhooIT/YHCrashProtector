@@ -44,11 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param exception   捕获到的异常
  *  @param defaultToDo 处理该异常的默认做法
  */
-+ (void)yh_reportErrorWithException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
++ (void)yh_reportException:(NSException *)exception defaultToDo:(NSString *)defaultToDo;
 
 /// 上报被拦击的错误的日志信息
-/// @param log 日志信息
-+ (void)yh_reportErrorWithLog:(NSString *)log;
+/// @param errLog 日志信息
++ (void)yh_reportError:(NSString *)errLog;
 
 /// 根据前缀判断是否是系统类（并不全面，只是做一个简单的过滤）
 + (BOOL)yh_isSystemClassWithPrefix:(NSString *)classPrefix;

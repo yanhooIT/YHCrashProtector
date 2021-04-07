@@ -47,7 +47,7 @@
 - (instancetype)yh_initWithString:(NSString *)aString {
     if (nil == aString) {
         NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -58,7 +58,7 @@
 - (BOOL)yh_hasPrefix:(NSString *)str {
     if (nil == str) {
         NSString *log = [self _formatLogWithSEL:@"hasPrefix:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -69,7 +69,7 @@
 - (BOOL)yh_hasSuffix:(NSString *)str {
     if (nil == str) {
         NSString *log = [self _formatLogWithSEL:@"hasSuffix:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -83,7 +83,7 @@
         characteristic = [self yh_characterAtIndex:index];
     } else {
         NSString *log = [self _formatLogWithSEL:@"characterAtIndex:" error:@"Range or index out of bounds"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
     }
     
     return characteristic;
@@ -93,7 +93,7 @@
 - (NSString *)yh_substringFromIndex:(NSUInteger)from {
     if (from < 0 || from > self.length) {
         NSString *log = [self _formatLogWithSEL:@"substringFromIndex:" index:from];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -104,7 +104,7 @@
 - (NSString *)yh_substringToIndex:(NSUInteger)to {
     if (to < 0 || to > self.length) {
         NSString *log = [self _formatLogWithSEL:@"substringToIndex:" index:to];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -116,7 +116,7 @@
     NSUInteger tmp = (range.location + range.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"substringWithRange:" range:range];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
@@ -128,14 +128,14 @@
 {
     if (nil == target || nil == replacement) {
         NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
     NSUInteger tmp = (searchRange.location + searchRange.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" range:searchRange];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     

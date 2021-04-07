@@ -36,13 +36,13 @@
 - (void)yh_insertString:(NSString *)aString atIndex:(NSUInteger)loc {
     if (nil == aString) {
         NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
     if (loc < 0 || loc > self.length) {
         NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" index:loc];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -52,14 +52,14 @@
 - (void)yh_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
     if (nil == aString) {
         NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
     NSUInteger tmp = (range.location + range.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" range:range];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -70,14 +70,14 @@
 {
     if (nil == target || nil == replacement) {
         NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return 0;
     }
     
     NSUInteger tmp = (searchRange.location + searchRange.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" range:searchRange];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return 0;
     }
     
@@ -88,7 +88,7 @@
     NSUInteger tmp = (range.location + range.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"deleteCharactersInRange:" range:range];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return;
     }
     
@@ -100,14 +100,14 @@
 {
     if (nil == target || nil == replacement) {
         NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     
     NSUInteger tmp = (searchRange.location + searchRange.length);
     if (tmp > self.length) {
         NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" range:searchRange];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     

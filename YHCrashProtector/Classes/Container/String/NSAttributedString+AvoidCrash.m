@@ -26,7 +26,7 @@
 - (instancetype)yh_initWithString:(NSString *)str {
     if (nil == str) {
         NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportErrorWithLog:log];
+        [YHAvoidUtils yh_reportError:log];
         return nil;
     }
     

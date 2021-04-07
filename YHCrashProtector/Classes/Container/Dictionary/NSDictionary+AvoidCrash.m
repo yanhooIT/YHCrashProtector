@@ -58,13 +58,13 @@
         
         if (nil == obj) {
             NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
+            [YHAvoidUtils yh_reportError:log];
             continue;
         }
         
         if (nil == key) {
             NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportErrorWithLog:log];
+            [YHAvoidUtils yh_reportError:log];
             continue;
         }
 
