@@ -107,4 +107,10 @@
 #endif
 }
 
++ (void)yh_setupHandleKVOCrashClassPrefixs:(NSArray<NSString *> *)classPrefixs {
+#if _INTERNAL_AVC_ENABLED
+    [NSObject setupHandleKVOCrashClassPrefixs:classPrefixs];
+#endif
+}
+
 @end
