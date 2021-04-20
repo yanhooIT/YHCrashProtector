@@ -17,26 +17,29 @@
 #pragma mark - 动态转发阶段动态添加方法
 // 动态添加【对象方法】
 + (BOOL)resolveInstanceMethod:(SEL)sel {
-    // v@:的含义：v表示无返回值，@表示id类型的参数，:表示SEL
-    class_addMethod(self.class, sel, (IMP)addMethod, "v@:");
+    // @@:的含义：@表示返回值为id类型，@表示id类型的参数，:表示SEL
+    class_addMethod(self.class, sel, (IMP)addMethod, "@@:");
     return YES;
 }
 
 // 动态添加【类对象方法】
 + (BOOL)resolveClassMethod:(SEL)sel {
     // 通过object_getClass获取元类对象
-    class_addMethod(object_getClass(self), sel, (IMP)addMethod, "v@:");
+    class_addMethod(object_getClass(self), sel, (IMP)addMethod, "@@:");
     return YES;
 }
 
-// 用一个返回为空的函数来替换，从而达到程序不崩溃的目的
-void addMethod(id self, SEL _cmd) { }
+// 用一个有返回值的函数来替换，从而达到程序不崩溃的目的
+// 用这种带有返回值的函数能很好的容错（能兼容无返回参数的方法和有参数返回的方法）
+id addMethod(id self, SEL _cmd) {
+    return nil;
+}
 
 // ^^^^^^^^^^^^^^^^ 以上为动态转发阶段【桩对象】动态添加方法的处理逻辑 ^^^^^^^^^^^^^^^^
 
 // 返回代理对象
 + (id)handleWithObject:(id)obj forwardingTargetForSelector:(SEL)aSelector {
-    // 如果重写了 forwardInvocation，说明对象本身要处理，这里直接返回
+    // 如果重写了 forwardInvocation，说明对象本身会处理，框架就无需干预了，直接返回nil
     BOOL isOverride = [self _hasOverrideWithObject:obj selector:@selector(forwardInvocation:)];
     if (isOverride) {
         return nil;
@@ -60,7 +63,7 @@ void addMethod(id self, SEL _cmd) { }
     if (class_respondsToSelector(cls, sel)) {
         IMP imp = class_getMethodImplementation(cls, sel);
         IMP impInRoot = class_getMethodImplementation([NSObject class], sel);
-        // 2、排除方法在根类中实现的情况
+        // 2、排除方法在根类(NSObject)中实现的情况
         if (imp != impInRoot) {
             return YES;
         }
@@ -70,3 +73,4 @@ void addMethod(id self, SEL _cmd) { }
 }
 
 @end
+
