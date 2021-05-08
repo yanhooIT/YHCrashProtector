@@ -35,6 +35,10 @@
  The proxy target.
  */
 @property (nonatomic, weak, readonly) id target;
+/**
+ The proxy target name
+ */
+@property (nonatomic, copy, readonly) NSString *targetName;
 /// 原target对应的方法实现
 @property (nonatomic, assign) SEL oriSEL;
 /// 回调方法是否有timer参数

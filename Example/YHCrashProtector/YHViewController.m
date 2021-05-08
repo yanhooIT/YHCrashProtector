@@ -20,10 +20,11 @@
 @interface YHViewController ()
 
 @property (nonatomic, strong) YHPerson *person;
-
 @property (nonatomic, assign) YHPerson *person1;
 @property (nonatomic, assign) YHPerson *person2;
 @property (nonatomic, assign) YHBoy *boy1;
+
+@property (nonatomic, weak) NSString *str;
 
 @end
 
@@ -38,6 +39,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor orangeColor];
+    
+    NSLog(@"%@", [self yh_logFormat:@"123%@", @"ert"]);
+    
+//    [self testOOM];
+    
+//    [self testString];
 
 //    [self testAttributedStringCrash];
 //    [self testAttributedStringMCrash];
@@ -60,13 +69,61 @@
 //    [self testExcBadAccess];
 //
 //    [self testUnrecognizedSelector];
+}
+
+// 动态参数方法实现
+- (NSString *)yh_logFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2) {
+    // 1. 定义一个指向个数可变的参数列表指针
+    va_list args;
     
-    self.view.backgroundColor = [UIColor orangeColor];
+    // 2. 开始初始化参数，start会从 format 中依次提取参数, 类似于类结构体中的偏移量 offset 的方式
+    va_start(args, format);
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
     
-    NSArray *arr = [NSArray new];
-    [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-    }];
+    // 3. 清空参数列表，并置参数指针args无效
+    va_end(args);
+    
+    return str;
+}
+
+- (void)testOOM {
+    for (NSInteger index = 0; index < 10000000; index++) {
+        NSString *text = [[NSString alloc] initWithFormat:@"qwertyuiopasdfghjklzxcvbnm12345678-%zd", index];
+        NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+        @autoreleasepool {
+            NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:text attributes:attributes];
+        }
+    }
+}
+
+- (void)testString {
+    /** 打印结果
+     字符串：qwertyuiopasdfghjklzxcvbnm12345678 类型：__NSCFConstantString 内存地址：0x108ea8148
+     
+     分析：这种方式创建的字符串是分配在【常量区】，只有在程序结束后才会被释放
+     */
+//    self.str = @"qwertyuiopasdfghjklzxcvbnm12345678";
+    
+    /** 打印结果
+     字符串：(null) 类型：(null) 内存地址：0x0
+     
+     分析：这种方式创建的字符串是会立即释放的
+     */
+//    self.str = [[NSString alloc] initWithFormat:@"%@", @"qwertyuiopasdfghjklzxcvbnm12345678"];
+
+    /** 打印结果
+     字符串：qwertyuiopasdfghjklzxcvbnm12345678 类型：__NSCFString 内存地址：0x600003481440
+     
+     分析：这种方式创建的字符串，内部会调用autorelease，从而延迟了字符串的释放
+     */
+//    self.str = [NSString stringWithFormat:@"%@", @"qwertyuiopasdfghjklzxcvbnm12345678"];
+    
+    NSLog(@"字符串：%@ 类型：%@ 内存地址：%p", self.str, [self.str class], self.str);
+    
+//    for (NSInteger index = 0; index < 10000000; index++) {
+//        // 这种方式创建字符串会导致内存瞬间暴增
+//        self.str = [NSString stringWithFormat:@"%@", @"qwertyuiopasdfghjklzxcvbnm12345678"];
+//    }
 }
 
 #pragma mark - load & initialize Test
@@ -81,14 +138,14 @@
     NSString *nilStr = nil;
     
     // NSConcreteAttributedString initWithString:: nil value
-    [[NSAttributedString alloc] initWithString:nilStr];
+//    [[NSAttributedString alloc] initWithString:nilStr];
     
     // NSConcreteAttributedString initWithString:: nil value
-    [[NSAttributedString alloc] initWithAttributedString:nilStr];
+//    [[NSAttributedString alloc] initWithAttributedString:nilStr];
     
-    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
-    // NSConcreteAttributedString initWithString:: nil value
-    [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
+//    NSDictionary *attributes = @{ NSForegroundColorAttributeName : [UIColor redColor] };
+//    // NSConcreteAttributedString initWithString:: nil value
+//    [[NSAttributedString alloc] initWithString:nilStr attributes:attributes];
 }
 
 - (void)testAttributedStringMCrash {

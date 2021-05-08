@@ -20,13 +20,19 @@
  拦截setValue:forKey:方法，用于处理key为nil的Crash
  */
 - (void)yh_setValue:(id)value forKey:(NSString *)key {
-    if (nil == key) {
-        NSString *crashMessages = [NSString stringWithFormat:@"[<%@ %p> setValue:forKey:]: attempt to set a value for a nil key, value:%@.", NSStringFromClass([self class]), self, value];
-        NSLog(@"CrashProtector - %@", crashMessages);
-        return;
+    @try {
+        if (nil == key) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[<%@ %p> setValue:forKey:]: attempt to set a value for a nil key, value:%@.", NSStringFromClass([self class]), self, value];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_setValue:value forKey:key];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    [self yh_setValue:value forKey:key];
 }
 
 #pragma mark - Override Methods
@@ -37,8 +43,8 @@
  通过重写 setValue: forUndefinedKey: 方法，来避免当找不到对应key时导致的Crash
  */
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
-    NSString *crashMessages = [NSString stringWithFormat:@"[<%@ %p> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: %@, value:%@.", NSStringFromClass([self class]), self, key, value];
-    NSLog(@"CrashProtector - %@", crashMessages);
+    NSString *log = [[NSString alloc] initWithFormat:@"[<%@ %p> setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key: %@, value:%@.", NSStringFromClass([self class]), self, key, value];
+    [YHAvoidLogger yh_reportError:log];
 }
 
 /** 获取值时，避免当找不到对应 key/keyPath 时导致的Crash
@@ -48,8 +54,8 @@
  通过重写 valueForUndefinedKey: 方法，来避免当找不到对应key时导致的Crash
  */
 - (nullable id)valueForUndefinedKey:(NSString *)key {
-    NSString *crashMessages = [NSString stringWithFormat:@"[<%@ %p> valueForUndefinedKey:]: this class is not key value coding-compliant for the key: %@.", NSStringFromClass([self class]), self, key];
-    NSLog(@"CrashProtector - %@", crashMessages);
+    NSString *log = [[NSString alloc] initWithFormat:@"[<%@ %p> valueForUndefinedKey:]: this class is not key value coding-compliant for the key: %@.", NSStringFromClass([self class]), self, key];
+    [YHAvoidLogger yh_reportError:log];
     
     return self;
 }
@@ -65,8 +71,8 @@
  这个方法的默认实现会引发崩溃，所以通过重写 setNilValueForKey: 来解决value为nil引发的Crash
  */
 - (void)setNilValueForKey:(NSString *)key {
-    NSString *crashMessages = [NSString stringWithFormat:@"[<%@ %p> setNilValueForKey]: could not set nil as the value for the key %@.", NSStringFromClass([self class]), self, key];
-    NSLog(@"CrashProtector - %@", crashMessages);
+    NSString *log = [[NSString alloc] initWithFormat:@"[<%@ %p> setNilValueForKey]: could not set nil as the value for the key %@.", NSStringFromClass([self class]), self, key];
+    [YHAvoidLogger yh_reportError:log];
 }
 
 @end

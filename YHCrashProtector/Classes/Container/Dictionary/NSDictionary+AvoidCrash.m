@@ -48,32 +48,39 @@
 }
 
 - (instancetype)yh_initWithObjects:(id  _Nonnull const [])objects forKeys:(id<NSCopying>  _Nonnull const [])keys count:(NSUInteger)cnt {
-    // 处理错误的数据，然后重新初始化一个字典
-    NSUInteger index = 0;
-    id newObjects[cnt];
-    id newkeys[cnt];
-    for (int i = 0; i < cnt; i++) {
-        id obj = objects[i];
-        id key = keys[i];
-        
-        if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportError:log];
-            continue;
-        }
-        
-        if (nil == key) {
-            NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
-            [YHAvoidUtils yh_reportError:log];
-            continue;
-        }
+    id instance = nil;
+    @try {
+        // 处理错误的数据，然后重新初始化一个字典
+        NSUInteger index = 0;
+        id newObjects[cnt];
+        id newkeys[cnt];
+        for (int i = 0; i < cnt; i++) {
+            id obj = objects[i];
+            id key = keys[i];
+            
+            if (nil == obj) {
+                NSString *log = [[NSString alloc] initWithFormat:@"[%@ - initWithObjects:forKeys:count:]: object is nil", NSStringFromClass(self.class)];
+                [YHAvoidLogger yh_reportError:log];
+                continue;
+            }
+            
+            if (nil == key) {
+                NSString *log = [[NSString alloc] initWithFormat:@"[%@ - initWithObjects:forKeys:count:]: key is nil", NSStringFromClass(self.class)];
+                [YHAvoidLogger yh_reportError:log];
+                continue;
+            }
 
-        newObjects[index] = objects[i];
-        newkeys[index] = keys[i];
-        index++;
+            newObjects[index] = objects[i];
+            newkeys[index] = keys[i];
+            index++;
+        }
+            
+        instance = [self yh_initWithObjects:newObjects forKeys:newkeys count:index];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
     }
-        
-    return [self yh_initWithObjects:newObjects forKeys:newkeys count:index];
 }
 
 @end

@@ -10,6 +10,7 @@
 //
 
 #import "YHWeakProxy.h"
+#import "YHAvoidUtils.h"
 
 /**
     实现的原理： 使用 NSProxy 持有 NSTimer 的 target
@@ -19,6 +20,11 @@
 
 - (instancetype)initWithTarget:(id)target {
     _target = target;
+    if ([_target isKindOfClass:[NSObject class]]) {
+        NSObject *obj = (NSObject *)_target;
+        _targetName = NSStringFromClass(obj.class);
+    }
+    
     return self;
 }
 
@@ -92,7 +98,8 @@
     if (self.target != nil) {// 判断原target是否已经被释放
         [self _safePerformAction:self.oriSEL target:self.target params:timer];
     } else {
-        NSLog(@"CrashProtector - 原target已经释放，定时器已无存在的必要，停止定时器并释放");
+        NSString *log = [[NSString alloc] initWithFormat:@"原target(%@)已经释放，定时器已无存在的必要，停止定时器并释放", _targetName];
+        [YHAvoidLogger yh_reportError:log];
               
         // 停止定时器
         if (timer) {

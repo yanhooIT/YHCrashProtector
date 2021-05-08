@@ -35,13 +35,16 @@
 + (void)_swizzleMethod:(Class)cls oldMethod:(SEL)oldMethod newMethod:(SEL)newMethod {
     Method originalMethod = class_getInstanceMethod(cls, oldMethod);
     Method swizzledMethod = class_getInstanceMethod(cls, newMethod);
-    /** 通过添加方法的方式判断原方法是否存在
+    /**
+     class_addMethod尝试给当前类添加oldMethod这个方法，实现采取的是swizzledMethod的实现，
+     这么做的目的是为了确保当前类一定有oldMethod这个方法名（否则使用method_exchangeImplementations交换不会成功）
      
      （1）如果返回YES
-     说明方法添加成功，也说明了源方法不存在，这时源方法的实现已经指向了我们自定义的方法，所以接下来只需要将新方法的实现指向源方法的实现即可，这里使用到了 class_replaceMethod 这个方法，此方法内部实现会调用 class_addMethod 和 method_setImplementation 这两个函数。
+     说明方法添加成功，接下来只需要将新方法的实现指向源方法的实现即可，
+     这里使用到了 class_replaceMethod 这个方法，此方法内部实现会调用 class_addMethod 和 method_setImplementation 这两个函数。
 
      （2）如果返回NO
-     说明方法添加失败，说明源方法已经存在，直接将两个方法的实现交换即可。
+     说明当前类中已经存在此方法，直接将两个方法的实现交换即可。
      */
     BOOL didAddMethod = class_addMethod(cls, oldMethod, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
     if (didAddMethod) {
@@ -49,56 +52,6 @@
     } else {
         method_exchangeImplementations(originalMethod, swizzledMethod);
     }
-}
-
-+ (void)yh_reportException:(NSException *)exception defaultToDo:(NSString *)defaultToDo {
-    if (nil == exception) return;
-    
-    // 堆栈数据
-    NSArray *callStackSymbolsArr = [NSThread callStackSymbols];
-    // 获取在哪个类的哪个方法中实例化的数组
-    // 字符串格式: -[类名 方法名] or +[类名 方法名]
-    NSString *mainCallStackSymbolMsg = [self _getMainCallStackSymbolMessageWithCallStackSymbols:callStackSymbolsArr];
-    if (mainCallStackSymbolMsg == nil) {
-        mainCallStackSymbolMsg = @"崩溃方法定位失败, 请您查看函数调用栈来排查错误原因";
-    }
-    
-    NSString *errorName = exception.name;
-    NSString *errorReason = exception.reason;
-    // errorReason 可能为 -[__NSCFConstantString yh_characterAtIndex:]: Range or index out of bounds, 将yh_前缀去掉
-    errorReason = [errorReason stringByReplacingOccurrencesOfString:@"yh_" withString:@""];
-    NSString *errorPlace = [NSString stringWithFormat:@"Error Place: %@", mainCallStackSymbolMsg];
-    NSString *logErrorMessage = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n\n",  errorName, errorReason, errorPlace, defaultToDo];
-
-#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
-    NSLog(@"CrashProtector - %@", logErrorMessage);
-#else
-    NSMutableDictionary *errInfoDic = [NSMutableDictionary dictionary];
-    errInfoDic[key_errorName] = errorName;
-    errInfoDic[key_errorReason] = errorReason;
-    errInfoDic[key_errorPlace] = errorPlace;
-    errInfoDic[key_defaultToDo] = defaultToDo;
-    errInfoDic[key_exception] = exception;
-    errInfoDic[key_callStackSymbols] = callStackSymbolsArr;
-    
-    // 将错误信息放在字典里，用通知的形式发送出去
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:errInfoDic.copy];
-    });
-#endif
-}
-
-+ (void)yh_reportError:(NSString *)errLog {
-    if (AvoidCrash_STRING_IS_EMPTY(errLog)) return;
-    
-#if defined(POD_CONFIGURATION_DEBUG) || defined(DEBUG)
-    NSLog(@"CrashProtector - %@", errLog);
-#else
-    // 将错误信息放在字典里，用通知的形式发送出去
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AvoidCrashNotification object:nil userInfo:@{key_errorReason:errLog}];
-    });
-#endif
 }
 
 + (BOOL)yh_isSystemClassWithPrefix:(NSString *)classPrefix {
@@ -139,47 +92,6 @@
     }
     
     return argumentCount;
-}
-
-#pragma mark - Private Methods
-/**
- *  获取堆栈主要崩溃精简化的信息<根据正则表达式匹配出来>
- *
- *  @param callStackSymbols 堆栈主要崩溃信息
- *
- *  @return 堆栈主要崩溃精简化的信息
- */
-+ (NSString *)_getMainCallStackSymbolMessageWithCallStackSymbols:(NSArray<NSString *> *)callStackSymbols
-{
-    // mainCallStackSymbolMsg的格式为: +[类名 方法名] or -[类名 方法名]
-    __block NSString *mainCallStackSymbolMsg = nil;
-    
-    // 匹配出来的格式为: +[类名 方法名] or -[类名 方法名]
-    NSString *regularExpStr = @"[-\\+]\\[.+\\]";
-    NSRegularExpression *regularExp = [[NSRegularExpression alloc] initWithPattern:regularExpStr options:NSRegularExpressionCaseInsensitive error:nil];
-    for (int index = 2; index < callStackSymbols.count; index++) {
-        NSString *callStackSymbol = callStackSymbols[index];
-        [regularExp enumerateMatchesInString:callStackSymbol options:NSMatchingReportProgress range:NSMakeRange(0, callStackSymbol.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-            if (result) {
-                NSString *tempCallStackSymbolMsg = [callStackSymbol substringWithRange:result.range];
-                // get className
-                NSString *className = [tempCallStackSymbolMsg componentsSeparatedByString:@" "].firstObject;
-                className = [className componentsSeparatedByString:@"["].lastObject;
-                NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(className)];
-                // filter category and system class
-                if (![className hasSuffix:@")"] && bundle == [NSBundle mainBundle]) {
-                    mainCallStackSymbolMsg = tempCallStackSymbolMsg;
-                }
-                *stop = YES;
-            }
-        }];
-        
-        if (mainCallStackSymbolMsg.length) {
-            break;
-        }
-    }
-    
-    return mainCallStackSymbolMsg;
 }
 
 @end

@@ -89,7 +89,7 @@
         @try {
             [observer observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         } @catch (NSException *exception) {
-            NSLog(@"CrashProtector - KVO Warning: %@", [exception description]);
+            [YHAvoidLogger yh_reportException:exception];
         }
     }
 }

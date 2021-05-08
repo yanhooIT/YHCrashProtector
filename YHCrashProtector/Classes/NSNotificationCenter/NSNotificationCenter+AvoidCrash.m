@@ -17,8 +17,14 @@
 
 - (void)yh_addObserver:(id)observer selector:(SEL)aSelector name:(NSNotificationName)aName object:(id)anObject
 {
-    objc_setAssociatedObject(self, AvoidNotificationCrashFlagKey, @(1), OBJC_ASSOCIATION_ASSIGN);
-    [self yh_addObserver:observer selector:aSelector name:aName object:anObject];
+    @try {
+        objc_setAssociatedObject(self, AvoidNotificationCrashFlagKey, @(1), OBJC_ASSOCIATION_ASSIGN);
+        [self yh_addObserver:observer selector:aSelector name:aName object:anObject];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
+    }
 }
 
 @end

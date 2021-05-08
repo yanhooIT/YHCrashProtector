@@ -21,27 +21,43 @@
 
 + (NSTimer *)yh_timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo repeats:(BOOL)yesOrNo
 {
-    if (yesOrNo) {
-        YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
-        proxy.oriSEL = aSelector;
-        proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
-        SEL proxySEL = @selector(proxyTimerActionWithTimer:);
-        return [self yh_timerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
-    } else {
-        return [self yh_timerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+    NSTimer *timer = nil;
+    
+    @try {
+        if (yesOrNo) {
+            YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
+            proxy.oriSEL = aSelector;
+            proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
+            SEL proxySEL = @selector(proxyTimerActionWithTimer:);
+            timer = [self yh_timerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
+        } else {
+            timer = [self yh_timerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return timer;
     }
 }
 
 + (NSTimer *)yh_scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(id)userInfo repeats:(BOOL)yesOrNo
 {
-    if (yesOrNo) {
-        YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
-        proxy.oriSEL = aSelector;
-        proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
-        SEL proxySEL = @selector(proxyTimerActionWithTimer:);
-        return [self yh_scheduledTimerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
-    } else {
-        return [self yh_scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+    NSTimer *timer = nil;
+    
+    @try {
+        if (yesOrNo) {
+            YHWeakProxy *proxy = [YHWeakProxy proxyWithTarget:aTarget];
+            proxy.oriSEL = aSelector;
+            proxy.oriSELHasParam = [NSStringFromSelector(aSelector) containsString:@":"];
+            SEL proxySEL = @selector(proxyTimerActionWithTimer:);
+            timer = [self yh_scheduledTimerWithTimeInterval:ti target:proxy selector:proxySEL userInfo:userInfo repeats:yesOrNo];
+        } else {
+            timer = [self yh_scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return timer;
     }
 }
 

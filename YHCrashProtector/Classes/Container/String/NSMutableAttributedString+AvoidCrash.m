@@ -26,28 +26,44 @@
 
 #pragma mark - initWithString:
 - (instancetype)yh_initWithString:(NSString *)str {
-    if (nil == str) {
-        NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_initWithString:str];
+    @try {
+        if (nil == str) {
+            NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return nil;
+        }
+        
+        instance = [self yh_initWithString:str];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 #pragma mark - initWithString:attributes:
 - (instancetype)yh_initWithString:(NSString *)str attributes:(NSDictionary<NSString *, id> *)attrs {
-    if (nil == str) {
-        NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_initWithString:str attributes:attrs];
+    @try {
+        if (nil == str) {
+            NSString *log = [self _formatLogWithSEL:@"initWithString:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return nil;
+        }
+        
+        instance = [self yh_initWithString:str attributes:attrs];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (NSString *)_formatLogWithSEL:(NSString *)sel error:(NSString *)error {
-    return [NSString stringWithFormat:@"- [%@ - %@]: %@", NSStringFromClass(self.class), sel, error];
+    return [YHAvoidLogger yh_logFormat:@"- [%@ - %@]: %@", NSStringFromClass(self.class), sel, error];
 }
 
 @end

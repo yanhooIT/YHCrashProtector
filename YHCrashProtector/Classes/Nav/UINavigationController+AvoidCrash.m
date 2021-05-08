@@ -9,10 +9,10 @@
 #import <objc/runtime.h>
 #import "YHAvoidUtils.h"
 
-@interface UINavigationController ()
+@interface UINavigationController () <UINavigationControllerDelegate>
 
 /// 转场动画是否进行中，如果进行中就不要重复执行（不指定默认赋值修饰符为assign）
-@property (nonatomic, getter = isViewTransitionInProgress) BOOL viewTransitionInProgress;
+@property (nonatomic, assign) BOOL viewTransitionInProgress;
 
 @end
 
@@ -20,7 +20,6 @@
 
 + (void)yh_enabledAvoidNoAddSelfAsSubviewCrash {
     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(pushViewController:animated:) newMethod:@selector(yh_pushViewController:animated:)];
-    [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(didShowViewController:animated:) newMethod:@selector(yh_didShowViewController:animated:)];
     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(popViewControllerAnimated:) newMethod:@selector(yh_popViewControllerAnimated:)];
     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(popToViewController:animated:) newMethod:@selector(yh_popToViewController:animated:)];
     [YHAvoidUtils yh_swizzleInstanceMethod:[self class] oldMethod:@selector(popToRootViewControllerAnimated:) newMethod:@selector(yh_popToRootViewControllerAnimated:)];
@@ -30,18 +29,13 @@
     self.delegate = self;
     
     // If we are already pushing a view controller, we dont push another one.
-    if (!self.isViewTransitionInProgress) {
+    if (!self.viewTransitionInProgress) {
         if (animated) {
             self.viewTransitionInProgress = YES;
         }
         
         [self yh_pushViewController:viewController animated:animated];
     }
-}
-
-- (void)yh_didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    [self yh_didShowViewController:viewController animated:animated];
-    self.viewTransitionInProgress = NO;
 }
 
 - (UIViewController *)yh_popViewControllerAnimated:(BOOL)animated {
@@ -74,6 +68,7 @@
     return [self yh_popToRootViewControllerAnimated:animated];
 }
 
+#pragma mark - <UINavigationControllerDelegate>
 // If the user does not complete the swipe-to-go-back gesture, we need to intercept it and set the flag to NO again.
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     id<UIViewControllerTransitionCoordinator> tc = navigationController.topViewController.transitionCoordinator;
@@ -89,12 +84,16 @@
     }
 }
 
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    self.viewTransitionInProgress = NO;
+}
+
 #pragma mark - Getters and Setters
 - (void)setViewTransitionInProgress:(BOOL)isInProgress {
     NSNumber *number = [NSNumber numberWithBool:isInProgress];
-    objc_setAssociatedObject(self, @selector(isViewTransitionInProgress), number, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, @selector(viewTransitionInProgress), number, OBJC_ASSOCIATION_RETAIN);
 }
-- (BOOL)isViewTransitionInProgress {
+- (BOOL)viewTransitionInProgress {
     NSNumber *number = objc_getAssociatedObject(self, _cmd);
     return [number boolValue];
 }

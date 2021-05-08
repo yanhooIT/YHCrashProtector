@@ -54,45 +54,63 @@
 }
 
 - (void)yh_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
-    if (nil == anObject) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
-        [YHAvoidUtils yh_reportError:log];
-        return;
-    }
-    
-    if (nil == aKey) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
-        [YHAvoidUtils yh_reportError:log];
-        return;
-    }
+    @try {
+        if (nil == anObject) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        if (nil == aKey) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
 
-    [self yh_setObject:anObject forKey:aKey];
+        [self yh_setObject:anObject forKey:aKey];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
+    }
 }
 
 - (void)yh_setObject:(id)anObject forKeyedSubscript:(id<NSCopying>)aKey {
-    if (nil == anObject) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
-        [YHAvoidUtils yh_reportError:log];
-        return;
+    @try {
+        if (nil == anObject) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[%@ - setObject:forKeyedSubscript:]: object cannot be nil", NSStringFromClass(self.class)];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        if (nil == aKey) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_setObject:anObject forKeyedSubscript:aKey];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    if (nil == aKey) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - setObject:forKeyedSubscript:]: key cannot be nil", NSStringFromClass(self.class)];
-        [YHAvoidUtils yh_reportError:log];
-        return;
-    }
-    
-    [self yh_setObject:anObject forKeyedSubscript:aKey];
 }
 
 - (void)yh_removeObjectForKey:(id)aKey {
-    if (nil == aKey) {
-        NSString *log = [NSString stringWithFormat:@"[%@ - removeObjectForKey:]: key cannot be nil", NSStringFromClass(self.class)];
-        [YHAvoidUtils yh_reportError:log];
-        return;
+    @try {
+        if (nil == aKey) {
+            NSString *log = [[NSString alloc] initWithFormat:@"[%@ - removeObjectForKey:]: key cannot be nil", NSStringFromClass(self.class)];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_removeObjectForKey:aKey];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    [self yh_removeObjectForKey:aKey];
 }
 
 @end

@@ -27,11 +27,13 @@
 #import "YHKVOProxy.h"
 #import "UINavigationController+AvoidCrash.h"
 #import "NSNotificationCenter+AvoidCrash.h"
+#import "NSNull+YHNullSafe.h"
 #import "NSTimer+AvoidCrash.h"
 #import "YHWeakProxy.h"
 #import "NSObject+UnSELCrash.h"
 #import "YHForwardingTarget.h"
 #import "YHAvoidCrash.h"
+#import "YHAvoidLogger.h"
 #import "YHAvoidUtils.h"
 #import "YHDeallocHandle.h"
 

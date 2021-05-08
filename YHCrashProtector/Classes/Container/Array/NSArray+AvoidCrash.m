@@ -67,86 +67,136 @@
 }
 
 - (instancetype)yh_initWithObjects:(id  _Nonnull const [])objects count:(NSUInteger)cnt {
-    id safeObjects[cnt];
-    NSUInteger j = 0;
-    for (NSUInteger index = 0; index < cnt ; index++) {
-        id obj = objects[index];
-        if (nil == obj) {
-            NSString *log = [NSString stringWithFormat:@"[%@ - initWithObjects:count:]: attempt to insert nil object from objects[%ld]", NSStringFromClass(self.class), index];
-            [YHAvoidUtils yh_reportError:log];
-            continue;
+    id instance = nil;
+    
+    @try {
+        id safeObjects[cnt];
+        NSUInteger j = 0;
+        for (NSUInteger index = 0; index < cnt ; index++) {
+            id obj = objects[index];
+            if (nil == obj) {
+                NSString *log = [[NSString alloc] initWithFormat:@"[%@ - initWithObjects:count:]: attempt to insert nil object from objects[%ld]", NSStringFromClass(self.class), index];
+                [YHAvoidLogger yh_reportError:log];
+                continue;
+            }
+            
+            safeObjects[j] = obj;
+            j++;
         }
         
-        safeObjects[j] = obj;
-        j++;
+        instance = [self yh_initWithObjects:safeObjects count:j];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
     }
-    
-    return [self yh_initWithObjects:safeObjects count:j];
 }
 
 - (id)yh_NSArray0objectAtIndex:(NSUInteger)index {
-    if (index >= self.count) {
-        NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSArray0objectAtIndex:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndex:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSArray0objectAtIndex:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (id)yh_NSSingleObjectArrayIobjectAtIndex:(NSUInteger)index {
-    if (index >= self.count) {
-        NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSSingleObjectArrayIobjectAtIndex:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndex:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSSingleObjectArrayIobjectAtIndex:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (id)yh_NSArrayIobjectAtIndex:(NSUInteger)index {
-    if (index >= self.count) {
-        NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndex:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSArrayIobjectAtIndex:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndex:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSArrayIobjectAtIndex:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (id)yh_NSArray0objectAtIndexedSubscript:(NSUInteger)index {
-    if (index >= self.count ) {
-        NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSArray0objectAtIndexedSubscript:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSArray0objectAtIndexedSubscript:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSArray0objectAtIndexedSubscript:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (id)yh_NSSingleObjectArrayIobjectAtIndexedSubscript:(NSUInteger)index {
-    if (index >= self.count ) {
-        NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSSingleObjectArrayIobjectAtIndexedSubscript:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSSingleObjectArrayIobjectAtIndexedSubscript:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSSingleObjectArrayIobjectAtIndexedSubscript:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 - (id)yh_NSArrayIobjectAtIndexedSubscript:(NSUInteger)index {
-    if (index >= self.count ) {
-        NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndexedSubscript:" index:index];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    return [self yh_NSArrayIobjectAtIndexedSubscript:index];
+    @try {
+        if (index >= self.count) {
+            NSString *log = [self _formatLogWithSEL:@"__NSArrayIobjectAtIndexedSubscript:" index:index];
+            [YHAvoidLogger yh_reportError:log];
+        } else {
+            instance = [self yh_NSArrayIobjectAtIndexedSubscript:index];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
+    }
 }
 
 #pragma mark - Log
 - (NSString *)_formatLogWithSEL:(NSString *)sel index:(NSUInteger)index {
-    return [NSString stringWithFormat:@"[%@ - %@]: index %ld beyond bounds, array count = %ld", NSStringFromClass(self.class), sel, index, self.count];
+    return [YHAvoidLogger yh_logFormat:@"[%@ - %@]: index %ld beyond bounds, array count = %ld", NSStringFromClass(self.class), sel, index, self.count];
 }
 
 @end

@@ -34,97 +34,131 @@
 }
 
 - (void)yh_insertString:(NSString *)aString atIndex:(NSUInteger)loc {
-    if (nil == aString) {
-        NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return;
+    @try {
+        if (nil == aString) {
+            NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        if (loc < 0 || loc > self.length) {
+            NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" index:loc];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_insertString:aString atIndex:loc];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    if (loc < 0 || loc > self.length) {
-        NSString *log = [self _formatLogWithSEL:@"insertString:atIndex:" index:loc];
-        [YHAvoidUtils yh_reportError:log];
-        return;
-    }
-    
-    [self yh_insertString:aString atIndex:loc];
 }
 
 - (void)yh_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
-    if (nil == aString) {
-        NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return;
+    @try {
+        if (nil == aString) {
+            NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        NSUInteger tmp = (range.location + range.length);
+        if (tmp > self.length) {
+            NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" range:range];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_replaceCharactersInRange:range withString:aString];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    NSUInteger tmp = (range.location + range.length);
-    if (tmp > self.length) {
-        NSString *log = [self _formatLogWithSEL:@"replaceCharactersInRange:withString:" range:range];
-        [YHAvoidUtils yh_reportError:log];
-        return;
-    }
-    
-    [self yh_replaceCharactersInRange:range withString:aString];
 }
 
 - (NSUInteger)yh_replaceOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange
 {
-    if (nil == target || nil == replacement) {
-        NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return 0;
-    }
+    NSUInteger count = 0;
     
-    NSUInteger tmp = (searchRange.location + searchRange.length);
-    if (tmp > self.length) {
-        NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" range:searchRange];
-        [YHAvoidUtils yh_reportError:log];
-        return 0;
+    @try {
+        if (nil == target || nil == replacement) {
+            NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return 0;
+        }
+        
+        NSUInteger tmp = (searchRange.location + searchRange.length);
+        if (tmp > self.length) {
+            NSString *log = [self _formatLogWithSEL:@"replaceOccurrencesOfString:withString:options:range:" range:searchRange];
+            [YHAvoidLogger yh_reportError:log];
+            return 0;
+        }
+        
+        count = [self yh_replaceOccurrencesOfString:target withString:replacement options:options range:searchRange];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return count;
     }
-    
-    return [self yh_replaceOccurrencesOfString:target withString:replacement options:options range:searchRange];
 }
 
 - (void)yh_deleteCharactersInRange:(NSRange)range {
-    NSUInteger tmp = (range.location + range.length);
-    if (tmp > self.length) {
-        NSString *log = [self _formatLogWithSEL:@"deleteCharactersInRange:" range:range];
-        [YHAvoidUtils yh_reportError:log];
-        return;
+    @try {
+        NSUInteger tmp = (range.location + range.length);
+        if (tmp > self.length) {
+            NSString *log = [self _formatLogWithSEL:@"deleteCharactersInRange:" range:range];
+            [YHAvoidLogger yh_reportError:log];
+            return;
+        }
+        
+        [self yh_deleteCharactersInRange:range];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
-    
-    [self yh_deleteCharactersInRange:range];
 }
 
 #pragma mark - stringByReplacingOccurrencesOfString:withString:options:range:
 - (NSString *)yh_NSCFStringstringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange
 {
-    if (nil == target || nil == replacement) {
-        NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" error:@"nil argument"];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
-    }
+    id instance = nil;
     
-    NSUInteger tmp = (searchRange.location + searchRange.length);
-    if (tmp > self.length) {
-        NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" range:searchRange];
-        [YHAvoidUtils yh_reportError:log];
-        return nil;
+    @try {
+        if (nil == target || nil == replacement) {
+            NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" error:@"nil argument"];
+            [YHAvoidLogger yh_reportError:log];
+            return nil;
+        }
+        
+        NSUInteger tmp = (searchRange.location + searchRange.length);
+        if (tmp > self.length) {
+            NSString *log = [self _formatLogWithSEL:@"stringByReplacingOccurrencesOfString:withString:options:range:" range:searchRange];
+            [YHAvoidLogger yh_reportError:log];
+            return nil;
+        }
+        
+        instance = [self yh_NSCFStringstringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return instance;
     }
-    
-    return [self yh_NSCFStringstringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
 }
 
 #pragma mark - Log
 - (NSString *)_formatLogWithSEL:(NSString *)sel index:(NSUInteger)index {
-    return [NSString stringWithFormat:@"- [%@ - %@]: Index %ld out of bounds; string length %ld", NSStringFromClass(self.class), sel, index, self.length];
+    return [YHAvoidLogger yh_logFormat:@"- [%@ - %@]: Index %ld out of bounds; string length %ld", NSStringFromClass(self.class), sel, index, self.length];
 }
 
 - (NSString *)_formatLogWithSEL:(NSString *)sel range:(NSRange)range {
-    return [NSString stringWithFormat:@"- [%@ - %@]: Range {%ld, %ld} out of bounds; string length %ld", NSStringFromClass(self.class), sel, range.location, range.length, self.length];
+    return [YHAvoidLogger yh_logFormat:@"- [%@ - %@]: Range {%ld, %ld} out of bounds; string length %ld", NSStringFromClass(self.class), sel, range.location, range.length, self.length];
 }
 
 - (NSString *)_formatLogWithSEL:(NSString *)sel error:(NSString *)error {
-    return [NSString stringWithFormat:@"- [%@ - %@]: %@", NSStringFromClass(self.class), sel, error];
+    return [YHAvoidLogger yh_logFormat:@"- [%@ - %@]: %@", NSStringFromClass(self.class), sel, error];
 }
 
 @end

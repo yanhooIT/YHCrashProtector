@@ -42,44 +42,68 @@ static NSMutableArray *_cusClassPrefixs;
 }
 
 - (void)yh_removeAllObservers {
-    NSArray *keyPaths = [self.kvoProxy yh_allKeyPaths];
-    for (NSString *keyPath in keyPaths) {
-        [self removeObserver:self.kvoProxy forKeyPath:keyPath];
+    @try {
+        NSArray *keyPaths = [self.kvoProxy yh_allKeyPaths];
+        for (NSString *keyPath in keyPaths) {
+            [self removeObserver:self.kvoProxy forKeyPath:keyPath];
+        }
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
 }
 
 - (void)yh_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
 {
-    if ([self _isAvoidKVOCrash]) {
-        objc_setAssociatedObject(self, AvoidKVOCrashFlagKey, @(1), OBJC_ASSOCIATION_ASSIGN);
-        
-        if ([self.kvoProxy yh_canAddObserver:observer forKeyPath:keyPath options:options context:context]) {
-            [self yh_addObserver:self.kvoProxy forKeyPath:keyPath options:options context:context];
+    @try {
+        if ([self _isAvoidKVOCrash]) {
+            objc_setAssociatedObject(self, AvoidKVOCrashFlagKey, @(1), OBJC_ASSOCIATION_ASSIGN);
+            
+            if ([self.kvoProxy yh_canAddObserver:observer forKeyPath:keyPath options:options context:context]) {
+                [self yh_addObserver:self.kvoProxy forKeyPath:keyPath options:options context:context];
+            }
+        } else {
+            [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
         }
-    } else {
-        [self yh_addObserver:observer forKeyPath:keyPath options:options context:context];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
 }
 
 - (void)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 {
-    if ([self _isAvoidKVOCrash]) {
-        if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
-            [self yh_removeObserver:self.kvoProxy forKeyPath:keyPath];
+    @try {
+        if ([self _isAvoidKVOCrash]) {
+            if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
+                [self yh_removeObserver:self.kvoProxy forKeyPath:keyPath];
+            }
+        } else {
+            [self yh_removeObserver:observer forKeyPath:keyPath];
         }
-    } else {
-        [self yh_removeObserver:observer forKeyPath:keyPath];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
 }
 
 - (void)yh_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context
 {
-    if ([self _isAvoidKVOCrash]) {
-        if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
-            [self yh_removeObserver:self.kvoProxy forKeyPath:keyPath context:context];
+    @try {
+        if ([self _isAvoidKVOCrash]) {
+            if ([self.kvoProxy yh_canRemoveObserver:observer forKeyPath:keyPath]) {
+                [self yh_removeObserver:self.kvoProxy forKeyPath:keyPath context:context];
+            }
+        } else {
+            [self yh_removeObserver:observer forKeyPath:keyPath context:context];
         }
-    } else {
-        [self yh_removeObserver:observer forKeyPath:keyPath context:context];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        
     }
 }
 

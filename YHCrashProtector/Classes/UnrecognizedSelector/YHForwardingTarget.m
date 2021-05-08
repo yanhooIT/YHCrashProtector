@@ -7,6 +7,7 @@
 //
 
 #import "YHForwardingTarget.h"
+#import "YHAvoidUtils.h"
 
 @implementation YHForwardingTarget
 
@@ -39,16 +40,25 @@ id addMethod(id self, SEL _cmd) {
 
 // 返回代理对象
 + (id)handleWithObject:(id)obj forwardingTargetForSelector:(SEL)aSelector {
-    // 如果重写了 forwardInvocation，说明对象本身会处理，框架就无需干预了，直接返回nil
-    BOOL isOverride = [self _hasOverrideWithObject:obj selector:@selector(forwardInvocation:)];
-    if (isOverride) {
-        return nil;
+    id proxy = nil;
+    
+    @try {
+        // 如果重写了 forwardInvocation，说明对象本身会处理，框架就无需干预了，直接返回nil
+        BOOL isOverride = [self _hasOverrideWithObject:obj selector:@selector(forwardInvocation:)];
+        if (isOverride) {
+            return nil;
+        }
+        
+        NSString *log = [[NSString alloc] initWithFormat:@"unrecognized selector \"%@\" be sent to \"%@'s\" instance", NSStringFromSelector(aSelector), NSStringFromClass([obj class])];
+        [YHAvoidLogger yh_reportError:log];
+        
+        // 交给代理对象处理
+        proxy = [YHForwardingTarget new];
+    } @catch (NSException *exception) {
+        [YHAvoidLogger yh_reportException:exception];
+    } @finally {
+        return proxy;
     }
-    
-    NSLog(@"CrashProtector - unrecognized selector \"%@\" be sent to \"%@'s\" instance", NSStringFromSelector(aSelector), NSStringFromClass([obj class]));
-    
-    // 交给代理对象处理
-    return [YHForwardingTarget new];
 }
 
 // 判断对象本身是否重写了 forwardInvocation 方法
@@ -73,4 +83,3 @@ id addMethod(id self, SEL _cmd) {
 }
 
 @end
-

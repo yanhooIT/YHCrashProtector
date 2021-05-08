@@ -40,7 +40,10 @@
 
 + (void)load {
 #if _INTERNAL_AVC_ENABLED
-    [self startAvoidCrashProtect];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self startAvoidCrashProtect];
+    });
 #endif
 }
 
@@ -82,7 +85,7 @@
         [NSMutableAttributedString yh_enabledAvoidAttributedStringMCrash];
         
         // 启用 Avoid Can't Add Self as Subview Crash
-        [UINavigationController yh_enabledAvoidNoAddSelfAsSubviewCrash];
+//        [UINavigationController yh_enabledAvoidNoAddSelfAsSubviewCrash];
     });
 }
 
