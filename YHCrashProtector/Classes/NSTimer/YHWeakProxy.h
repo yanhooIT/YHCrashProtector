@@ -42,7 +42,7 @@
 /// 原target对应的方法实现
 @property (nonatomic, assign) SEL oriSEL;
 /// 回调方法是否有timer参数
-@property (nonatomic, assign) SEL oriSELHasParam;
+@property (nonatomic, assign) BOOL oriSELHasParam;
 
 /**
  Creates a new weak proxy for target.
